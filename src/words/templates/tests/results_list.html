@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+<h1>List</h1>
+
+
+{% block content %}
+
+
+
+
+
+
+
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>View</th>
+        </tr>
+
+        {% if user.is_authenticated %}
+
+
+        {% for result in results %}
+        <tr>
+            <td>{{result.date}}</td>
+            <td><a href="{% url 'words:single_result' uuid=result.id %}">View</a></td>
+
+        <tr>
+            {% endfor %}
+
+            {% endif %}
+
+    </table>
+
+{% endblock content %}

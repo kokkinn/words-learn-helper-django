@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Test for group {{group_obj.name}}</h1>
+
+{% if for_wX == 1 %}
+<h1>{{word_obj.word1}}</h1>
+{% endif %}
+{% if for_wX == 2 %}
+<h1>{{word_obj.word2}}</h1>
+{% endif %}
+
+<form action="" method="POST">
+    <input type="hidden" id="" name="word_obj" value="{{word_obj.id}}">
+    {% csrf_token %}
+    {{form}}
+    <input type="Submit" value="Go">
+</form>
+<a class="btn btn-primary" href="{% url 'words:tests_home' %}">Back to tests home</a>
+
+{% endblock %}

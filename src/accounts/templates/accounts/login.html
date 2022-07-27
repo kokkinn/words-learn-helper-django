@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block header %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <p>
+            If you forgot your password, we can help you. Please click
+            <a href="{% url 'password_reset' %}">here</a>.
+        </p>
+        <div>
+            <input class="btn btn-success mt-3" type="submit" value="Логин">
+            <a class="btn btn-success mt-3" href="{% url 'accounts:registration' %}">Register</a>
+        </div>
+    </form>
+{% endblock %}

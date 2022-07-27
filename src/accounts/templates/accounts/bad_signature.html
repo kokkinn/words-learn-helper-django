@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Активация не успешна
+{% endblock %}
+
+{% block header %}
+    Активация не успешна.
+{% endblock %}
+
+{% block content %}
+    <p>Activation failure</p>
+    <p><a href="{% url 'accounts:registration' %}">Send email again</a></p>
+{% endblock %}

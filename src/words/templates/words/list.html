@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static%}
+<h1>List</h1>
+
+
+{% block content %}
+
+
+<form action="" method="GET">
+    {{ filter.form.as_p }}
+    <input type="Submit" name="filter_button" value="Search">
+</form>
+
+<a href="{% url 'words:list' %}">Reset filter</a>
+
+<hr>
+
+<ul>
+    <li>AVG: {{ avg }}</li>
+    <li> MAX: {{ max }}</li>
+    <li> MIN {{ min }}</li>
+</ul>
+
+
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="Submit" name="delete_button" value="Delete chosen words">
+    <a href="{% url 'words:create' %}">Create a word</a>
+    <table>
+        <tr>
+            <th>Word</th>
+            <th>Translation</th>
+            <th>Score</th>
+            <th>View</th>
+            <th>Update</th>
+            <th></th>
+            <th>Checkbox</th>
+        </tr>
+
+        {% if user.is_authenticated %}
+
+
+        {% for word in filter.qs %}
+        <tr>
+            <td>{{word.word1}}</td>
+            <td>{{word.word2}}</td>
+            <td>{{word.score}}</td>
+            <td><a href="{% url 'words:single' uuid=word.id %}">View</a></td>
+            <td><a href="{% url 'words:update' uuid=word.id %}">Update</a></td>
+            <td><a href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
+            <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
+        <tr>
+            {% endfor %}
+
+            {% endif %}
+
+    </table>
+</form>
+
+
+{% endblock content %}

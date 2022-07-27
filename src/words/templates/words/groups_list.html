@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>View</th>
+            <th>Update</th>
+            <th>Checkbox</th>
+        </tr>
+        {% for group in groups %}
+
+        <tr>
+            <td>{{group.name}}</td>
+            <td><a href="{% url 'words:group' uuid=group.id %}">View</a></td>
+            {% if group.name != "General" %}
+            <td><a href="{% url 'words:group_update' uuid=group.id %}">Update</a></td>
+            <td><input type="Checkbox" name="checks[]" value="{{group.id}}"></td>
+            {% endif %}
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    <hr>
+
+    <input type="Submit" value="Delete" name="delete_button">
+
+    <a href="{% url 'words:group_create' %}">Create</a>
+
+</form>
+
+
+{% endblock %}

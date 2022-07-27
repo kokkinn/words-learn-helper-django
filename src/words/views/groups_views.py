@@ -1,0 +1,126 @@
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+
+from words.models import Word, GroupOfWords
+
+from words.forms import GroupForm
+from django.http import HttpResponseRedirect, Http404
+
+from django.urls import reverse_lazy
+from django.views.generic import ListView
+from django.views.generic.edit import FormView
+
+
+class GroupsListView(ListView, LoginRequiredMixin):
+    template_name = "words/groups_list.html"
+    model = GroupOfWords
+    context_object_name = 'groups'
+
+    def get_queryset(self):
+        super(GroupsListView, self).get_queryset()
+        return self.request.user.groups_of_words.all()
+
+    def post(self, request):
+        checks = request.POST.getlist("checks[]")
+        for idi in checks:
+            group = GroupOfWords.objects.get(id=idi)
+            if group.name == "General":
+                return HttpResponseRedirect(reverse_lazy("words:home"))
+            group.delete()
+            messages.success(self.request, f"Group '{group.name}' deleted")
+        return redirect(reverse_lazy("words:groups_list"))
+
+
+class GroupCreateView(FormView, LoginRequiredMixin):
+    template_name = "words/group_form.html"
+    form_class = GroupForm
+    success_url = reverse_lazy("words:groups_list")
+
+    def get_form_kwargs(self):
+        kwargs = super(GroupCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def form_valid(self, form):
+        super().form_valid(self)
+        group_obj = form.instance
+        words = form.cleaned_data['words']
+        group_obj.user = self.request.user
+        group_obj.save()
+        for word in words:
+            group_obj.words.add(word)
+        group_obj.save()
+        messages.success(self.request, f"Group '{form.instance.name}' created")
+        return HttpResponseRedirect(reverse_lazy("words:groups_list"))
+
+
+class GroupUpdateView(FormView, LoginRequiredMixin):
+    template_name = "words/group_form.html"
+    form_class = GroupForm
+    success_url = reverse_lazy("words:groups_list")
+    pk_url_kwarg = "uuid"
+
+    def get(self, request, *args, **kwargs):
+        try:
+            GroupOfWords.objects.get(user=self.request.user, id=self.kwargs["uuid"])
+        except Word.DoesNotExist:
+            raise Http404
+        uuid = self.kwargs.get('uuid')
+        group_obj = GroupOfWords.objects.get(id=uuid)
+        if group_obj.name == self.request.user.general_group.name:
+            return HttpResponseRedirect(reverse_lazy("words:home"))
+        return super().get(self, request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(GroupUpdateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get_initial(self):
+        initial = super().get_initial()
+        uuid = self.kwargs.get('uuid')
+        group_obj = GroupOfWords.objects.get(id=uuid)
+        initial['words'] = group_obj.words.all()
+        initial["name"] = group_obj.name
+        initial["description"] = group_obj.description
+        return initial
+
+    def form_valid(self, form):
+        super().form_valid(self)
+        words = form.cleaned_data['words']
+        uuid = self.kwargs.get('uuid')
+        group_obj = GroupOfWords.objects.get(id=uuid)
+        group_obj.words.clear()
+        for word in words:
+            group_obj.words.add(word)
+        group_obj.description = form.cleaned_data["description"]
+        group_obj.name = form.cleaned_data["name"]
+        group_obj.save()
+        messages.success(self.request, f"Group '{form.instance.name}' updated")
+
+        return HttpResponseRedirect(reverse_lazy("words:groups_list"))
+
+
+class WordsInGroupListView(ListView, LoginRequiredMixin):
+    model = Word
+    context_object_name = "words"
+    pk_url_kwarg = 'uuid'
+
+    def get_queryset(self):
+        super(WordsInGroupListView, self).get_queryset()
+        uuid = self.kwargs.get("uuid")
+        return GroupOfWords.objects.get(id=uuid).words.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        uuid = self.kwargs.get("uuid")
+        context["group_obj"] = GroupOfWords.objects.get(id=uuid)
+        return context
+
+    def get_template_names(self):
+        super().get_template_names()
+        if not self.request.user.words.all():
+            return ["words/no_words.html"]
+        else:
+            return ["words/words_in_group_list.html"]

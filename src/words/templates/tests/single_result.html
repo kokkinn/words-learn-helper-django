@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Result for {{result.date}}
+
+<p>
+<table>
+    <tr>
+        <th>Word</th>
+        <th>Input</th>
+        <th>Is correct</th>
+    </tr>
+
+    {% for gl_name, words_dict in dict.items %}
+    {% for word_obj, params_dict in words_dict.items %}
+
+    <tr>
+        <td>{{word_obj}}</td>
+        {% for param, param_val in params_dict.items %}
+
+        {% if param == "input_word" %}
+        <td>{{param_val}}</td>
+        {% endif %}
+
+        {% if param == "is_correct" %}
+        <td>{{param_val}}</td>
+        {% endif %}
+
+        {% endfor %}
+    </tr>
+
+
+    {% endfor %}
+    {% endfor %}
+</table>
+{% endblock %}

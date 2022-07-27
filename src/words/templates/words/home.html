@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1>Welcome to home page of words!!!</h1>
+
+<table>
+    <tr>
+        <td><h1><a href="{% url 'words:list' %}">Words list</a></h1></td>
+        <td><a href="{% url 'words:create' %}"><h1>Create a word</h1></a></td>
+        <td><a href="{% url 'words:groups_list' %}"><h1>Group list</h1></a></td>
+        <td><a href="{% url 'words:group_create' %}"><h1>Create a group</h1></a></td>
+        <td><a href="{% url 'words:tests_home'%}"><h1>Tests</h1></a></td>
+    </tr>
+</table>
+
+{% endblock content %}
+

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+<a href="{% url 'words:groups_of_words_test' uuid=''%}">Test</a>
+{% block content %}
+<!---->
+
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Start">
+</form>
+<a href="{% url 'words:test_results' %}">Results</a>
+{% endblock %}

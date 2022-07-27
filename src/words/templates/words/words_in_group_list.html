@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Group of words: {{group_obj.name}}</h1>
+<a href="{% url 'words:group_update' uuid=group_obj.id %}">Update group</a>
+<table>
+    <tr>
+        <th>Word</th>
+        <th>Translation</th>
+        <th>Score</th>
+        <th>View</th>
+        <th>Update</th>
+        <th></th>
+        <th>Checkbox</th>
+    </tr>
+
+    {% if user.is_authenticated %}
+
+
+    {% for word in words %}
+    <tr>
+        <td>{{word.word1}}</td>
+        <td>{{word.word2}}</td>
+        <td>{{word.score}}</td>
+        <td><a href="{% url 'words:single' uuid=word.id %}">View</a></td>
+        <td><a href="{% url 'words:update' uuid=word.id %}">Update</a></td>
+        <td><a href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
+        <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
+    <tr>
+        {% endfor %}
+
+        {% endif %}
+
+</table>
+{% endblock %}

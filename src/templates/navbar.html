@@ -1,0 +1,27 @@
+{% load static %}
+
+<table cellpadding="10">
+    <tr>
+        <td><img src="{% static 'pictures/default.png' %}" width="50" height="50"></td>
+        <td><a href="{% url 'index' %}">Very main page</a></td>
+
+        {% if user.is_authenticated %}
+        <td><a href="{% url 'accounts:profile' %}">Profile</a></td>
+        <td><a href="{% url 'accounts:logout' %}">Logout</a></td>
+        <td><a href="{% url 'password_change' %}">Change password</a></td>
+        <td>Welcome, {{user.username}}</td>
+
+        {% else %}
+        <td><a href="{% url 'accounts:registration' %}">Registration</a></td>
+        <td><a href="{% url 'accounts:login' %}">Login</a></td>
+
+
+        {% endif %}
+
+
+    </tr>
+</table>
+
+
+
+<hr>
