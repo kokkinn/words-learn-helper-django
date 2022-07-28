@@ -38,7 +38,7 @@ def send_activation_notification(user):
     send_mail(
         subject,
         body,
-        env("EMAIL_HOST_USER").EMAIL_HOST_USER,
+        env("EMAIL_HOST_USER"),
         [user_email],
         fail_silently=True
     )
