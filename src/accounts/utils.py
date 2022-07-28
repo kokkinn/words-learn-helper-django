@@ -2,7 +2,9 @@ from os import getenv
 
 from django.core.mail import send_mail
 
-
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 from django.core.signing import Signer
 from django.template.loader import render_to_string
@@ -36,7 +38,7 @@ def send_activation_notification(user):
     send_mail(
         subject,
         body,
-        settings.EMAIL_HOST_USER,
+        env("EMAIL_HOST_USER").EMAIL_HOST_USER,
         [user_email],
         fail_silently=True
     )
