@@ -29,8 +29,18 @@ class Word(models.Model):
     score = models.IntegerField(default=0)
     group = models.ManyToManyField(to=GroupOfWords, related_name='words', blank=True, null=True)
 
+    #
+    # def __init__(self):
+    #     if
+    #     super(Word, self).__init__()
+
     def __str__(self):
         return f"{self.word1}: {self.word2}, {self.score}, {str(self.id)[0:4]}"
+
+
+    # def try_get_list_from_word(self):
+
+
 
     @classmethod
     def average_score(cls, user, qs=None):

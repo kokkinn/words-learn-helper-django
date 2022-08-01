@@ -17,17 +17,36 @@ import re
 import json
 
 
-sampleJson = """{ 
-   "company":{ 
-      "employee":{ 
-         "name":"emma",
-         "payble":{ 
-            "salary":7000,
-            "bonus":800
-         }
-      }
-   }
-}"""
+# sampleJson = """{
+#    "company":{
+#       "employee":{
+#          "name":"emma",
+#          "payble":{
+#             "salary":7000,
+#             "bonus":800
+#          }
+#       }
+#    }
+# }"""
+#
+# py_dict = json.loads(sampleJson)
+# print(py_dict['company']['employee']["payble"]["salary"])
 
-py_dict = json.loads(sampleJson)
-print(py_dict['company']['employee']["payble"]["salary"])
+# a = "sdf       sfsf"
+# a = a.split(" ")
+# print(a)
+# print(type(a))
+# if type(a) is list:
+#     print("GF")
+
+# import re
+#
+# def normalize_word(word):
+#     pattern = r", *"
+#     word = re.sub(pattern, ", ", word)
+#     return word.strip(" ").strip(",")
+#
+# print(normalize_word("wefwef,     wdg,wfgw, w, ").split(", "))
+
+s = "fescds"
+print(s.split(","))

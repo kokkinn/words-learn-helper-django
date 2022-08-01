@@ -1,19 +1,39 @@
+from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator
 from django.forms import ModelForm, ModelMultipleChoiceField
 from .models import Word, GroupOfWords
 from django import forms
 
+# def correct_input_validator(string):
+#
+from .utils import word_is_list, normalize_word
+
 
 class WordForm(ModelForm):
+    word1 = forms.CharField(validators=[MinLengthValidator(1)])
+    word2 = forms.CharField(validators=[MinLengthValidator(1)])
+    groups = ModelMultipleChoiceField(queryset=None, widget=forms.CheckboxSelectMultiple,
+                                      required=False)  # we defined a qs in init method
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(WordForm, self).__init__(*args, **kwargs)
         self.fields['groups'].queryset = GroupOfWords.objects.filter(user=self.request.user).exclude(name="General")
 
-    word1 = forms.CharField(validators=[MinLengthValidator(1)])
-    word2 = forms.CharField(validators=[MinLengthValidator(1)])
-    groups = ModelMultipleChoiceField(queryset=None, widget=forms.CheckboxSelectMultiple,
-                                      required=False)  # we defined a qs in init method
+    def clean(self):
+        super().clean()
+        self.cleaned_data["word1"] = normalize_word(self.cleaned_data["word1"])
+        self.cleaned_data["word2"] = normalize_word(self.cleaned_data["word2"])
+        word1 = self.cleaned_data["word1"]
+        word2 = self.cleaned_data["word2"]
+
+        if word_is_list(word1) and word_is_list(word2):
+            raise ValidationError(
+                {
+                    'word1': ValidationError("Both words can\'t have multiple words")
+                }
+            )
+        return self.cleaned_data
 
     class Meta:
         model = Word
