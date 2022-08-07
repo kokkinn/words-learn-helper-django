@@ -16,7 +16,6 @@
 import re
 import json
 
-
 # sampleJson = """{
 #    "company":{
 #       "employee":{
@@ -47,6 +46,15 @@ import json
 #     return word.strip(" ").strip(",")
 #
 # print(normalize_word("wefwef,     wdg,wfgw, w, ").split(", "))
+#
+# s = "fescds"
+# print(s.split(","))
 
-s = "fescds"
-print(s.split(","))
+listt = ["wd", "wf"]
+
+# a = listt.pop()
+# print(listt)
+# print(a)
+
+listt[0] = 1
+print(listt)

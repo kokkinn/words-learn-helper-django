@@ -4,14 +4,12 @@ from django.forms import ModelForm, ModelMultipleChoiceField
 from .models import Word, GroupOfWords
 from django import forms
 
-# def correct_input_validator(string):
-#
 from .utils import word_is_list, normalize_word
 
 
 class WordForm(ModelForm):
-    word1 = forms.CharField(validators=[MinLengthValidator(1)])
-    word2 = forms.CharField(validators=[MinLengthValidator(1)])
+    word1 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput(attrs={'class': 'input_f_'}))
+    word2 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput(attrs={'class': 'input_f_'}))
     groups = ModelMultipleChoiceField(queryset=None, widget=forms.CheckboxSelectMultiple,
                                       required=False)  # we defined a qs in init method
 

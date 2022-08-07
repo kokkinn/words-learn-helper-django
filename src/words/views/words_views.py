@@ -86,6 +86,11 @@ class WordUpdateView(LoginRequiredMixin, UpdateView, SingleObjectMixin):
         initial["groups"] = Word.objects.get(id=self.kwargs["uuid"]).group.all()
         return initial
 
+    def get_context_data(self, **kwargs):
+        context = super(WordUpdateView, self).get_context_data()
+        context["type"] = "update"
+        return context
+
 
 class WordCreateView(LoginRequiredMixin, CreateView):
     model = Word
@@ -107,6 +112,11 @@ class WordCreateView(LoginRequiredMixin, CreateView):
         form.save()
         messages.success(self.request, f"Word '{form.instance.word1} - {form.instance.word2}' created")
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(WordCreateView, self).get_context_data()
+        context["type"] = "create"
+        return context
 
 
 @login_required

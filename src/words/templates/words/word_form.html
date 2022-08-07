@@ -2,13 +2,84 @@
 
 {% block content %}
 
-<h1>Word creation</h1>
+<style>
+    .title_text {
+    font-family: Optima;
+    font-size: 70px;
+    line-height: 0px;
+    height: 0px;
+    font-weight: solid;
+    text-align: center;
+    margin: 50px;
+    }
+
+
+
+</style>
+<!--<style type="text/css">-->
+<!--  td {-->
+<!--    padding: 0px 200px;-->
+<!--  }-->
+<!--</style>-->
+
+{% if type == 'create' %}
+<p class="title_text">Word creation</p>
+{% else %}
+<p class="title_text">Word update</p>
+{% endif %}
 
 <form action="" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create">
+
+    <table class="center">
+
+        <tr>
+            <td class="label_">Word 1</td>
+            <td class="label_">Word 2</td>
+        </tr>
+
+        <tr>
+            {% for field in form %}
+            <td>
+                {% if field.name != 'groups' %}
+                {{ field }}
+                {% endif %}
+            </td>
+            {% endfor %}
+        </tr>
+        <tr>
+
+            <td>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    {% for field in form %}
+    {% if field.name == 'groups' %}
+    <p class="label_">Groups</p>
+    {{ field }}
+    {% endif %}
+    {% endfor %}
+
+
+    <input class='next_prev_buttons' type="submit" value="Create">
+</form>
+<!--<style>-->
+<!--    .errorlist {-->
+<!--    color:red;}-->
+<!--</style>-->
+<!--<form ALIGN='center' action="" method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    {{ form.as_p }}-->
+<!--    <input class='next_prev_buttons' type="submit" value="Create">-->
+<!--</form>-->
+
+
+<form action="{% url 'words:list' %}">
+    <input class='next_prev_buttons' type="submit" value="Words list">
 </form>
 
-<a href="{% url 'words:list' %}">Words list</a>
 {% endblock %}

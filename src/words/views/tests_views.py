@@ -12,7 +12,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import FormView
 
-from src.words.utils import word_is_list, normalize_word
+from words.utils import normalize_word
+
+from words.utils import word_with_min_score_from_id_array
 
 
 def create_result_json(list_of_uuids):
@@ -116,32 +118,36 @@ class GroupOfWordsTest(FormView):
         context["group_obj"] = GroupOfWords.objects.get(id=self.kwargs.get("uuid"))
 
         if request.session["test_params"]["duration"] == "finite":
-            randint = random.randint(0, len(request.session["test_params"]["list_test_words"]) - 1)
-            print('\n', request.session["test_params"]["list_test_words"], "\n")
-            random_word_id = request.session["test_params"]["list_test_words"].pop(randint)
-            request.session.modified = True
-            print('\n', request.session["test_params"]["list_test_words"], "\n")
-            context["word_obj"] = Word.objects.get(id=random_word_id)
+            if request.session["test_params"]["lower_score_first"] == "lower_score_first":
+                word = word_with_min_score_from_id_array(request.session["test_params"]["list_test_words"])
+                # context["word_obj"] = random.choice(context["group_obj"].words.filter(score=min_score))
+                context["word_obj"] = word
+            elif request.session["test_params"]["lower_score_first"] == "random_score_first":
+                random_word_id = random.choice(request.session["test_params"]["list_test_words"])
+                context["word_obj"] = Word.objects.get(id=random_word_id)
             return context
 
         elif request.session["test_params"]["duration"] == "loop":
             if request.session["test_params"]["lower_score_first"] == "lower_score_first":
                 min_score = context["group_obj"].words.filter().order_by('score').first().score
                 context["word_obj"] = random.choice(context["group_obj"].words.filter(score=min_score))
-            else:
-                context["word_obj"] = random.choice(context["group_obj"].words.filter().order_by('score').first())
+            elif request.session["test_params"]["lower_score_first"] == "random_score_first":
+                context["word_obj"] = random.choice(context["group_obj"].words.all())
+                print(context["word_obj"])
             return context
 
     def form_valid(self, form):
         if form.is_valid():
             try:
                 add_score = 0
-                correct_answs_in_list = None
                 compare_input_with = None
 
-                """We define a word or a list to wich we'll compare our input. A value of for_wX means we are asking 
+                """We define a word or a list to which we'll compare our input. A value of for_wX means we are asking 
                 a translation of word <value>, so a word to compare should be another one"""
                 word_obj_db = Word.objects.get(id=self.request.POST.getlist("word_obj")[0])
+                if self.request.session["test_params"]["duration"] == "finite":
+                    self.request.session["test_params"]['list_test_words'].remove(str(word_obj_db.id))
+                self.request.session.modified = True
                 if self.request.session["test_params"]["for_wX"] == 1:
                     compare_input_with = word_obj_db.word2.split(", ")
                 elif self.request.session["test_params"]["for_wX"] == 2:
@@ -149,14 +155,11 @@ class GroupOfWordsTest(FormView):
 
                 input_from_form = normalize_word(self.request.POST.getlist("input_word")[0]).split(", ")
 
-
                 for el in compare_input_with:
                     if el in input_from_form:
                         add_score += 1
                 if add_score == 0:
                     add_score = -1
-
-
 
                 print(f"\nI COMPARE {compare_input_with} WITH {input_from_form}\n")
 
@@ -177,7 +180,8 @@ class GroupOfWordsTest(FormView):
 
                     if self.request.session["test_params"]["duration"] == "finite":
                         res_obj = Result.objects.get(id=self.request.session["test_params"]["result_id"])
-                        res_obj.details["test_words"][f"{str(word_obj_db.id)}"]["input_word"] = ", ".join(input_from_form)
+                        res_obj.details["test_words"][f"{str(word_obj_db.id)}"]["input_word"] = ", ".join(
+                            input_from_form)
                         if add_score >= 1:
                             res_obj.details["test_words"][f"{str(word_obj_db.id)}"][
                                 "is_correct"] = f"{add_score} / {len(compare_input_with)}"
@@ -192,15 +196,17 @@ class GroupOfWordsTest(FormView):
 
                     if self.request.session["test_params"]["test_eval"] == "ranked":
                         word_obj_db.score -= 1
-                    if self.request.session["test_params"]["do_with_incorrect"] == "repeat" and \
-                            self.request.session["test_params"]["duration"] == "finite":
-                        self.request.session["test_params"]["list_test_words"].append(str(word_obj_db.id))
-                        self.request.session.modified = True
+
                     if self.request.session["test_params"]["duration"] == "finite":
                         res_obj = Result.objects.get(id=self.request.session["test_params"]["result_id"])
-                        res_obj.details["test_words"][f"{str(word_obj_db.id)}"]["input_word"] = ", ".join(input_from_form)
+                        res_obj.details["test_words"][f"{str(word_obj_db.id)}"]["input_word"] = ", ".join(
+                            input_from_form)
                         res_obj.details["test_words"][f"{str(word_obj_db.id)}"]["is_correct"] = False
                         res_obj.save()
+
+                    if self.request.session["test_params"]["do_with_incorrect"] == "repeat":
+                        self.request.session["test_params"]["list_test_words"].append(str(word_obj_db.id))
+                        self.request.session.modified = True
 
                 word_obj_db.save()
             except KeyError:

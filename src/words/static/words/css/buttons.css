@@ -1,0 +1,142 @@
+
+    .next_prev_buttons {
+        background-color:aliceblue;
+        color:black;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius:3px;
+        border-color:black;
+        border-style:solid;
+        cursor:pointer;
+        font-weight:bold;
+        font-size:20px;
+        transition: color 0.5s, opacity 1s;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: block;
+        font-family: Optima;
+        text-decoration: none;
+        width: 200px;
+
+    }
+
+
+    .next_prev_buttons:hover {
+    color:firebrick;
+        opacity:2;
+    }
+
+    .next_prev_buttons:active {
+    color:green;
+    }
+
+    .input_ {
+
+    }
+
+    .label_{
+    font-family: Optima;
+    font-size: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 1px;
+
+    }
+
+    .input_f_{
+    font-family: Optima;
+        background-color:aliceblue;
+        color:firebrick;
+        border-radius:3px;
+        cursor:text;
+        border-width: thin;
+        border-color:black;
+        border-style:solid;
+        text-align:left;
+        text-color:red;
+        font-size: 20px;
+        margin: 15px;
+        display: block;
+        height: 30px;
+
+
+    }
+
+    .td{
+        padding: 0px, 15px;
+    }
+
+#id_groups, #id_group {
+    font-family: Optima;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: firebrick;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    border-color:black;
+    border-style:solid;
+    margin-bottom: 30px;
+    cursor:pointer;
+     border-width: thin;
+    }
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    column-gap: 30px;
+}
+
+hr{
+    border-top: 1px solid black;
+}
+
+td{
+    font-size: 18px;
+
+    font-family: Optima;
+
+}
+
+a{
+    color: firebrick;
+    text-decoration:none;
+    pointer:cursor;
+    background-color:floralwhite;
+    padding: 4px;
+
+
+}
+
+.table_list {
+    border:none;
+    border-collapse: collapse;
+
+}
+
+.table_list td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+
+    padding: 5px;
+}
+
+.table_list th {
+    border-top: 1px solid #000;
+    padding-top: 10px;
+
+}
+
+.table_list th {
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.tt{
+    margin-top: 5px;
+    padding-bottom: 1px;
+}

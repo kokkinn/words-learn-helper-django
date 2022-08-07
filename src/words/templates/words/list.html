@@ -5,13 +5,24 @@
 
 {% block content %}
 
-
 <form action="" method="GET">
-    {{ filter.form.as_p }}
-    <input type="Submit" name="filter_button" value="Search">
+    <table>
+        {% for form in filter.form %}
+        <tr>
+            <td class="label_">{{form.label_tag}}</td>
+        </tr>
+        <tr>
+            <td>{{form}}</td>
+            {%endfor%}
+        </tr>
+    </table>
+    <input type="Submit" class='next_prev_buttons' name="filter_button" value="Search">
 </form>
 
+
+
 <a href="{% url 'words:list' %}">Reset filter</a>
+
 
 <hr>
 
@@ -25,16 +36,21 @@
 <hr>
 <form action="" method="POST">
     {% csrf_token %}
-    <input type="Submit" name="delete_button" value="Delete chosen words">
+
     <a href="{% url 'words:create' %}">Create a word</a>
-    <table>
+
+
+    <input class='next_prev_buttons' type="Submit" name="delete_button" value="Delete chosen words"></td>
+
+
+    <table class="table_list">
         <tr>
-            <th>Word</th>
-            <th>Translation</th>
+            <th>Word1</th>
+            <th>Word2</th>
             <th>Score</th>
             <th>View</th>
             <th>Update</th>
-            <th></th>
+            <th>Delete</th>
             <th>Checkbox</th>
         </tr>
 
@@ -51,6 +67,7 @@
             <td><a href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
             <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
         <tr>
+
             {% endfor %}
 
             {% endif %}

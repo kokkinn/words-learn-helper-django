@@ -1,9 +1,13 @@
+{% for field in form %}
+{{ field.errors }}
+{% endfor %}
 {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-        <hr>
-    {% endfor %}
+{% for message in messages %}
+{{ message }}
+{% endfor %}
+{% else %}
 {% endif %}
+
+
+<hr>
 

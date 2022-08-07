@@ -18,10 +18,23 @@ class CustomBooleanWidget(BooleanWidget):
 
 
 class WordFilter(django_filters.FilterSet):
+    word1 = django_filters.CharFilter(lookup_expr='icontains')
+    word2 = django_filters.CharFilter(lookup_expr='icontains')
+    score_gt = django_filters.NumberFilter(lookup_expr='gt', field_name='score')
+    score_lt = django_filters.NumberFilter(lookup_expr='lt', field_name="score")
     group = django_filters.ModelMultipleChoiceFilter(queryset=groups, widget=forms.CheckboxSelectMultiple())
-    # username = django_filters.CharFilter(method='my_custom_filter')
     order_by_asc_score = django_filters.BooleanFilter(label="Order score by", method="order_by_asc_scoree",
                                                       widget=CustomBooleanWidget)
+
+    def __init__(self, data=None, queryset=None, *, request=None, prefix=None):
+        super(WordFilter, self).__init__(data=data, queryset=queryset, request=request, prefix=prefix)
+        self.filters['word1'].field.widget.attrs.update({'class': 'input_f_'})
+        self.filters['word2'].field.widget.attrs.update({'class': 'input_f_'})
+        self.filters['order_by_asc_score'].field.widget.attrs.update({'class': 'input_f_'})
+        # self.filters['group'].field.widget.attrs.update({'class': 'input_f_'})
+        self.filters['score_gt'].field.widget.attrs.update({'class': 'input_f_'})
+        self.filters['score_lt'].field.widget.attrs.update({'class': 'input_f_'})
+
 
     def order_by_asc_scoree(self, queryset, name, value):
         if value:
@@ -31,4 +44,4 @@ class WordFilter(django_filters.FilterSet):
 
     class Meta:
         model = Word
-        fields = {"score": ["lt", "gt"], "word1": ["icontains"], "word2": ["icontains"]}
+        fields = []
