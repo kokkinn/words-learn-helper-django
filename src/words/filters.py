@@ -28,12 +28,12 @@ class WordFilter(django_filters.FilterSet):
 
     def __init__(self, data=None, queryset=None, *, request=None, prefix=None):
         super(WordFilter, self).__init__(data=data, queryset=queryset, request=request, prefix=prefix)
-        self.filters['word1'].field.widget.attrs.update({'class': 'input_f_'})
-        self.filters['word2'].field.widget.attrs.update({'class': 'input_f_'})
-        self.filters['order_by_asc_score'].field.widget.attrs.update({'class': 'input_f_'})
+        # self.filters['word1'].field.widget.attrs.update({'class': 'input_f_'})
+        # self.filters['word2'].field.widget.attrs.update({'class': 'input_f_'})
+        # self.filters['order_by_asc_score'].field.widget.attrs.update({'class': 'input_f_'})
         # self.filters['group'].field.widget.attrs.update({'class': 'input_f_'})
-        self.filters['score_gt'].field.widget.attrs.update({'class': 'input_f_'})
-        self.filters['score_lt'].field.widget.attrs.update({'class': 'input_f_'})
+        # self.filters['score_gt'].field.widget.attrs.update({'class': 'input_f_'})
+        # self.filters['score_lt'].field.widget.attrs.update({'class': 'input_f_'})
 
 
     def order_by_asc_scoree(self, queryset, name, value):

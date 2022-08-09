@@ -1,24 +1,25 @@
-
-    .next_prev_buttons {
-        background-color:aliceblue;
-        color:black;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        border-radius:3px;
-        border-color:black;
-        border-style:solid;
-        cursor:pointer;
-        font-weight:bold;
-        font-size:20px;
-        transition: color 0.5s, opacity 1s;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        display: block;
-        font-family: Optima;
-        text-decoration: none;
-        width: 200px;
+.next_prev_buttons {
+    background-color:aliceblue;
+    color:black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right:auto;
+    padding-left:auto;
+    border-radius:3px;
+    border-color:black;
+    border-style:solid;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:20px;
+    transition: color 0.5s, opacity 1s;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    font-family: Optima;
+    text-decoration: none;
+    width: 200px;
 
     }
 
@@ -43,10 +44,11 @@
     text-align: center;
     margin-bottom: 10px;
     margin-top: 1px;
+    vertical-align:top;
 
     }
 
-    .input_f_{
+    .input_f_ input, select{
     font-family: Optima;
         background-color:aliceblue;
         color:firebrick;
@@ -69,18 +71,18 @@
         padding: 0px, 15px;
     }
 
-#id_groups, #id_group {
+.groups_choice div[id="id_group"], div[id="id_groups"], div[id='id_words']{
     font-family: Optima;
     font-size: 20px;
     line-height: 30px;
     text-align: center;
     color: firebrick;
-    margin-left: auto;
+    margin-left: 20px;
     margin-right: auto;
-    width: 300px;
+    width: auto;
     border-color:black;
     border-style:solid;
-    margin-bottom: 30px;
+
     cursor:pointer;
      border-width: thin;
     }
@@ -88,7 +90,9 @@
 .center{
     margin-left: auto;
     margin-right: auto;
-    column-gap: 30px;
+
+
+
 }
 
 hr{
@@ -126,7 +130,7 @@ a{
 }
 
 .table_list th {
-    border-top: 1px solid #000;
+    border-top: 3px solid #000;
     padding-top: 10px;
 
 }
@@ -137,5 +141,141 @@ a{
 }
 
 .tet{
-    font-size: 20px
+    font-size: 16px
 }
+
+.inline_block_label_field{
+    display:inline-block;
+    margin-bottom:0px;
+    padding-bottom:0px;
+    vertical-align: center;
+    text-align:left;
+}
+
+
+.input_ovr input, select{
+        font-size: 15px;
+        color: black;
+        height: 20px;
+        align:left;
+        margin-left: 0px;
+        margin-top: 0px;
+        width:150px;
+        background-color:white;
+
+}
+
+.filter_label{
+    color:black;
+    font-size: 18px;
+    display:inline-block;
+
+    }
+
+.group_choice_word_list div[id='id_group']{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    text-align:left;
+    width:auto;
+    vertical-align:bottom;
+}
+
+
+
+.buttons_word_list{
+    width:200px;
+    margin-left:10px;
+    margin-bottom:0px;
+    text-align:center;
+
+
+}
+
+.filter_form{
+    display:block;
+}
+
+.stats_wl{
+    margin-left: 40px;
+    margin-top: 20px;
+    border-color:black;
+    border-style:solid;
+    text-align:left;
+    border-width:thin;
+    vertical-align:bottom;
+}
+
+.table_wl{
+    display:inline-block;
+    margin-top:50px;
+
+}
+
+.table_buttons{
+    display:inline-block;
+    margin-left:40px;
+    margin-top:50px;
+}
+
+.imgt{
+    width:500px;
+    padding-top: 10px;
+
+
+}
+
+.imgr{
+    display:inline-block;
+}
+
+.right_of_table{
+     display:inline-block;
+     vertical-align:top;
+
+}
+
+
+    .title_text {
+    font-family: Optima;
+    font-size: 70px;
+    line-height: 0px;
+    height: 0px;
+    font-weight: solid;
+    text-align: center;
+    margin: 50px;
+    }
+
+.input_ovr2 input, select{
+    margin:0px 0px 0px 20px;
+    padding:0px;
+    margin-bottom:10px;
+
+}
+
+.cell{
+    vertical-align:top;
+
+}
+
+
+
+
+.buttons_wc{
+    margin:0px;
+    padding-top:0px;
+
+    height:auto;
+}
+
+.label_gc{
+    text-align: left;
+    padding-right: 100px;
+    padding:0px;
+
+}
+
+.button_line input{
+    margin-top: 10px;
+    margin-left:574px;
+
+    }

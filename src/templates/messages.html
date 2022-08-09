@@ -1,11 +1,12 @@
+{% if messages or form %}
 {% for field in form %}
 {{ field.errors }}
 {% endfor %}
-{% if messages %}
 {% for message in messages %}
 {{ message }}
 {% endfor %}
 {% else %}
+<p></p>
 {% endif %}
 
 

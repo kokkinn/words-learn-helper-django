@@ -54,6 +54,15 @@ class GroupCreateView(FormView, LoginRequiredMixin):
         messages.success(self.request, f"Group '{form.instance.name}' created")
         return HttpResponseRedirect(reverse_lazy("words:groups_list"))
 
+    def get_context_data(self, **kwargs):
+        context = super(GroupCreateView, self).get_context_data()
+        context["type"] = "create"
+        no_words = None
+        if len(self.request.user.words.all()) == 0:
+            no_words = True
+        context['no_words'] = no_words
+        return context
+
 
 class GroupUpdateView(FormView, LoginRequiredMixin):
     template_name = "words/group_form.html"
@@ -100,6 +109,14 @@ class GroupUpdateView(FormView, LoginRequiredMixin):
         messages.success(self.request, f"Group '{form.instance.name}' updated")
 
         return HttpResponseRedirect(reverse_lazy("words:groups_list"))
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupUpdateView, self).get_context_data()
+        context["type"] = "update"
+        if len(self.request.user.words.all()) == 0:
+            no_words = True
+        context['no_words'] = no_words
+        return context
 
 
 class WordsInGroupListView(ListView, LoginRequiredMixin):

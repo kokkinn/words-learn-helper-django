@@ -1,79 +1,110 @@
 {% extends 'base.html' %}
-{% load static%}
-<h1>List</h1>
-
-
 {% block content %}
-
-<form action="" method="GET">
-    <table>
-        {% for form in filter.form %}
-        <tr>
-            <td class="label_">{{form.label_tag}}</td>
-            <td class="tet">{{form}}</td>
-            {%endfor%}
-        </tr>
-<!--        <tr>-->
-<!--            -->
-<!--        </tr>-->
-    </table>
-    <input type="Submit" class='next_prev_buttons' name="filter_button" value="Search">
-</form>
+{% load static%}
 
 
+<div class="filter_space">
+    <form action="" method="GET">
+        <div class="inline_block_label_field">
+            <div class="label_ filter_label">{{filter.form.word1.label}}</div>
+            <div class="input_f_ input_ovr">{{filter.form.word1}}</div>
+        </div>
 
-<a href="{% url 'words:list' %}">Reset filter</a>
+        <div class="inline_block_label_field">
+            <div class="label_ filter_label">{{filter.form.word2.label}}</div>
+            <div class="input_f_ input_ovr">{{filter.form.word2}}</div>
+        </div>
 
 
-<hr>
+        <div class="inline_block_label_field">
+            <div class="label_ filter_label">{{filter.form.score_gt.label}}</div>
+            <div class="input_f_ input_ovr">{{filter.form.score_gt}}</div>
+        </div>
 
-<ul>
-    <li>AVG: {{ avg }}</li>
-    <li> MAX: {{ max }}</li>
-    <li> MIN {{ min }}</li>
-</ul>
+        <div class="inline_block_label_field">
+            <div class="label_ filter_label">{{filter.form.score_lt.label}}</div>
+            <div class="input_f_ input_ovr">{{filter.form.score_lt}}</div>
+        </div>
+
+        <div class="inline_block_label_field">
+            <div class="label_ filter_label">{{filter.form.order_by_asc_score.label}}</div>
+            <div class="input_f_ input_ovr">{{filter.form.order_by_asc_score}}</div>
+        </div>
+
+        <br>
 
 
-<hr>
+        <div class="inline_block_label_field">
+            <div class="label_ filter_label">{{filter.form.group.label}}</div>
+            <div class="groups_choice group_choice_word_list">{{filter.form.group}}</div>
+        </div>
+
+        <div class="inline_block_label_field">
+            <input type="Submit" class='next_prev_buttons buttons_word_list' name="filter_button"
+                   value="Search with filter">
+            <a onclick="checker()" class="next_prev_buttons buttons_word_list" href="{% url 'words:list' %}">Reset
+                filter</a>
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
 <form action="" method="POST">
     {% csrf_token %}
+    <div class="table_wl">
+        <table class="table_list">
+            <tr>
+                <th>Word1</th>
+                <th>Word2</th>
+                <th>Score</th>
+                <th>View</th>
+                <th>Update</th>
+                <th>Delete</th>
+                <th>Checkbox</th>
+            </tr>
 
-    <a href="{% url 'words:create' %}">Create a word</a>
-
-
-    <input class='next_prev_buttons' type="Submit" name="delete_button" value="Delete chosen words"></td>
-
-
-    <table class="table_list">
-        <tr>
-            <th>Word1</th>
-            <th>Word2</th>
-            <th>Score</th>
-            <th>View</th>
-            <th>Update</th>
-            <th>Delete</th>
-            <th>Checkbox</th>
-        </tr>
-
-        {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
 
 
-        {% for word in filter.qs %}
-        <tr>
-            <td>{{word.word1}}</td>
-            <td>{{word.word2}}</td>
-            <td>{{word.score}}</td>
-            <td><a href="{% url 'words:single' uuid=word.id %}">View</a></td>
-            <td><a href="{% url 'words:update' uuid=word.id %}">Update</a></td>
-            <td><a href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
-            <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
-        <tr>
+            {% for word in filter.qs %}
+            <tr>
+                <td>{{word.word1}}</td>
+                <td>{{word.word2}}</td>
+                <td>{{word.score}}</td>
+                <td><a href="{% url 'words:single' uuid=word.id %}">View</a></td>
+                <td><a href="{% url 'words:update' uuid=word.id %}">Update</a></td>
+                <td><a onclick="checker()" href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
+                <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
+            <tr>
 
-            {% endfor %}
+                {% endfor %}
 
-            {% endif %}
+                {% endif %}
 
-    </table>
+        </table>
+    </div>
+
+    <div class="right_of_table">
+
+        <div>
+            <a class='next_prev_buttons buttons_word_list table_buttons' href="{% url 'words:create' %}">Create a
+                word</a>
+            <input class='next_prev_buttons buttons_word_list table_buttons' type="Submit" name="delete_button"
+                   value="Delete chosen words" onclick="checker()">
+        </div>
+
+        <div class="inline_block_label_field stats_wl label_">
+            <div>AVG: {{ avg }}</div>
+            <div>MAX: {{ max }}</div>
+            <div>MIN: {{ min }}</div>
+        </div>
+
+    </div>
 </form>
 
 

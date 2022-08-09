@@ -1,29 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<style>
-    .title_text {
-    font-family: Optima;
-    font-size: 70px;
-    line-height: 0px;
-    height: 0px;
-    font-weight: solid;
-    text-align: center;
-    margin: 50px;
-    }
-
-
-
-</style>
-<!--<style type="text/css">-->
-<!--  td {-->
-<!--    padding: 0px 200px;-->
-<!--  }-->
-<!--</style>-->
+{% load static %}
 
 {% if type == 'create' %}
 <p class="title_text">Word creation</p>
+<!--<script src="{% static 'words/js/test_script.js' %}"></script>-->
 {% else %}
 <p class="title_text">Word update</p>
 {% endif %}
@@ -42,30 +24,40 @@
             {% for field in form %}
             <td>
                 {% if field.name != 'groups' %}
-                {{ field }}
+                <div class="input_f_">{{ field }}</div>
                 {% endif %}
             </td>
             {% endfor %}
         </tr>
-        <tr>
 
+        <tr>
             <td>
 
+                <p class="label_">Groups</p>
+                {% if no_groups %}
+                     <a class='next_prev_buttons buttons_word_list' href="{% url 'words:group_create' %}">No groups yet, create a group</a>
+                {% else %}
+                <div class="groups_choice">{{form.groups}}</div>
+                {% endif %}
+            </td>
+
+            <td>
+                <div class="buttons_wc">
+                    {% if type == 'create' %}
+                    <input onclick="checker()" class='next_prev_buttons buttons_word_list' type="submit" value="Create a word">
+                    {% else %}
+                    <input class='next_prev_buttons buttons_word_list' type="submit" value="Update">
+                    {% endif %}
+
+                    <a class='next_prev_buttons buttons_word_list' href="{% url 'words:list' %}">Words list</a>
+                </div>
             </td>
 
         </tr>
 
     </table>
 
-    {% for field in form %}
-    {% if field.name == 'groups' %}
-    <p class="label_">Groups</p>
-    {{ field }}
-    {% endif %}
-    {% endfor %}
 
-
-    <input class='next_prev_buttons' type="submit" value="Create">
 </form>
 <!--<style>-->
 <!--    .errorlist {-->
@@ -77,9 +69,5 @@
 <!--    <input class='next_prev_buttons' type="submit" value="Create">-->
 <!--</form>-->
 
-
-<form action="{% url 'words:list' %}">
-    <input class='next_prev_buttons' type="submit" value="Words list">
-</form>
 
 {% endblock %}

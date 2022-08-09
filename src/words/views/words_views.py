@@ -116,6 +116,11 @@ class WordCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(WordCreateView, self).get_context_data()
         context["type"] = "create"
+        no_groups = False
+        if len(self.request.user.groups_of_words.all()) == 1:
+            no_groups = True
+        context['no_groups'] = no_groups
+
         return context
 
 
@@ -138,9 +143,9 @@ def delete_view(request, uuid):
     except Word.DoesNotExist:
         raise Http404
     word_object = Word.objects.get(id=uuid)
-    if request.method == "POST":
-        word_object.delete()
-        messages.success(request, f"Word '{word_object.word1} - {word_object.word2}' deleted")
-        return redirect(reverse_lazy("words:list"))
-    context = {"word": word_object}
-    return render(request, "words/delete.html", context)
+    # if request.method == "POST":
+    word_object.delete()
+    messages.success(request, f"Word '{word_object.word1} - {word_object.word2}' deleted")
+    return redirect(reverse_lazy("words:list"))
+
+    # return render(request, "words/delete.html", context)

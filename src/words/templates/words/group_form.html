@@ -2,12 +2,55 @@
 
 {% block content %}
 
-<h1>Group creation/updation</h1>
+{% if type == 'create' %}
+<p class="title_text">Group creation</p>
+{% else %}
+<p class="title_text">Group update</p>
+{% endif %}
 
 <form action="" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create">
+    <table class="center">
+
+        <tr>
+            <td class="label_ label_gc">Group name</td>
+            <td>
+                <div class="input_f_ input_ovr2">{{form.name}}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label_ label_gc">Group description</td>
+            <td>
+                <div class="input_f_ input_ovr2">{{form.description}}</div>
+            </td>
+
+        </tr>
+        <tr>
+            <td class="cell">
+                <div class="label_ label_gc">Words</div>
+            </td>
+            <td class="cell">
+                {% if no_words %}
+                <a class='next_prev_buttons buttons_word_list' href="{% url 'words:create' %}">No words yet,
+                    create a word (optional)</a>
+                {% else %}
+                <div class="group_choices ">{{form.words}}</div>
+                {% endif %}
+
+            </td>
+        </tr>
+
+    </table>
+
+
+    {% if type == 'create' %}
+    <div class="button_line"><input class='next_prev_buttons buttons_word_list' type="submit" value="Create"></div>
+    {% else %}
+    <div class="button_line"><input class='next_prev_buttons buttons_word_list' type="submit" value="Update"></div>
+    {% endif %}
+
+
 </form>
 
 {% endblock %}
