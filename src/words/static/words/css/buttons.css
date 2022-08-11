@@ -1,29 +1,53 @@
+* {
+    font-family: Optima;
+}
+
 .next_prev_buttons {
     background-color:aliceblue;
     color:black;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right:auto;
-    padding-left:auto;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    display:block;
+    width:200px;
+    height:40px;
     border-radius:3px;
     border-color:black;
     border-style:solid;
+    border-width:thin;
     cursor:pointer;
     font-weight:bold;
     font-size:20px;
+    line-height:40px;
+    text-align:center;
     transition: color 0.5s, opacity 1s;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: block;
-    font-family: Optima;
-    text-decoration: none;
-    width: 200px;
-
+    text-decoration:none;
     }
 
+.buttons_wc{
+    margin: 5px 0px 0px 0px;
+}
 
+.buttons_wc_container{
+    display:inline-block;
+
+}
+
+.td_wc_buttons{
+    vertical-align:bottom;
+    text-align:center;
+
+}
+
+.td_wc_groups{
+    vertical-align:top;
+    text-align:center;
+
+}
+.buttons_word_list{
+    margin-left:10px;
+    margin-bottom:0px;
+    margin-top:10px;
+}
     .next_prev_buttons:hover {
     color:firebrick;
         opacity:2;
@@ -77,8 +101,8 @@
     line-height: 30px;
     text-align: center;
     color: firebrick;
-    margin-left: 20px;
-    margin-right: auto;
+
+
     width: auto;
     border-color:black;
     border-style:solid;
@@ -125,20 +149,32 @@ a{
 .table_list td {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
-
-    padding: 5px;
+    padding: 8px;
 }
+
+.table_list td:first-child {
+  width: 100px;
+  }
+
+.table_list td:nth-child(2) {
+  width: 100px;
+
+  }
+
+.table_list td:nth-child(3) {
+  width: 30px;
+  text-align:center;
+  }
 
 .table_list th {
     border-top: 3px solid #000;
     padding-top: 10px;
-
-}
-
-.table_list th {
     font-size: 20px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+
 }
+
+
 
 .tet{
     font-size: 16px
@@ -148,7 +184,7 @@ a{
     display:inline-block;
     margin-bottom:0px;
     padding-bottom:0px;
-    vertical-align: center;
+    vertical-align: bottom;
     text-align:left;
 }
 
@@ -182,14 +218,7 @@ a{
 
 
 
-.buttons_word_list{
-    width:200px;
-    margin-left:10px;
-    margin-bottom:0px;
-    text-align:center;
 
-
-}
 
 .filter_form{
     display:block;
@@ -260,12 +289,7 @@ a{
 
 
 
-.buttons_wc{
-    margin:0px;
-    padding-top:0px;
 
-    height:auto;
-}
 
 .label_gc{
     text-align: left;

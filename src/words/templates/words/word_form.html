@@ -31,25 +31,27 @@
         </tr>
 
         <tr>
-            <td>
-
-                <p class="label_">Groups</p>
-                {% if no_groups %}
-                     <a class='next_prev_buttons buttons_word_list' href="{% url 'words:group_create' %}">No groups yet, create a group</a>
-                {% else %}
-                <div class="groups_choice">{{form.groups}}</div>
-                {% endif %}
+            <td class="td_wc_groups">
+                <div class="buttons_wc_container">
+                    <p class="label_">Groups</p>
+                    {% if no_groups %}
+                    <a class='next_prev_buttons buttons_wc' href="{% url 'words:group_create' %}">No groups yet, create
+                        a group</a>
+                    {% else %}
+                    <div class="groups_choice">{{form.groups}}</div>
+                    {% endif %}
+                </div>
             </td>
 
-            <td>
-                <div class="buttons_wc">
+            <td class="td_wc_buttons">
+                <div class="buttons_wc_container">
                     {% if type == 'create' %}
-                    <input onclick="checker()" class='next_prev_buttons buttons_word_list' type="submit" value="Create a word">
+                    <input class='next_prev_buttons buttons_wc' type="submit" value="Create a word">
                     {% else %}
-                    <input class='next_prev_buttons buttons_word_list' type="submit" value="Update">
+                    <input class='next_prev_buttons buttons_wc' type="submit" value="Update">
                     {% endif %}
 
-                    <a class='next_prev_buttons buttons_word_list' href="{% url 'words:list' %}">Words list</a>
+                    <a class='next_prev_buttons buttons_wc' href="{% url 'words:list' %}">Words list</a>
                 </div>
             </td>
 
@@ -59,15 +61,7 @@
 
 
 </form>
-<!--<style>-->
-<!--    .errorlist {-->
-<!--    color:red;}-->
-<!--</style>-->
-<!--<form ALIGN='center' action="" method="POST">-->
-<!--    {% csrf_token %}-->
-<!--    {{ form.as_p }}-->
-<!--    <input class='next_prev_buttons' type="submit" value="Create">-->
-<!--</form>-->
+
 
 
 {% endblock %}

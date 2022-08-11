@@ -3,56 +3,72 @@
 {% load static%}
 
 
-<div class="filter_space">
-    <form action="" method="GET">
-        <div class="inline_block_label_field">
-            <div class="label_ filter_label">{{filter.form.word1.label}}</div>
-            <div class="input_f_ input_ovr">{{filter.form.word1}}</div>
-        </div>
+<div class="accordion">
+    <button type="button" class="accordion_button_wl">Expand filter</button>
+    <div class="accordion_content_wl">
+        <form action="" method="GET">
+            <div class="inline_block_label_field">
+                <div class="label_ filter_label">{{filter.form.word1.label}}</div>
+                <div class="input_f_ input_ovr">{{filter.form.word1}}</div>
+            </div>
 
-        <div class="inline_block_label_field">
-            <div class="label_ filter_label">{{filter.form.word2.label}}</div>
-            <div class="input_f_ input_ovr">{{filter.form.word2}}</div>
-        </div>
-
-
-        <div class="inline_block_label_field">
-            <div class="label_ filter_label">{{filter.form.score_gt.label}}</div>
-            <div class="input_f_ input_ovr">{{filter.form.score_gt}}</div>
-        </div>
-
-        <div class="inline_block_label_field">
-            <div class="label_ filter_label">{{filter.form.score_lt.label}}</div>
-            <div class="input_f_ input_ovr">{{filter.form.score_lt}}</div>
-        </div>
-
-        <div class="inline_block_label_field">
-            <div class="label_ filter_label">{{filter.form.order_by_asc_score.label}}</div>
-            <div class="input_f_ input_ovr">{{filter.form.order_by_asc_score}}</div>
-        </div>
-
-        <br>
+            <div class="inline_block_label_field">
+                <div class="label_ filter_label">{{filter.form.word2.label}}</div>
+                <div class="input_f_ input_ovr">{{filter.form.word2}}</div>
+            </div>
 
 
-        <div class="inline_block_label_field">
-            <div class="label_ filter_label">{{filter.form.group.label}}</div>
-            <div class="groups_choice group_choice_word_list">{{filter.form.group}}</div>
-        </div>
+            <div class="inline_block_label_field">
+                <div class="label_ filter_label">{{filter.form.score_gt.label}}</div>
+                <div class="input_f_ input_ovr">{{filter.form.score_gt}}</div>
+            </div>
 
-        <div class="inline_block_label_field">
-            <input type="Submit" class='next_prev_buttons buttons_word_list' name="filter_button"
-                   value="Search with filter">
-            <a onclick="checker()" class="next_prev_buttons buttons_word_list" href="{% url 'words:list' %}">Reset
-                filter</a>
+            <div class="inline_block_label_field">
+                <div class="label_ filter_label">{{filter.form.score_lt.label}}</div>
+                <div class="input_f_ input_ovr">{{filter.form.score_lt}}</div>
+            </div>
 
-        </div>
+            <div class="inline_block_label_field">
+                <div class="label_ filter_label">{{filter.form.order_by_asc_score.label}}</div>
+                <div class="input_f_ input_ovr">{{filter.form.order_by_asc_score}}</div>
+            </div>
+
+            <br>
+
+            <div class="inline_block_label_field">
+                <div class="label_ filter_label">{{filter.form.group.label}}</div>
+                <div class="groups_choice group_choice_word_list">{{filter.form.group}}</div>
+            </div>
+
+            <div class="inline_block_label_field">
+                <input type="Submit" class='next_prev_buttons buttons_word_list' name="filter_button"
+                       value="Search with filter">
+                <a class="next_prev_buttons buttons_word_list" href="{% url 'words:list' %}">Reset
+                    filter</a>
+            </div>
 
 
-    </form>
+        </form>
 
-
+    </div>
 </div>
+<!--</div>-->
 
+<!--<div class="buttons">-->
+<!--    <h1>Notifications</h1>-->
+<!--    <button onclick="notifySuccess()">-->
+<!--        Success-->
+<!--    </button>-->
+<!--    <button onclick="notifyError()">-->
+<!--        Error-->
+<!--    </button>-->
+<!--    <button onclick="notifyInfo()">-->
+<!--        Info-->
+<!--    </button>-->
+<!--</div>-->
+
+<!--<div id="notification-area">-->
+<!--</div>-->
 
 <form action="" method="POST">
     {% csrf_token %}
@@ -61,11 +77,11 @@
             <tr>
                 <th>Word1</th>
                 <th>Word2</th>
-                <th>Score</th>
-                <th>View</th>
-                <th>Update</th>
-                <th>Delete</th>
-                <th>Checkbox</th>
+                <th>&#128211;</th>
+                <th>&#128064;</th>
+                <th>&#9998;</th>
+                <th>&#128465;</th>
+                <th>&#10060;</th>
             </tr>
 
             {% if user.is_authenticated %}
