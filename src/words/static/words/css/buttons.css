@@ -2,6 +2,9 @@
     font-family: Optima;
 }
 
+body{
+    margin-top:0px;
+}
 .next_prev_buttons {
     background-color:aliceblue;
     color:black;
@@ -57,18 +60,64 @@
     color:green;
     }
 
+.accordion_button_wl{
+    display:block;
+    color:black;
+    font-weight:bold;
+    height:60px;
+    width:100%;
+    padding: 15px;
+    margin:1px;
+    border-style:solid;
+    border-width:thin;
+    border-color:black;
+    cursor:pointer;
+    font-size:20px;
+    background: aliceblue;
+    text-align:center;
+    transition: background: 0.4s;
+}
+
+.accordion_button_wl::after{
+    content: '\25b2';
+    float:right;
+}
+
+.accordion_button_wl-active{
+    background:floralwhite;
+
+}
+
+.accordion_button_wl-active::after{
+    content: '\25bc';
+}
+
+.accordion_content_wl{
+    overflow:hidden;
+    max-height: 0px;
+    transition: max-height 0.2s;
+    background:lavenderblush;
+}
+
+.accordion{
+    margin-top:10px;
+}
+
+
+
     .input_ {
 
     }
 
-    .label_{
+    .label_form{
     font-family: Optima;
     font-size: 30px;
     line-height: 30px;
-    text-align: center;
+    text-align: left;
     margin-bottom: 10px;
     margin-top: 1px;
     vertical-align:top;
+
 
     }
 
@@ -125,25 +174,14 @@ hr{
 
 td{
     font-size: 18px;
-
     font-family: Optima;
-
 }
 
-a{
-    color: firebrick;
-    text-decoration:none;
-    pointer:cursor;
-    background-color:floralwhite;
-    padding: 4px;
 
-
-}
 
 .table_list {
     border:none;
     border-collapse: collapse;
-
 }
 
 .table_list td {
@@ -231,7 +269,8 @@ a{
     border-style:solid;
     text-align:left;
     border-width:thin;
-    vertical-align:bottom;
+    display:inline-block;
+    font-size:25px;
 }
 
 .table_wl{
@@ -303,3 +342,79 @@ a{
     margin-left:574px;
 
     }
+
+.navbar{
+    background:ghostwhite;
+    height:auto;
+    border-style:solid;
+    display:block;
+}
+
+.navbar_el{
+    margin: 5px 5px 5px 5px;
+    display:inline-block;
+    vertical-align:middle;
+    margin-bottom:0px;
+    margin-top:0px;
+
+}
+
+.navbar_right{
+    display:inline-block;
+    width:auto;
+    border:solid;
+    border-color:red;
+    width:500px;
+    vertical-align:middle;
+    cursor:pointer;
+
+
+
+}
+
+.navbar_left{
+
+    display:inline-block;
+    border:solid;
+    border-color:red;
+    width:500px;
+    margin-right:200px;
+}
+
+.navbar_button{
+    color: black;
+    background:none;
+    text-decoration:none;
+    font-size:20px;
+    background:aliceblue;
+    border-style:solid;
+}
+
+.navbar_logo{
+    margin-right:30px;
+    margin-left:30px;
+    padding-left:20px;
+    padding-right:20px;
+    border-style:solid;
+    font-weight:bold;
+    font-color:white;
+    cursor:pointer;
+    border-color:firebrick;
+
+}
+
+.registration_form{
+    display:inline-block;
+      text-align:right;
+
+}
+
+.label_form_reg{
+    vertical-align:middle;
+
+}
+
+.label_field_comb{
+    margin-bottom:10px;
+
+}

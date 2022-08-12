@@ -115,12 +115,13 @@ class AccountUpdateForm(UserChangeForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
+    pass
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     # print("\nOWEGOJRWGOJEROGEROJRJ:VEVH\n")
 
-    def confirm_login_allowed(self, user):
-        print("\nwpirjgi0erghoetohrtouhogurtegourtou\n")
+    # def confirm_login_allowed(self, user):
+    #     print("\nwpirjgi0erghoetohrtouhogurtegourtou\n")
         # if not user.is_activated:
         #     raise ValidationError(
         #         message="This user is not activated"

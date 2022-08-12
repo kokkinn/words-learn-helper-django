@@ -3,40 +3,41 @@
 {% load static%}
 
 
+
 <div class="accordion">
     <button type="button" class="accordion_button_wl">Expand filter</button>
     <div class="accordion_content_wl">
         <form action="" method="GET">
             <div class="inline_block_label_field">
-                <div class="label_ filter_label">{{filter.form.word1.label}}</div>
+                <div class="label_form filter_label">{{filter.form.word1.label}}</div>
                 <div class="input_f_ input_ovr">{{filter.form.word1}}</div>
             </div>
 
             <div class="inline_block_label_field">
-                <div class="label_ filter_label">{{filter.form.word2.label}}</div>
+                <div class="label_form filter_label">{{filter.form.word2.label}}</div>
                 <div class="input_f_ input_ovr">{{filter.form.word2}}</div>
             </div>
 
 
             <div class="inline_block_label_field">
-                <div class="label_ filter_label">{{filter.form.score_gt.label}}</div>
+                <div class="label_form filter_label">{{filter.form.score_gt.label}}</div>
                 <div class="input_f_ input_ovr">{{filter.form.score_gt}}</div>
             </div>
 
             <div class="inline_block_label_field">
-                <div class="label_ filter_label">{{filter.form.score_lt.label}}</div>
+                <div class="label_form filter_label">{{filter.form.score_lt.label}}</div>
                 <div class="input_f_ input_ovr">{{filter.form.score_lt}}</div>
             </div>
 
             <div class="inline_block_label_field">
-                <div class="label_ filter_label">{{filter.form.order_by_asc_score.label}}</div>
+                <div class="label_form filter_label">{{filter.form.order_by_asc_score.label}}</div>
                 <div class="input_f_ input_ovr">{{filter.form.order_by_asc_score}}</div>
             </div>
 
             <br>
 
             <div class="inline_block_label_field">
-                <div class="label_ filter_label">{{filter.form.group.label}}</div>
+                <div class="label_form filter_label">{{filter.form.group.label}}</div>
                 <div class="groups_choice group_choice_word_list">{{filter.form.group}}</div>
             </div>
 
@@ -52,23 +53,22 @@
 
     </div>
 </div>
-<!--</div>-->
 
-<!--<div class="buttons">-->
-<!--    <h1>Notifications</h1>-->
-<!--    <button onclick="notifySuccess()">-->
-<!--        Success-->
-<!--    </button>-->
-<!--    <button onclick="notifyError()">-->
-<!--        Error-->
-<!--    </button>-->
-<!--    <button onclick="notifyInfo()">-->
-<!--        Info-->
-<!--    </button>-->
-<!--</div>-->
+<script>
+    document.querySelectorAll('.accordion_button_wl').forEach(button =>{
+        button.addEventListener('click', () => {
+            const accordionContent = button.nextElementSibling;
+            button.classList.toggle('accordion_button_wl-active');
+            if (button.classList.contains('accordion_button_wl-active')){
+                accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+            }
+            else {
+                accordionContent.style.maxHeight = 0;
+            }
+        });
+    });
+</script>
 
-<!--<div id="notification-area">-->
-<!--</div>-->
 
 <form action="" method="POST">
     {% csrf_token %}
@@ -114,7 +114,7 @@
                    value="Delete chosen words" onclick="checker()">
         </div>
 
-        <div class="inline_block_label_field stats_wl label_">
+        <div class="stats_wl label_">
             <div>AVG: {{ avg }}</div>
             <div>MAX: {{ max }}</div>
             <div>MIN: {{ min }}</div>

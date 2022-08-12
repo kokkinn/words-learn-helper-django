@@ -13,6 +13,7 @@ from django.views.generic import TemplateView
 from .apps import user_registered
 from .forms import AccountRegistrationForm, CustomAuthenticationForm, ActivationEmailConfirmationForm
 from .forms import AccountUpdateForm
+# from .forms import AccountRegistrationForm, ActivationEmailConfirmationForm
 from .utils import signer
 
 
@@ -65,7 +66,7 @@ def activation_email_confirmation(request):
 
 class AccountLoginView(LoginView):
     template_name = 'accounts/login.html'
-    form_class = CustomAuthenticationForm
+    # form_class = CustomAuthenticationForm
 
     def get_redirect_url(self):
         next_url = self.request.GET.get('next')

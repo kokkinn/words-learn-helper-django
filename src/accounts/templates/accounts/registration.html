@@ -2,20 +2,28 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %}
-    Регистрация нового пользователя
-{% endblock %}
 
 {% block header %}
-    Регистрация нового пользователя.
+Регистрация нового пользователя.
 {% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form | crispy }}
+<div class="title_text">Registration</div>
+<form method="post" style="text-align:center;">
 
-        <input class="btn btn-success mt-3" type="submit" value="Регистрация">
-        <a class="btn btn-success mt-3" href="{% url 'accounts:login' %}">Логин</a>
-    </form>
+    {% csrf_token %}
+    <div class="registration_form">
+        {% for field in form %}
+        <div class="label_field_comb">
+            <div class="label_form label_form_reg" style="display:inline-block">{{field.label_tag}}</div>
+            <div class="input_f_" style="display:inline-block">{{field}}</div>
+        </div>
+        {% endfor %}
+
+
+        <div style="display:inline-block;"><input class="next_prev_buttons" type="submit" value="Register"></div>
+        <div style="display:inline-block;"><a class="next_prev_buttons" href="{% url 'accounts:login' %}">Login</a>
+        </div>
+    </div>
+</form>
 {% endblock %}

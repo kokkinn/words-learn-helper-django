@@ -12,7 +12,7 @@ services:
 #    ports:
 #      - 8010:8000
     env_file:
-      - .env
+      - src/.env
     depends_on:
       - db
 
@@ -24,7 +24,7 @@ services:
     ports:
       - 5438:5432
     env_file:
-      - .env
+      - src/.env
 
   nginx:
     build: ./nginx
@@ -35,8 +35,7 @@ services:
     ports:
       - 80:80
     depends_on:
-      - db 
-      - 
+      - db  
 
 volumes:
   db_volume:

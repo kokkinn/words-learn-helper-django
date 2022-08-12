@@ -1,24 +1,29 @@
 {% load static %}
 
-<table cellpadding="10">
-    <tr>
-        <td><img src="{% static 'pictures/default.png' %}" width="50" height="50"></td>
-        <td><a href="{% url 'index' %}">Very main page</a></td>
+<div class="navbar">
+    <div class="navbar_left">
 
+        <div class="navbar_el navbar_logo">
+            <div>Words</div>
+            <div>Learn</div>
+            <div>Helper</div>
+        </div>
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'index' %}">Very main page</a></div>
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'words:home' %}">Words page</a></div>
+    </div>
+
+    <div class="navbar_right">
         {% if user.is_authenticated %}
-        <td><a href="{% url 'accounts:profile' %}">Profile</a></td>
-        <td><a href="{% url 'accounts:logout' %}">Logout</a></td>
-        <td><a href="{% url 'password_change' %}">Change password</a></td>
-        <td>Welcome, {{user.username}}</td>
+        <div class="navbar_el" style="font-size:20px;">Welcome, {{user.username}}</div>
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:profile' %}">Profile</a></div>
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:logout' %}">Logout</a></div>
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'password_change' %}">Change password</a></div>
+
 
         {% else %}
-        <td><a href="{% url 'accounts:registration' %}">Registration</a></td>
-        <td><a href="{% url 'accounts:login' %}">Login</a></td>
-
-
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:registration' %}">Registration</a></div>
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:login' %}">Login</a></div>
         {% endif %}
+    </div>
 
-
-    </tr>
-</table>
-<hr>
+</div>

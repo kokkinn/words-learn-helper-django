@@ -1,33 +1,21 @@
-* {
-  font-family:"Raleway";
-}
 #notification-area {
   position:fixed;
-  top:0px;
-  right:10px;
+  right:5px;
   width:250px;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
+  top:80px;
 }
 #notification-area .notification {
   position:relative;
-  padding:15px 10px;
-  background:#111;
+  padding:15px 15px;
+  margin:5px;
   color:white;
-  font-family:Optima;
   font-size:20px;
   font-weight:400;
   border-radius:5px;
-  margin:530px 15px;
-  opacity:0;
-
-  left:20px;
-  animation:showNotification 500ms ease-in-out forwards;
-
-
-   box-shadow: 10px 0px orange;
+  opacity:-10;
+  left:30px;
+  animation:showNotification 800ms ease-in-out forwards;
+  box-shadow: 10px 0px orange;
 
 }
 @keyframes showNotification {
@@ -47,3 +35,6 @@
 #notification-area .notification.info {
   background:#00acee;
 }
+
+
+

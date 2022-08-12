@@ -5,11 +5,6 @@ function checker() {
     }
 }
 
-function decodeHtml(html) {
-    var txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
-}
 
 function stripHtml(html)
 {
@@ -17,33 +12,25 @@ function stripHtml(html)
    tmp.innerHTML = html;
    return tmp.textContent || tmp.innerText || "";
 }
-function notify(type,message){
-  (()=>{
-    console.log(message);
-    message = decodeHtml(message);
-    message = stripHtml(message);
-    console.log(message);
-    let n = document.createElement("div");
-    let id = Math.random().toString(36).substr(2,10);
-    n.setAttribute("id",id);
-    n.classList.add("notification",type);
-    n.innerText = message;
-    document.getElementById("notification-area").appendChild(n);
-    setTimeout(()=>{
-      var notifications = document.getElementById("notification-area").getElementsByClassName("notification");
-      for(let i=0;i<notifications.length;i++){
-        if(notifications[i].getAttribute("id") == id){
-          notifications[i].remove();
-          break;
-        }
-      }
-    },10000);
-  })();
+
+function notify(type,message) {
+  message = stripHtml(message);
+  let n = document.createElement("div");
+  const id = Math.random().toString(36).slice(2);
+  n.setAttribute("id", id);
+  n.classList.add("notification", type);
+  n.innerText = message;
+  document.getElementById("notification-area").appendChild(n);
+
+  setTimeout(() => {
+    const toRemove = document.getElementById(id);
+    toRemove.remove()
+  },1000);
 }
+
 
 function notifySuccess(message){
     notify("success",message);
-
 }
 function notifyError(message){
   notify("error", message);
@@ -51,3 +38,4 @@ function notifyError(message){
 function notifyInfo(){
   notify("info","This is demo info notification message");
 }
+
