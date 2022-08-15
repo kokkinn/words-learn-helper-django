@@ -16,20 +16,18 @@ Login
     {% for field in form %}
     <div class="label_field_comb">
         <div class="label_form label_form_reg" style="display:inline-block">{{field.label_tag}}</div>
-        <div class="input_f_" style="display:inline-block">{{field}}</div>
+        <div class="input_f_ input_reg_log" style="display:inline-block">{{field}}</div>
     </div>
     {% endfor %}
     <p>
-        If you forgot your password, we can help you. Please click <a href="{% url 'password_reset' %}">here</a>.
+        <span style="font-size:20px;">If you forgot your password, we can help you. Please click <a href="{% url 'password_reset' %}">here</a></span>.
+    </p>
+     <p>
+        <span style="font-size:20px;">If you don't have an account - <a href="{% url 'accounts:registration' %}">create it!</a> </span>
     </p>
 
+    <div style="margin-bottom:40px; margin-top:40px;"><input class="next_prev_buttons buttons_log_reg" type="submit" value="Login"></div>
 
-
-
-    <div style="display:inline-block;"><input class="next_prev_buttons" type="submit" value="Login"></div>
-    <div style="display:inline-block;"><a class="next_prev_buttons"
-                                          href="{% url 'accounts:registration' %}">Register</a>
-    </div>
 </form>
 
 {% endblock %}

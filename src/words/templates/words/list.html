@@ -3,10 +3,9 @@
 {% load static%}
 
 
-
 <div class="accordion">
     <button type="button" class="accordion_button_wl">Expand filter</button>
-    <div class="accordion_content_wl">
+    <div class="accordion_content_wl" >
         <form action="" method="GET">
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.word1.label}}</div>
@@ -31,17 +30,17 @@
 
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.order_by_asc_score.label}}</div>
-                <div class="input_f_ input_ovr">{{filter.form.order_by_asc_score}}</div>
+                <div class="input_f_ ">{{filter.form.order_by_asc_score}}</div>
             </div>
 
             <br>
 
-            <div class="inline_block_label_field">
+            <div class="inline_block_label_field" >
                 <div class="label_form filter_label">{{filter.form.group.label}}</div>
                 <div class="groups_choice group_choice_word_list">{{filter.form.group}}</div>
             </div>
 
-            <div class="inline_block_label_field">
+            <div class="inline_block_label_field" >
                 <input type="Submit" class='next_prev_buttons buttons_word_list' name="filter_button"
                        value="Search with filter">
                 <a class="next_prev_buttons buttons_word_list" href="{% url 'words:list' %}">Reset
@@ -60,18 +59,24 @@
             const accordionContent = button.nextElementSibling;
             button.classList.toggle('accordion_button_wl-active');
             if (button.classList.contains('accordion_button_wl-active')){
+                accordionContent.style.border = '1px solid black';
                 accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
             }
             else {
                 accordionContent.style.maxHeight = 0;
+                accordionContent.style.border = 'none';
             }
         });
     });
+
+
+
 </script>
 
 
 <form action="" method="POST">
     {% csrf_token %}
+
     <div class="table_wl">
         <table class="table_list">
             <tr>
@@ -84,9 +89,6 @@
                 <th>&#10060;</th>
             </tr>
 
-            {% if user.is_authenticated %}
-
-
             {% for word in filter.qs %}
             <tr>
                 <td>{{word.word1}}</td>
@@ -96,29 +98,31 @@
                 <td><a href="{% url 'words:update' uuid=word.id %}">Update</a></td>
                 <td><a onclick="checker()" href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
                 <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
-            <tr>
-
-                {% endfor %}
-
-                {% endif %}
+            </tr>
+            {% endfor %}
 
         </table>
     </div>
 
     <div class="right_of_table">
 
-        <div>
-            <a class='next_prev_buttons buttons_word_list table_buttons' href="{% url 'words:create' %}">Create a
-                word</a>
-            <input class='next_prev_buttons buttons_word_list table_buttons' type="Submit" name="delete_button"
-                   value="Delete chosen words" onclick="checker()">
-        </div>
-
         <div class="stats_wl label_">
             <div>AVG: {{ avg }}</div>
             <div>MAX: {{ max }}</div>
             <div>MIN: {{ min }}</div>
         </div>
+
+        <div class="stats_wl label_" style="display:block; width:270px; margin-top:10px;">
+            <div>TOTAL WORDS: {{ total }}</div>
+        </div>
+
+        <div style="color:red;">
+            <a class='next_prev_buttons button_wl_table' href="{% url 'words:create' %}">Create a
+                word</a>
+            <input class='next_prev_buttons button_wl_table' style="width:100%;" type="Submit" name="delete_button"
+                   value="Delete chosen words" onclick="checker()">
+        </div>
+
 
     </div>
 </form>

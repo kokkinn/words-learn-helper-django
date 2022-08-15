@@ -29,7 +29,9 @@ class WordsListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["filter"] = WordFilter(self.request.GET, queryset=self.get_queryset(), request=self.request)
         filtered_word_qs = context["filter"].qs
+        print(filtered_word_qs)
         if filtered_word_qs:
+            context["total"] = filtered_word_qs.count()
             context["min"] = filtered_word_qs.order_by("score").first().score
             context["max"] = filtered_word_qs.order_by("score").last().score
             context["avg"] = Word.average_score(self.request.user, qs=filtered_word_qs)
@@ -74,9 +76,11 @@ class WordUpdateView(LoginRequiredMixin, UpdateView, SingleObjectMixin):
 
     def form_valid(self, form):
         if form.is_valid():
-            Word.objects.get(id=self.kwargs["uuid"]).group.clear()
+            word = Word.objects.get(id=self.kwargs["uuid"])
+            word.group.clear()
+            word.save()
             for group in form.cleaned_data["groups"]:
-                group.words.add(form.instance.word1)
+                group.words.add(word)
         form.save()
         messages.success(self.request, f"Word {form.instance.word1} - {form.instance.word2} updated")
         return super().form_valid(form)

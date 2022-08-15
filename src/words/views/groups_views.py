@@ -113,6 +113,7 @@ class GroupUpdateView(FormView, LoginRequiredMixin):
     def get_context_data(self, **kwargs):
         context = super(GroupUpdateView, self).get_context_data()
         context["type"] = "update"
+        no_words = False
         if len(self.request.user.words.all()) == 0:
             no_words = True
         context['no_words'] = no_words

@@ -5,63 +5,57 @@
 
 {% if type == 'create' %}
 <p class="title_text">Word creation</p>
-<!--<script src="{% static 'words/js/test_script.js' %}"></script>-->
 {% else %}
 <p class="title_text">Word update</p>
 {% endif %}
 
 <form action="" method="POST">
     {% csrf_token %}
-
-    <table class="center">
-
+    <table class="table_wc">
         <tr>
             <td class="label_form">Word 1</td>
             <td class="label_form">Word 2</td>
         </tr>
-
         <tr>
-            {% for field in form %}
             <td>
-                {% if field.name != 'groups' %}
-                <div class="input_f_">{{ field }}</div>
-                {% endif %}
+                <div class="input_f_">{{ form.word1 }}</div>
             </td>
-            {% endfor %}
+            <td>
+                <div class="input_f_">{{ form.word2 }}</div>
+            </td>
         </tr>
-
-        <tr>
-            <td class="td_wc_groups">
-                <div class="buttons_wc_container">
-                    <p class="label">Groups</p>
-                    {% if no_groups %}
-                    <a class='next_prev_buttons buttons_wc' href="{% url 'words:group_create' %}">No groups yet, create
-                        a group</a>
-                    {% else %}
-                    <div class="groups_choice">{{form.groups}}</div>
-                    {% endif %}
-                </div>
-            </td>
-
-            <td class="td_wc_buttons">
-                <div class="buttons_wc_container">
-                    {% if type == 'create' %}
-                    <input class='next_prev_buttons buttons_wc' type="submit" value="Create a word">
-                    {% else %}
-                    <input class='next_prev_buttons buttons_wc' type="submit" value="Update">
-                    {% endif %}
-
-                    <a class='next_prev_buttons buttons_wc' href="{% url 'words:list' %}">Words list</a>
-                </div>
-            </td>
-
-        </tr>
-
     </table>
+
+    <div class="groups_wc">
+        <div class="buttons_wc_container">
+            <p class="label_form">Groups</p>
+            {% if no_groups %}
+            <a class='next_prev_buttons buttons_wc' href="{% url 'words:group_create' %}">No groups yet, create
+                a group</a>
+            {% else %}
+            <div class="groups_choice">{{form.groups}}</div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="td_wc_groups">
+        <div class="td_wc_buttons">
+            <div class="buttons_wc_container">
+                {% if type == 'create' %}
+                <input class='next_prev_buttons buttons_wc' style="margin-bottom:20px;" type="submit" value="Create a word">
+                {% else %}
+                <input class='next_prev_buttons buttons_wc' style="margin-bottom:20px;" type="submit" value="Update">
+                {% endif %}
+
+                <a class='next_prev_buttons buttons_wc' href="{% url 'words:list' %}">Words list</a>
+            </div>
+        </div>
+    </div>
+
 
 
 </form>
-
 
 
 {% endblock %}

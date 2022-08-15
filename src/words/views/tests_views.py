@@ -1,6 +1,7 @@
 import random
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
 
@@ -24,7 +25,7 @@ def create_result_json(list_of_uuids):
     return json
 
 
-class TestsHomeView(TemplateView):
+class TestsHomeView(TemplateView, LoginRequiredMixin):
     template_name = "tests/tests_home.html"
 
     def get(self, request, *args, **kwargs):
@@ -82,7 +83,7 @@ class TestsHomeView(TemplateView):
             reverse_lazy("words:groups_of_words_test", kwargs=kwargs))
 
 
-class GroupOfWordsTest(FormView):
+class GroupOfWordsTest(FormView, LoginRequiredMixin):
     pk_url_kwarg = "uuid"
     template_name = "tests/quick_test.html"
     form_class = TestInputForm
@@ -215,7 +216,7 @@ class GroupOfWordsTest(FormView):
                 reverse_lazy(f"words:groups_of_words_test", kwargs={'uuid': self.kwargs["uuid"]}))
 
 
-class TestsResultsListView(ListView):
+class TestsResultsListView(ListView, LoginRequiredMixin):
     model = Result
     context_object_name = 'results'
     template_name = "tests/results_list.html"
@@ -233,7 +234,7 @@ def update_result_details():
     pass
 
 
-class TestsResultView(DetailView):
+class TestsResultView(DetailView, LoginRequiredMixin):
     pk_url_kwarg = "uuid"
     model = Result
     context_object_name = "result"

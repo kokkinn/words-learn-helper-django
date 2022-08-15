@@ -3,23 +3,24 @@
 {% block content %}
 
 
-<h1>Welcome to home page of words!!!</h1>
+<div class="title_text">Words section menu</div>
 
-<table class="hm_pg">
-
-        <tr>
-
-            <td><a href="{% url 'words:list' %}">Words list</a></td>
-
-            <td><a href="{% url 'words:create' %}">Create a word</a></td>
-
-            <td><a href="{% url 'words:groups_list' %}">Group list</a></td>
-
-            <td><a href="{% url 'words:group_create' %}">Create a group</a></td>
-
-            <td><a href="{% url 'words:tests_home'%}">Tests</a></td>
-
-        </tr>
+<table class="table_wh">
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'words:list' %}">Words list</a></td>
+    </tr>
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'words:create' %}">Create a word</a></td>
+    </tr>
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'words:groups_list' %}">Groups list</a></td>
+    </tr>
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'words:group_create' %}">Create a group</a></td>
+    </tr>
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'words:tests_home'%}">Tests</a></td>
+    </tr>
 
 </table>
 

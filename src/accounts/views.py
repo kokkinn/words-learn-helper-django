@@ -1,5 +1,7 @@
 from django.apps import apps
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.signing import BadSignature
 from django.shortcuts import get_object_or_404, redirect
@@ -13,7 +15,7 @@ from django.views.generic import TemplateView
 from .apps import user_registered
 from .forms import AccountRegistrationForm, CustomAuthenticationForm, ActivationEmailConfirmationForm
 from .forms import AccountUpdateForm
-# from .forms import AccountRegistrationForm, ActivationEmailConfirmationForm
+from .forms import AccountRegistrationForm, ActivationEmailConfirmationForm
 from .utils import signer
 
 
@@ -47,25 +49,30 @@ def user_activate(request, sign):
     return render(request, template)
 
 
+# def activation_email_confirmation(request):
+#     if request.method == "GET":
+#         form = ActivationEmailConfirmationForm(request)
+#         context = {"form": form}
+#         template_name = "accounts/activation_email_confirmation.html"
+#         return render(request, template_name, context)
+#     elif request.method == "POST":
+#         form = ActivationEmailConfirmationForm(request)
+#         if form.is_valid() or not form.is_valid():
+#             user = request.user
+#             user.email = request.POST["email"]
+#             user.save()
+#             user_registered.send(AccountRegistrationForm, instance=request.user)
+#             print(request.POST)
+#             return redirect(reverse_lazy("words:home"))
+
 def activation_email_confirmation(request):
-    if request.method == "GET":
-        form = ActivationEmailConfirmationForm(request)
-        context = {"form": form}
-        template_name = "accounts/activation_email_confirmation.html"
-        return render(request, template_name, context)
-    elif request.method == "POST":
-        form = ActivationEmailConfirmationForm(request)
-        if form.is_valid() or not form.is_valid():
-            user = request.user
-            user.email = request.POST["email"]
-            user.save()
-            user_registered.send(AccountRegistrationForm, instance=request.user)
-            print(request.POST)
-            return redirect(reverse_lazy("words:home"))
+    user_registered.send(AccountRegistrationForm, instance=request.user)
+    return redirect(reverse_lazy("accounts:profile"))
 
 
 class AccountLoginView(LoginView):
     template_name = 'accounts/login.html'
+
     # form_class = CustomAuthenticationForm
 
     def get_redirect_url(self):
@@ -90,11 +97,12 @@ class AccountLogoutView(LogoutView):
     template_name = 'accounts/logout.html'
 
 
+@login_required
 def account_profile_view(request):
     return render(request, 'accounts/profile.html')
 
 
-class AccountUpdateProfileView(UpdateView):
+class AccountUpdateProfileView(UpdateView, LoginRequiredMixin):
     template_name = 'accounts/profile_update.html'
     model = get_user_model()
     success_url = reverse_lazy('accounts:profile')
@@ -107,4 +115,3 @@ class AccountUpdateProfileView(UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs["request"] = self.request
         return kwargs
-

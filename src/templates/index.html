@@ -1,9 +1,37 @@
 {%extends 'base.html'%}
-
+{% load static %}
 {%block content%}
 
 
+<div class="title_text">Words Learn Helper</div>
+<div class="textbox_in">
+    Hi, welcome to the application which provides an opportunity to study foreign language faster. It has three
+    logical
+    sections:
+    <br><br>1. <span style="font-weight:bold; font-size:25px;">Words list/Word creation</span> - you can make a pair of
+    two words that is a main unit to be studied.
+    <br><br>2. <span style="font-weight:bold; font-size:25px;">Groups list/Group creation</span> - a way to join
+    multiple words by some category.
+    <br><br>3. <span style="font-weight:bold; font-size:25px;">Tests</span> - checking of your ‘words’ knowledge, with
+    multiple options.
+</div>
 
-    <h1>Welcome to base site page???!!!</h1>
-    <h1><a href="{% url 'words:home' %}">Words page</a></h1>
-{%endblock content%}
+<table class="table_wh">
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'words:home' %}">Words section</a>
+        </td>
+    </tr>
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'accounts:profile' %}">Profile</a></td>
+    </tr>
+    <tr>
+        <td><a class="menu_item_wh" href="https://github.com/kokkinn/django_LH_web" target="_blank" rel="noopener noreferrer"><span style="margin-right:10px;">GitHub</span><img
+                src="{% static '25231.png' %}" width="33px"></a></td>
+    </tr>
+    <tr>
+        <td><a class="menu_item_wh" href="{% url 'contacts' %}">Contacts</a></td>
+    </tr>
+</table>
+
+
+{%endblock%}

@@ -1,5 +1,5 @@
 function checker() {
-    var result = confirm('Are you sure')
+    var result = confirm('Are you sure ?')
     if(result == false){
         event.preventDefault()
     }
@@ -25,7 +25,7 @@ function notify(type,message) {
   setTimeout(() => {
     const toRemove = document.getElementById(id);
     toRemove.remove()
-  },1000);
+  },5000);
 }
 
 

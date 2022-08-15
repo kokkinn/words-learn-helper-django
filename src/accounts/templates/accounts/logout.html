@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Logout
+Logout
 {% endblock %}
 
 {% block header %}
-    User was logged out.
+User was logged out.
 {% endblock %}
 
 {% block content %}
-    <a class="btn btn-success mt-3" href="{% url 'accounts:login' %}">Login</a>
+<div class="title_text">You are now logged out</div>
+<div style="text-align:center;">
+    <a class="menu_item_wh menu_logout" href="{% url 'accounts:login' %}">Login</a>
+    <a class="menu_item_wh menu_logout" href="{% url 'index' %}">Main page</a>
+    <a class="menu_item_wh menu_logout" href="{% url 'accounts:registration' %}">Register</a>
+
+</div>
+
+
 {% endblock %}

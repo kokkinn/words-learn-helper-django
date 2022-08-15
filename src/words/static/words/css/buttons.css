@@ -1,19 +1,19 @@
 * {
-    font-family: Optima;
+    font-family: FreeMono, monospace;
 }
 
 body{
     margin-top:0px;
+    background-color:#EEEEEE;
 }
-.next_prev_buttons {
+.next_prev_buttons{
     background-color:aliceblue;
-    color:black;
-    padding: 0px 0px 0px 0px;
+    color:#41444b;
+    padding: 5px 5px 5px 5px;
     margin: 0px 0px 0px 0px;
     display:block;
-    width:200px;
-    height:40px;
-    border-radius:3px;
+    width:auto;
+    border-radius:4px;
     border-color:black;
     border-style:solid;
     border-width:thin;
@@ -26,8 +26,18 @@ body{
     text-decoration:none;
     }
 
+.buttons_log_reg{
+    width:200px;
+    margin:auto;
+    display:block;
+}
 .buttons_wc{
-    margin: 5px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    width:150px;
+    padding:0px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-top:5px;
 }
 
 .buttons_wc_container{
@@ -46,11 +56,14 @@ body{
     text-align:center;
 
 }
-.buttons_word_list{
-    margin-left:10px;
-    margin-bottom:0px;
-    margin-top:10px;
+
+.groups_wc{
+    text-align:center;
+    margin-top:20px;
+        margin-bottom:20px;
 }
+
+
     .next_prev_buttons:hover {
     color:firebrick;
         opacity:2;
@@ -67,7 +80,6 @@ body{
     height:60px;
     width:100%;
     padding: 15px;
-    margin:1px;
     border-style:solid;
     border-width:thin;
     border-color:black;
@@ -76,6 +88,7 @@ body{
     background: aliceblue;
     text-align:center;
     transition: background: 0.4s;
+
 }
 
 .accordion_button_wl::after{
@@ -96,24 +109,23 @@ body{
     overflow:hidden;
     max-height: 0px;
     transition: max-height 0.2s;
-    background:lavenderblush;
+    background:#F1EED8;
+    margin-bottom:30px;
+
 }
 
 .accordion{
     margin-top:10px;
 }
 
-
-
     .input_ {
 
     }
 
-    .label_form{
-    font-family: Optima;
+.label_form{
     font-size: 30px;
     line-height: 30px;
-    text-align: left;
+    text-align: center;
     margin-bottom: 10px;
     margin-top: 1px;
     vertical-align:top;
@@ -122,7 +134,6 @@ body{
     }
 
     .input_f_ input, select{
-    font-family: Optima;
         background-color:aliceblue;
         color:firebrick;
         border-radius:3px;
@@ -130,85 +141,111 @@ body{
         border-width: thin;
         border-color:black;
         border-style:solid;
-        text-align:left;
+
         text-color:red;
         font-size: 20px;
-        margin: 15px;
-        display: block;
-        height: 30px;
+        margin: 0px;
+        padding: 0px;
+        display:inline-block;
 
-
+        height:30px;
     }
+
+.input_reg_log input, select{
+    height: 40px;
+    color: red;
+    margin-bottom:20px;
+}
 
     .td{
         padding: 0px, 15px;
     }
 
 .groups_choice div[id="id_group"], div[id="id_groups"], div[id='id_words']{
-    font-family: Optima;
     font-size: 20px;
     line-height: 30px;
     text-align: center;
     color: firebrick;
-
-
     width: auto;
     border-color:black;
     border-style:solid;
-
     cursor:pointer;
-     border-width: thin;
-    }
+    border-width: thin;
+}
 
-.center{
+.table_wc{
     margin-left: auto;
     margin-right: auto;
 
+}
 
+.table_wc td{
+    text-align:center;
+
+    padding-right:10px;
+    padding-left:10px;
 
 }
 
-hr{
-    border-top: 1px solid black;
+
+
+.table_wl{
+    display:inline-block;
+    width:auto;
 }
 
-td{
-    font-size: 18px;
-    font-family: Optima;
+.right_of_table{
+     display:inline-block;
+     vertical-align:top;
+     text-align:left;
+     width:auto;
+
 }
-
-
 
 .table_list {
-    border:none;
     border-collapse: collapse;
+    font-size: 22px;
+    text-align:center;
 }
 
-.table_list td {
+.table_list td, th {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
-    padding: 8px;
+    padding: 9px;
+
+    word-break:break-word;
+
 }
 
 .table_list td:first-child {
-  width: 100px;
-  }
-
+    width:230px;
+    text-align:left;
+}
 .table_list td:nth-child(2) {
-  width: 100px;
+       width:230px;
+    text-align:left;
 
-  }
-
+}
 .table_list td:nth-child(3) {
-  width: 30px;
-  text-align:center;
-  }
+
+    text-align:center;
+}
+
+.table_list tr:first-child {
+    border-bottom: 3px solid black;
+}
+.table_list tr:last-child {
+    border-bottom: 3px solid black;
+}
 
 .table_list th {
     border-top: 3px solid #000;
     padding-top: 10px;
-    font-size: 20px;
     padding-bottom: 5px;
+}
+
+.button_wl_table{
+    margin-top:10px;
 
 }
 
@@ -218,12 +255,15 @@ td{
     font-size: 16px
 }
 
+
 .inline_block_label_field{
     display:inline-block;
     margin-bottom:0px;
     padding-bottom:0px;
     vertical-align: bottom;
-    text-align:left;
+    text-align:center;
+    padding:10px;
+
 }
 
 
@@ -263,21 +303,17 @@ td{
 }
 
 .stats_wl{
-    margin-left: 40px;
-    margin-top: 20px;
+
     border-color:black;
     border-style:solid;
     text-align:left;
     border-width:thin;
     display:inline-block;
     font-size:25px;
-}
-
-.table_wl{
-    display:inline-block;
-    margin-top:50px;
 
 }
+
+
 
 .table_buttons{
     display:inline-block;
@@ -296,21 +332,18 @@ td{
     display:inline-block;
 }
 
-.right_of_table{
-     display:inline-block;
-     vertical-align:top;
 
-}
 
 
     .title_text {
-    font-family: Optima;
-    font-size: 70px;
+
+    font-size: 60px;
     line-height: 0px;
     height: 0px;
     font-weight: solid;
     text-align: center;
     margin: 50px;
+        margin-bottom:60px;
     }
 
 .input_ovr2 input, select{
@@ -344,41 +377,37 @@ td{
     }
 
 .navbar{
-    background:ghostwhite;
+    background:aliceblue;
     height:auto;
     border-style:solid;
-    display:block;
+    display:flex;
+    justify-content:space-between;
 }
 
 .navbar_el{
     margin: 5px 5px 5px 5px;
     display:inline-block;
     vertical-align:middle;
-    margin-bottom:0px;
-    margin-top:0px;
-
 }
 
 .navbar_right{
-    display:inline-block;
-    width:auto;
-    border:solid;
+    display: flex;
+    align-items: center;
+    justify-content: center
     border-color:red;
-    width:500px;
-    vertical-align:middle;
     cursor:pointer;
-
-
-
 }
 
 .navbar_left{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
 
-    display:inline-block;
-    border:solid;
-    border-color:red;
-    width:500px;
-    margin-right:200px;
+.navbar_middle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar_button{
@@ -386,35 +415,182 @@ td{
     background:none;
     text-decoration:none;
     font-size:20px;
-    background:aliceblue;
-    border-style:solid;
+    text-decoration-color:#7F4A88;
+    background:#BADBE9;
+
+
 }
 
 .navbar_logo{
-    margin-right:30px;
-    margin-left:30px;
-    padding-left:20px;
-    padding-right:20px;
+    margin-right:15px;
+    margin-left:15px;
+    padding-left:10px;
+    padding-right:10px;
     border-style:solid;
     font-weight:bold;
     font-color:white;
     cursor:pointer;
-    border-color:firebrick;
+    border-color:#547C8C;
 
 }
 
 .registration_form{
     display:inline-block;
-      text-align:right;
+    text-align:right;
+
 
 }
 
 .label_form_reg{
     vertical-align:middle;
-
 }
 
 .label_field_comb{
     margin-bottom:10px;
 
+}
+
+select{
+    padding:0px;
+    height:24px;
+    margin:0px;
+}
+
+.table_wh{
+    margin-right:auto;
+    margin-left:auto;
+    text-align:center;
+    font-size:40px;
+}
+
+.table_wh td{
+    padding:10px;
+}
+
+.menu_item_wh{
+    color:black;
+    text-decoration:none;
+    font-size:40px;
+    margin-right:10px;
+}
+
+.menu_item_wh:hover {
+    color:firebrick;
+    font-size:40px;
+    }
+
+.menu_item_wh:active {
+    color:green;
+        font-size:44px;
+
+    }
+
+.textbox_in{
+    border:solid;
+    width:900px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:30px;
+    font-size:20px;
+}
+
+.table_contacts{
+    font-size:30px;
+    margin-left:auto;
+    margin-right:auto;
+
+}
+
+.table_contacts td{
+     padding:7px;
+
+}
+.contact_line{
+    text-decoration-color: black;
+    color:#7b27cf;
+}
+
+.menu_logout{
+    text-decoration-color:red;
+    text-decoration:underline;
+    align:center;
+    margin:10px;
+
+}
+
+.image_profile{
+    display:block;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:10px;
+    border:solid;
+
+}
+
+.label_form_profile{
+    display:inline-block;
+    margin:0px;
+    width:auto;
+
+}
+
+.label_field_comb_profile{
+    margin-top:10px;
+    display:block;
+    border:solid;
+
+}
+
+.profile_space{
+    text-align:center;
+    border:solid;
+    padding:4px;
+
+}
+
+.profile_space2{
+     display:inline-block;
+    text-align:right;
+    border:solid;
+}
+
+.input_profile input{
+    width:100%;
+}
+
+.table_profile{
+    margin-top:10px;
+    border:solid;
+    margin-left: auto;
+  margin-right: auto;
+
+}
+
+.table_profile td{
+
+ word-wrap: break-word;
+  word-break: break-all;
+  text-align: left;
+
+
+
+}
+
+.table_profile td:first-child{
+    width:200px;
+
+}
+.table_profile td:last-child{
+    width:500px;
+    text-align:left;
+}
+
+.buttons_profile{
+    margin-top:15px;
+    width:200px;
+    margin-right:auto;
+    margin-left:auto;
+    padding:0px;
+    padding-top:5px;
+    padding-bottom:5px;
 }

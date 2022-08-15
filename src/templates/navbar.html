@@ -2,19 +2,33 @@
 
 <div class="navbar">
     <div class="navbar_left">
-
         <div class="navbar_el navbar_logo">
             <div>Words</div>
             <div>Learn</div>
             <div>Helper</div>
         </div>
+
         <div class="navbar_el"><a class="navbar_button" href="{% url 'index' %}">Very main page</a></div>
+         {% if user.is_authenticated %}
         <div class="navbar_el"><a class="navbar_button" href="{% url 'words:home' %}">Words page</a></div>
+        {% endif %}
+    </div>
+
+
+    <div class="navbar_middle">
+         {% if user.is_authenticated %}
+        <div  class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, {{user.username}}</span>
+        </div>
+        {% else %}
+        <div  class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, user</span>
+        </div>
+        {% endif %}
     </div>
 
     <div class="navbar_right">
         {% if user.is_authenticated %}
-        <div class="navbar_el" style="font-size:20px;">Welcome, {{user.username}}</div>
+
+
         <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:profile' %}">Profile</a></div>
         <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:logout' %}">Logout</a></div>
         <div class="navbar_el"><a class="navbar_button" href="{% url 'password_change' %}">Change password</a></div>

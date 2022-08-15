@@ -17,13 +17,13 @@ signer = Signer()
 def send_activation_notification(user):
 
 
-    # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = bool(getenv("DEBUG", default=True))
+
+
 
     ALLOWED_HOSTS = getenv('ALLOWED_HOSTS').split()
 
     if ALLOWED_HOSTS:
-        host = f'http://{ALLOWED_HOSTS[0]}'
+        host = f'http://{ALLOWED_HOSTS[0]}:8000'
     else:
         host = 'http://localhost:8000'
 

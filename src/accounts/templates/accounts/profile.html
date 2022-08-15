@@ -4,58 +4,92 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block title %}
-    User profile
+User profile
 {% endblock %}
 
 {% block header %}
-    {{ user.username }} profile.
+{{ user.username }} profile.
 {% endblock %}
 
 {% block content %}
-    <div class="row mb-3">
-      <div class="col-sm-10">
-          <img src="{{ user.avatar.url }}" width="100px"  height="100px"/>
-<!--          <img src="{% static 'accounts/Unknown.png' %} ">-->
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="username" class="col-sm-2"><strong>Username:</strong></label>
-      <div class="col-sm-10">
-          <p id="username">{{ user.username }}</p>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="firstname" class="col-sm-2"><strong>First name:</strong></label>
-      <div class="col-sm-10">
-          <p id="firstname">{{ user.first_name }}</p>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="lastname" class="col-sm-2"><strong>Last name:</strong></label>
-      <div class="col-sm-10">
-          <p id="lastname">{{ user.last_name }}</p>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="email" class="col-sm-2"><strong>E-Mail:</strong></label>
-      <div class="col-sm-10">
-          <p id="email">{{ user.email }}</p>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="birthday" class="col-sm-2"><strong>Birthday:</strong></label>
-      <div class="col-sm-10">
-          <p id="birthday">{{ user.birthday }}</p>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="city" class="col-sm-2"><strong>City:</strong></label>
-      <div class="col-sm-10">
-          <p id="city">{{ user.city }}</p>
-      </div>
-    </div>
-    <a class="btn btn-primary" href="{% url 'accounts:profile_change' %}">Change profile</a>
+
+<img src="{{ user.avatar.url }}" width="80px" class="image_profile"/>
+<table class="table_profile">
+    <tr>
+        <td>
+            <div class="label_form label_form_profile">Username:</div>
+        </td>
+        <td>
+            <div class="label_form label_form_profile">{{ user.username }}</div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="label_form label_form_profile">Email:</div>
+        </td>
+        <td>
+            <div class="label_form label_form_profile">{{ user.email }}</div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="label_form label_form_profile">Name:</div>
+        </td>
+        <td>
+            <div class="label_form label_form_profile">{{ user.first_name }}</div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="label_form label_form_profile">Surname:</div>
+        </td>
+        <td>
+            <div class="label_form label_form_profile">{{ user.last_name }}</div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="label_form label_form_profile">Birthday:</div>
+        </td>
+        <td>
+            <div class="label_form label_form_profile">{{ user.birthday }}</div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="label_form label_form_profile">City:</div>
+        </td>
+        <td>
+            <div class="label_form label_form_profile">{{ user.city }}</div>
+        </td>
+    </tr>
+    <tr>
+            <td>
+                <div class="label_form label_form_profile">Avatar:</div>
+            </td>
+            <td>
+                <div class="label_form label_form_profile">{{ user.avatar }}</div>
+            </td>
+        </tr>
+    </table>
+</table>
+
+
+<a class="next_prev_buttons buttons_profile" href="{% url 'accounts:profile_change' %}">Change profile</a>
 {% if user.is_activated == 0 %}
-<a href="{% url 'accounts:activation_email_confirmation' %}">Activate account</a>
+<a class="next_prev_buttons buttons_profile" style="width:190px;" href="{% url 'accounts:activation_email_confirmation' %}">Activate
+    account</a>
 {% endif %}
 {% endblock %}
+
+
+
+
+
+
+
