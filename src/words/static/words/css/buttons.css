@@ -423,6 +423,7 @@ body{
     background:#BADBE9;
 
 
+
 }
 
 .navbar_logo{
@@ -638,7 +639,7 @@ select{
     border-style:solid;
     border-width:thin;
     cursor:pointer;
-    width:240px;
+    width:300px;
     font-size:15px;
 }
 
