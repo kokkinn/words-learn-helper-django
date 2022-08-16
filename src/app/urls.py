@@ -28,8 +28,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path("accounts/", include('django.contrib.auth.urls')),
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
-    path("contacts", TemplateView.as_view(template_name='contacts.html'), name="contacts"),
-    path('__debug__/', include('debug_toolbar.urls'))
+    path("contacts", TemplateView.as_view(template_name='contacts.html'), name="contacts")
+    # path('__debug__/', include('debug_toolbar.urls'))
 ]
 
 if settings.typee == 'dev':

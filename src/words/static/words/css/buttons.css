@@ -182,6 +182,8 @@ body{
     margin-left: auto;
     margin-right: auto;
 
+
+
 }
 
 .table_wc td{
@@ -340,15 +342,15 @@ body{
 
 
 
-    .title_text {
+.title_text {
 
-    font-size: 55px;
-    line-height: 0px;
-    height: 0px;
+    font-size: 40px;
     font-weight: solid;
-    text-align: center;
-    margin: 40px;
-        margin-bottom:60px;
+    margin-top:55px;
+    margin-bottom:55px;
+    width:100%;
+    word-break: break-word;
+    text-align:center;
     }
 
 .input_ovr2 input, select{
@@ -383,55 +385,92 @@ body{
 
 .navbar{
     background:aliceblue;
-    height:auto;
     border-style:solid;
     display:flex;
     justify-content:space-between;
+    align-items:center;
+    width:100%;
+
+}
+
+@media only screen and (max-width: 768px){
+    .navbar{
+        flex-direction:column;
+
+    }
+
+    .navbar_right{
+
+        justify-content:flex-end;
+        color:blue;
+    }
 }
 
 .navbar_el{
-    margin: 5px 5px 5px 5px;
-    display:inline-block;
-    vertical-align:middle;
-}
 
-.navbar_right{
-    display: flex;
-    align-items: center;
-    justify-content: center
-    border-color:red;
-    cursor:pointer;
+    width:100%;
+    text-align:center;
+
 }
 
 .navbar_left{
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content:flex-start;
+    width:100%;
+
+
 }
 
 .navbar_middle{
     display: flex;
+    height:100%;
+    width:auto;
+
+    justify-content:center;
+
+}
+.navbar_right{
+    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:flex-end;
+    width:100%;
+
+    cursor:pointer;
+
+
 }
 
+
+.flex_el{
+    border:solid;
+    font-size:30px;
+    width:100%
+
+    border:solid;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+
+    border-color:red;
+    cursor:pointer;
+
+
+}
 .navbar_button{
     color: black;
-    background:none;
     text-decoration:none;
     font-size:20px;
     text-decoration-color:#7F4A88;
     background:#BADBE9;
 
 
-
 }
 
 .navbar_logo{
-    margin-right:15px;
-    margin-left:15px;
-    padding-left:10px;
-    padding-right:10px;
+    padding: 0px;
+    margin: 0px;
+    width:auto;
     border-style:solid;
     font-weight:bold;
     font-color:white;
@@ -471,6 +510,7 @@ select{
     margin-left:auto;
     text-align:center;
     font-size:40px;
+    width:100%;
 }
 
 .table_wh td{
@@ -497,7 +537,7 @@ select{
 
 .textbox_in{
     border:solid;
-    width:900px;
+    width:100%;
     margin-left:auto;
     margin-right:auto;
     margin-bottom:30px;
