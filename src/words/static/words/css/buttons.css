@@ -24,16 +24,17 @@ body{
     text-align:center;
     transition: color 0.5s, opacity 1s;
     text-decoration:none;
+    width:200px;
     }
 
 .buttons_log_reg{
-    width:200px;
+
     margin:auto;
     display:block;
 }
 .buttons_wc{
     margin: 0px 0px 0px 0px;
-    width:150px;
+
     padding:0px;
     padding-top:5px;
     padding-bottom:5px;
@@ -609,7 +610,7 @@ select{
 
 .buttons_profile{
     margin-top:15px;
-    width:200px;
+
     margin-right:auto;
     margin-left:auto;
     padding:0px;
