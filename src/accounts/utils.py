@@ -3,6 +3,7 @@ from os import getenv
 from django.core.mail import send_mail
 
 import environ
+
 env = environ.Env()
 environ.Env.read_env()
 
@@ -12,14 +13,7 @@ from django.template.loader import render_to_string
 signer = Signer()
 
 
-
-
 def send_activation_notification(user):
-
-
-
-
-
     ALLOWED_HOSTS = getenv('ALLOWED_HOSTS').split()
 
     if ALLOWED_HOSTS:

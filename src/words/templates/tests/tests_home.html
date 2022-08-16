@@ -1,12 +1,60 @@
 {% extends "base.html" %}
 <a href="{% url 'words:groups_of_words_test' uuid=''%}">Test</a>
 {% block content %}
-<!---->
+
+<button class='help_button_tests' id="open_guide">Click here to read a guide</button>
+<p class="title_text" style="margin-bottom:30px;">Test</p>
+
+<dialog class="modal" id="modal">
+    <strong>Group</strong> - all of its words will be included in the test.
+    <br>
+    <br>
+    <strong>Duration</strong>: 'Finite' for a result created after test's finish and test is finite. 'Loop' for infinite test.
+    <br>
+    <br>
+    <strong>Score</strong>: 'Ranked' for changing word's score in dependency of answer, 'Unranked' - score won't be affected.
+    <br>
+    <br>
+    <strong>Test for</strong>: this choice defines a translation of which word will be asked.
+    <br>
+    <br>
+    <strong>Do with incorrect</strong>: 'Repeat' - test won't end until all answers are answered correctly.
+    <br>
+    <br>
+    <strong>Order</strong>: 'Words with lower are asked firstly' - words with lower score go first.
+    <br>
+    <br>
+    <button class='help_button_tests' id="close_guide">Close</button>
+</dialog>
 
 <form method="post">
-    {%csrf_token%}
-    {{form.as_p}}
-    <input type="submit" value="Start">
+    {% csrf_token %}
+    <table style="margin-right:auto; margin-left:auto;">
+        {% for field in form %}
+        <tr>
+            <td>
+                <div class="label_form" style="display:inline-block;">{{ field.label_tag }}</div>
+            </td>
+            <td>
+                <div style="display:inline-block;">{{ field }}</div>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    <input class='next_prev_buttons' style='margin-right:auto; margin-left:auto; width:200px; margin-bottom:15px;'
+           type="submit" value="Start">
 </form>
-<a href="{% url 'words:test_results' %}">Results</a>
+<a class='next_prev_buttons' style='margin-right:auto; margin-left:auto; width:190px;'
+   href="{% url 'words:test_results' %}">Results section</a>
+
+<script>
+    const modal = document.querySelector('#modal');
+    const openModal = document.querySelector('#open_guide');
+    const closeModal = document.querySelector('#close_guide');
+
+    openModal.addEventListener('click', () => {modal.showModal();})
+    closeModal.addEventListener('click', () => {modal.close();})
+</script>
+
 {% endblock %}

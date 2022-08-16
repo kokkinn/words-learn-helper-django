@@ -3,7 +3,10 @@ function checker() {
     if(result == false){
         event.preventDefault()
     }
+
 }
+
+
 
 
 function stripHtml(html)

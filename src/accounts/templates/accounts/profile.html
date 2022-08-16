@@ -1,17 +1,10 @@
 {% extends 'base.html' %}
 
-
-{% load crispy_forms_tags %}
 {% load static %}
-{% block title %}
-User profile
-{% endblock %}
 
-{% block header %}
-{{ user.username }} profile.
-{% endblock %}
 
 {% block content %}
+
 
 <img src="{{ user.avatar.url }}" width="80px" class="image_profile"/>
 <table class="table_profile">
@@ -38,7 +31,11 @@ User profile
             <div class="label_form label_form_profile">Name:</div>
         </td>
         <td>
+            {% if user.first_name %}
             <div class="label_form label_form_profile">{{ user.first_name }}</div>
+            {% else %}
+            <div class="label_form label_form_profile">None</div>
+            {% endif %}
         </td>
     </tr>
 
@@ -47,7 +44,12 @@ User profile
             <div class="label_form label_form_profile">Surname:</div>
         </td>
         <td>
+            {% if user.last_name %}
             <div class="label_form label_form_profile">{{ user.last_name }}</div>
+            {% else %}
+            <div class="label_form label_form_profile">None</div>
+            {% endif %}
+
         </td>
     </tr>
 
@@ -69,22 +71,38 @@ User profile
         </td>
     </tr>
     <tr>
-            <td>
-                <div class="label_form label_form_profile">Avatar:</div>
-            </td>
-            <td>
-                <div class="label_form label_form_profile">{{ user.avatar }}</div>
-            </td>
-        </tr>
-    </table>
+        <td>
+            <div class="label_form label_form_profile">Avatar:</div>
+        </td>
+        <td>
+            <div class="label_form label_form_profile">{{ user.avatar }}</div>
+        </td>
+    </tr>
 </table>
-
-
+{% if user.is_activated == 0 %}
+<span style="font-size:19px; text-align: center; display:block; margin-top:15px;"><strong>Note</strong>, you can't change anything in your profile, except email, until you account is activated.</span>
+{% endif %}
 <a class="next_prev_buttons buttons_profile" href="{% url 'accounts:profile_change' %}">Change profile</a>
 {% if user.is_activated == 0 %}
-<a class="next_prev_buttons buttons_profile" style="width:190px;" href="{% url 'accounts:activation_email_confirmation' %}">Activate
+
+<a class="next_prev_buttons buttons_profile" id="bb" style="width:190px;"
+   href="{% url 'accounts:activation_email_confirmation' %}" onclick="">Activate
     account</a>
 {% endif %}
+
+<script>
+    const el = document.getElementById('bb');
+    const email = '{{ email }}';
+    el.addEventListener('click', () => {
+            message =  `Send activation letter to ${email} ?`
+            var result = confirm(message);
+            if(result == false){
+                event.preventDefault()
+            }
+    }
+    )
+
+</script>
 {% endblock %}
 
 

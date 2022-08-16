@@ -5,32 +5,23 @@
 
 {% block content %}
 
+<div class="title_text">Results list</div>
+<table class="table_list table_results" style="margin-right:auto; margin-left:auto; margin-top:25px;">
 
+    <tr>
+        <th>Date</th>
+        <th>View</th>
 
+    </tr>
 
+    {% for result in results %}
+    <tr>
+        <td>{{result.date}}</td>
+        <td><a href="{% url 'words:single_result' uuid=result.id %}">View</a></td>
+    </tr>
+    {% endfor %}
 
+</table>
 
-
-
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>View</th>
-        </tr>
-
-        {% if user.is_authenticated %}
-
-
-        {% for result in results %}
-        <tr>
-            <td>{{result.date}}</td>
-            <td><a href="{% url 'words:single_result' uuid=result.id %}">View</a></td>
-
-        <tr>
-            {% endfor %}
-
-            {% endif %}
-
-    </table>
 
 {% endblock content %}

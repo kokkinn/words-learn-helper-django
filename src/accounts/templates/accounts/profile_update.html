@@ -11,6 +11,8 @@ Update profile
 {% endblock %}
 
 {% block content %}
+
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
   <img src="{{ user.avatar.url }}" width="80px" class="image_profile"/>
@@ -78,6 +80,7 @@ Update profile
             </td>
         </tr>
     </table>
+
 
 
     <input class="next_prev_buttons buttons_profile" type="submit" value="Save">

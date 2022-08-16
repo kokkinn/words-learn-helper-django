@@ -10,7 +10,7 @@
 
 <form action="" method="POST">
     {% csrf_token %}
-    <table class="center">
+    <table class="table_gcu">
 
         <tr>
             <td class="label_form label_gc">Group name</td>
@@ -28,14 +28,14 @@
         </tr>
         <tr>
             <td class="cell">
-                <div class="label_form label_gc">Words</div>
+                <div class="label_form label_gc">Words (optional)</div>
             </td>
             <td class="cell">
                 {% if no_words %}
                 <a class='next_prev_buttons buttons_word_list' href="{% url 'words:create' %}">No words yet,
                     create a word (optional)</a>
                 {% else %}
-                <div class="group_choices ">{{form.words}}</div>
+                <div class="group_choice">{{form.words}}</div>
                 {% endif %}
 
             </td>
@@ -45,9 +45,9 @@
 
 
     {% if type == 'create' %}
-    <div class="button_line"><input class='next_prev_buttons buttons_word_list' type="submit" value="Create"></div>
+    <div class="button_line"><input class='next_prev_buttons'  style="width:150px; margin-right:auto; margin-left:auto;" type="submit" value="Create"></div>
     {% else %}
-    <div class="button_line"><input class='next_prev_buttons buttons_word_list' type="submit" value="Update"></div>
+    <div class="button_line"><input class='next_prev_buttons'  style="width:150px margin-right:auto; margin-left:auto;;" type="submit" value="Update"></div>
     {% endif %}
 
 

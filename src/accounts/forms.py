@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserChangeForm, AuthenticationForm
@@ -21,7 +22,10 @@ class AccountRegistrationForm(forms.ModelForm):
         # validators=[validate_password]
     )
 
-    #
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
+        super().__init__(*args, **kwargs)
+
     def clean_email(self):
 
         print(f"CLEAN MAIL\n{self.cleaned_data}\n")
@@ -77,6 +81,7 @@ class AccountRegistrationForm(forms.ModelForm):
         user.is_activated = False
         if commit:
             user.save()
+        messages.success(self.request, "You've successfully registered!")
         return user
 
     class Meta:
@@ -122,10 +127,10 @@ class CustomAuthenticationForm(AuthenticationForm):
 
     # def confirm_login_allowed(self, user):
     #     print("\nwpirjgi0erghoetohrtouhogurtegourtou\n")
-        # if not user.is_activated:
-        #     raise ValidationError(
-        #         message="This user is not activated"
-        #     )
+    # if not user.is_activated:
+    #     raise ValidationError(
+    #         message="This user is not activated"
+    #     )
 
 
 class ActivationEmailConfirmationForm(forms.Form):

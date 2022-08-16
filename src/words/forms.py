@@ -75,7 +75,7 @@ class GroupChoiceForm(forms.Form):
 
 
 class TestInputForm(forms.Form):
-    input_word = forms.CharField()
+    input_word = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Your input...'}))
 
 
 class TestParametersForm(forms.Form):

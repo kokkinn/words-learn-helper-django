@@ -2,25 +2,26 @@
 
 <div class="navbar">
     <div class="navbar_left">
-        <div class="navbar_el navbar_logo">
-            <div>Words</div>
-            <div>Learn</div>
-            <div>Helper</div>
-        </div>
-
+        <a class = 'logo_ref' href="{% url 'index' %}">
+            <div class="navbar_el navbar_logo">
+                <div>Words</div>
+                <div>Learn</div>
+                <div>Helper</div>
+            </div>
+        </a>
         <div class="navbar_el"><a class="navbar_button" href="{% url 'index' %}">Very main page</a></div>
-         {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
         <div class="navbar_el"><a class="navbar_button" href="{% url 'words:home' %}">Words page</a></div>
         {% endif %}
     </div>
 
 
     <div class="navbar_middle">
-         {% if user.is_authenticated %}
-        <div  class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, {{user.username}}</span>
+        {% if user.is_authenticated %}
+        <div class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, {{user.username}}</span>
         </div>
         {% else %}
-        <div  class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, user</span>
+        <div class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, user</span>
         </div>
         {% endif %}
     </div>

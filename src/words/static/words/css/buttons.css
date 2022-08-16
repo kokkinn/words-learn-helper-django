@@ -38,10 +38,14 @@ body{
     padding-top:5px;
     padding-bottom:5px;
     margin-top:5px;
+    margin-left:auto;
+    margin-right:auto;
 }
+
 
 .buttons_wc_container{
     display:inline-block;
+    text-align:center;
 
 }
 
@@ -164,7 +168,7 @@ body{
 .groups_choice div[id="id_group"], div[id="id_groups"], div[id='id_words']{
     font-size: 20px;
     line-height: 30px;
-    text-align: center;
+    text-align: left;
     color: firebrick;
     width: auto;
     border-color:black;
@@ -337,17 +341,17 @@ body{
 
     .title_text {
 
-    font-size: 60px;
+    font-size: 55px;
     line-height: 0px;
     height: 0px;
     font-weight: solid;
     text-align: center;
-    margin: 50px;
+    margin: 40px;
         margin-bottom:60px;
     }
 
 .input_ovr2 input, select{
-    margin:0px 0px 0px 20px;
+    margin:0px 0px 0px 0px;
     padding:0px;
     margin-bottom:10px;
 
@@ -431,7 +435,11 @@ body{
     font-color:white;
     cursor:pointer;
     border-color:#547C8C;
+    text-align:center;
+}
 
+.logo_ref{
+    color:black;
 }
 
 .registration_form{
@@ -531,6 +539,7 @@ select{
     display:inline-block;
     margin:0px;
     width:auto;
+     font-size:25px;
 
 }
 
@@ -548,6 +557,15 @@ select{
 
 }
 
+.modal{
+
+}
+
+.modal::backdrop{
+    background: aliceblue;
+    opacity: .60;
+}
+
 .profile_space2{
      display:inline-block;
     text-align:right;
@@ -556,6 +574,7 @@ select{
 
 .input_profile input{
     width:100%;
+    color:firebrick;
 }
 
 .table_profile{
@@ -563,6 +582,7 @@ select{
     border:solid;
     margin-left: auto;
   margin-right: auto;
+
 
 }
 
@@ -574,10 +594,11 @@ select{
 
 
 
+
 }
 
 .table_profile td:first-child{
-    width:200px;
+    width:150px;
 
 }
 .table_profile td:last-child{
@@ -593,4 +614,65 @@ select{
     padding:0px;
     padding-top:5px;
     padding-bottom:5px;
+}
+
+.table_gcu{
+  margin-left: auto;
+  margin-right: auto;
+
+
+}
+
+.table_gcu td:first-child{
+    width:300px;
+}
+
+.help_button_tests{
+    background-color:#F0EDD9;
+    margin: 0px 0px 0px 0px;
+    display:block;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:15px;
+    border-color:black;
+    border-style:solid;
+    border-width:thin;
+    cursor:pointer;
+    width:240px;
+    font-size:15px;
+}
+
+.button_test{
+    background-color:#F0EDD9;
+    display:block;
+    margin-right:auto;
+    margin-left:auto;
+    width:200px;
+    margin-top:20px;
+    vertical-align:bottom;
+
+}
+
+.back_test{
+     display:block;
+    margin-right:auto;
+    margin-left:auto;
+    text-align:center;
+    margin-top:20px;
+    font-size:22px;
+}
+
+.table_results{
+
+}
+
+.table_results td:first-child{
+    width:auto;
+}
+.table_results td:nth-child(2){
+    width:100px;
+    text-align:center;
+}
+.table_results td:last-child{
+    width:100px;
 }

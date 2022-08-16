@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Активация выполнена
-{% endblock %}
-
-{% block header %}
-    Активация выполнена.
-{% endblock %}
-
 {% block content %}
-    <p>Пользователь успешно активирован.</p>
-    <p><a href="{% url 'accounts:login' %}">Войти на сайт.</a></p>
+    <div class="title_text">User was successfully activated</div>
+    <div class="text-center">
+        <a class="next_prev_buttons" style='margin-right:auto; margin-left:auto; width:200px; margin-top:20px;' href="{% url 'accounts:profile' %}">Profile</a>
+    </div>
 {% endblock %}

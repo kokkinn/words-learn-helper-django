@@ -229,6 +229,13 @@ class TestsResultsListView(ListView, LoginRequiredMixin):
     def get(self, request, *args, **kwargs):
         return super(TestsResultsListView, self).get(request, *args, **kwargs)
 
+    def get_template_names(self):
+        super().get_template_names()
+        if not self.request.user.results.all():
+            return ["tests/no_results.html"]
+        else:
+            return ["tests/results_list.html"]
+
 
 def update_result_details():
     pass
@@ -247,4 +254,5 @@ class TestsResultView(DetailView, LoginRequiredMixin):
         context["dict"] = context_dict
         return context
 
-# ranked loop problem
+
+

@@ -34,7 +34,7 @@ class WordsListView(LoginRequiredMixin, ListView):
             context["total"] = filtered_word_qs.count()
             context["min"] = filtered_word_qs.order_by("score").first().score
             context["max"] = filtered_word_qs.order_by("score").last().score
-            context["avg"] = Word.average_score(self.request.user, qs=filtered_word_qs)
+            context["avg"] = round(Word.average_score(self.request.user, qs=filtered_word_qs), 2)
         return context
 
     def get_template_names(self):

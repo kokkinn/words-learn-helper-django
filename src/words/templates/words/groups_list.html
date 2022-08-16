@@ -5,32 +5,33 @@
 <form action="" method="POST">
     {% csrf_token %}
 
-    <table>
+    <table class="table_list table_results" style="margin-right:auto; margin-left:auto; margin-top:25px;">
+
         <tr>
             <th>Name</th>
             <th>View</th>
-            <th>Update</th>
-            <th>Checkbox</th>
+            <th style="font-size:40px;">&#9998;</th>
+            <th>&#10060;</th>
         </tr>
-        {% for group in groups %}
 
+        {% for group in groups %}
         <tr>
             <td>{{group.name}}</td>
             <td><a href="{% url 'words:group' uuid=group.id %}">View</a></td>
-            {% if group.name != "General" %}
+
             <td><a href="{% url 'words:group_update' uuid=group.id %}">Update</a></td>
             <td><input type="Checkbox" name="checks[]" value="{{group.id}}"></td>
-            {% endif %}
+
         </tr>
 
         {% endfor %}
     </table>
 
-    <hr>
 
-    <input type="Submit" value="Delete" name="delete_button">
-
-    <a href="{% url 'words:group_create' %}">Create</a>
+    <input class='next_prev_buttons' style="margin-left:auto; margin-right:auto; margin-top:15px;" type="Submit"
+           value="Delete chosen groups" name="delete_button" onclick="checker()">
+    <a class='next_prev_buttons' style="width:200px; margin-left:auto; margin-right:auto; margin-top:15px;"
+       href="{% url 'words:group_create' %}">Create a group</a>
 
 </form>
 

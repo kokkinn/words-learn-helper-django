@@ -2,21 +2,23 @@
 
 {% block content %}
 
-<h1>Test for group {{group_obj.name}}</h1>
+<div class="title_text">Test for group {{group_obj.name}}</div>
 
 {% if for_wX == 1 %}
-<h1>{{word_obj.word1}}</h1>
+<div class="label_form">Translation of '{{word_obj.word1}}' is ...</div>
 {% endif %}
 {% if for_wX == 2 %}
-<h1>{{word_obj.word2}}</h1>
+<div class="label_form">Translation of '{{word_obj.word2}}' is ...</div>
 {% endif %}
 
 <form action="" method="POST">
     <input type="hidden" id="" name="word_obj" value="{{word_obj.id}}">
     {% csrf_token %}
-    {{form}}
-    <input type="Submit" value="Go">
+    <div style="text-align:center;">
+        <div class="input_f_" style="margin-top:20px;">{{form.input_word}}</div>
+        <input class='next_prev_buttons button_test' type="Submit" value="Go">
+    </div>
 </form>
-<a class="btn btn-primary" href="{% url 'words:tests_home' %}">Back to tests home</a>
+<a class="back_test" href="{% url 'words:tests_home' %}">Back to tests home</a>
 
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.apps import apps
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,6 +25,15 @@ class AccountRegistrationView(CreateView):
     template_name = 'accounts/registration.html'
     success_url = reverse_lazy('accounts:login')
     form_class = AccountRegistrationForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
+    # def form_valid(self, form):
+    #     if form.is_valid():
+    #         messages.success(self.request, "You've successfully registered!")
+    #     return super(AccountRegistrationView, self).form_valid(form)
 
 
 class AccountRegistrationDoneView(TemplateView):
@@ -67,6 +77,8 @@ def user_activate(request, sign):
 
 def activation_email_confirmation(request):
     user_registered.send(AccountRegistrationForm, instance=request.user)
+    messages.success(request, f"Activation email letter was sent")
+
     return redirect(reverse_lazy("accounts:profile"))
 
 
@@ -99,7 +111,7 @@ class AccountLogoutView(LogoutView):
 
 @login_required
 def account_profile_view(request):
-    return render(request, 'accounts/profile.html')
+    return render(request, 'accounts/profile.html', context={"email": request.user.email})
 
 
 class AccountUpdateProfileView(UpdateView, LoginRequiredMixin):
@@ -115,3 +127,7 @@ class AccountUpdateProfileView(UpdateView, LoginRequiredMixin):
         kwargs = super().get_form_kwargs()
         kwargs["request"] = self.request
         return kwargs
+
+    def form_valid(self, form):
+        messages.success(self.request, "Profile updated")
+        return super(AccountUpdateProfileView, self).form_valid(form)
