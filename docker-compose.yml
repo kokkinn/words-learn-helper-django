@@ -7,7 +7,7 @@ services:
     # command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/opt/src/static_files
+      - static_volume:/opt/src/static
       - media_volume:/opt/src/media
 #    ports:
 #      - 8010:8000
@@ -30,7 +30,7 @@ services:
     build: ./nginx
     container_name: nginx_servece
     volumes:
-      - static_volume:/opt/src/static_files
+      - static_volume:/opt/src/static
       - media_volume:/opt/src/media
     ports:
       - 80:80
