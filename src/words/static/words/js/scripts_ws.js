@@ -6,9 +6,6 @@ function checker() {
 
 }
 
-
-
-
 function stripHtml(html)
 {
    let tmp = document.createElement("DIV");

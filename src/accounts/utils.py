@@ -17,7 +17,7 @@ def send_activation_notification(user):
     ALLOWED_HOSTS = getenv('ALLOWED_HOSTS').split()
 
     if ALLOWED_HOSTS:
-        host = f'http://{ALLOWED_HOSTS[0]}:8000'
+        host = f'http://{ALLOWED_HOSTS[0]}'
     else:
         host = 'http://localhost:8000'
 
