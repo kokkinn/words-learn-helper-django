@@ -45,10 +45,10 @@
         </tr>
         <tr>
             <td>
-                <div class="input_f_">{{ form.word1 }}</div>
+                <div class="input_main">{{ form.word1 }}</div>
             </td>
             <td>
-                <div class="input_f_">{{ form.word2 }}</div>
+                <div class="input_main">{{ form.word2 }}</div>
             </td>
         </tr>
     </table>
@@ -57,7 +57,7 @@
         <div class="buttons_wc_container">
             <p class="label_form">Groups (optional)</p>
             {% if no_groups %}
-            <a class='next_prev_buttons buttons_wc' href="{% url 'words:group_create' %}">No groups
+            <a class='button_main buttons_wc' href="{% url 'words:group_create' %}">No groups
                 yet, create
                 a group</a>
             {% else %}
@@ -71,13 +71,13 @@
         <div class="td_wc_buttons">
             <div class="buttons_wc_container">
                 {% if type == 'create' %}
-                <input class='next_prev_buttons buttons_wc' style="margin-bottom:20px;" type="submit"
+                <input class='button_main buttons_wc' style="margin-bottom:20px;" type="submit"
                        value="Create a pair">
                 {% else %}
-                <input class='next_prev_buttons buttons_wc' style="margin-bottom:20px;" type="submit" value="Update">
+                <input class='button_main buttons_wc' style="margin-bottom:20px;" type="submit" value="Update">
                 {% endif %}
 
-                <a class='next_prev_buttons buttons_wc' href="{% url 'words:list' %}">Pairs list</a>
+                <a class='button_main buttons_wc' href="{% url 'words:list' %}">Pairs list</a>
             </div>
         </div>
     </div>

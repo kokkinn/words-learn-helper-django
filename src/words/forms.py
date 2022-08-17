@@ -8,8 +8,8 @@ from .utils import word_is_list, normalize_word
 
 
 class WordForm(ModelForm):
-    word1 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput(attrs={'class': 'input_f_'}))
-    word2 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput(attrs={'class': 'input_f_'}))
+    word1 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput())
+    word2 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput())
     groups = ModelMultipleChoiceField(queryset=None, widget=forms.CheckboxSelectMultiple,
                                       required=False)  # we defined a qs in init method
 

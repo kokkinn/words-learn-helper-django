@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="title_text" style="margin-bottom:40px;">Group of words: {{group_obj.name}}</div>
-<a class="next_prev_buttons" style="display:block; margin-right:auto; margin-left:auto; margin-top:10px; width:200px;"
+<a class="button_main" style="display:block; margin-right:auto; margin-left:auto; margin-top:10px; width:200px;"
    href="{% url 'words:group_update' uuid=group_obj.id %}">Update group</a>
 <table class="table_list table_results" style="margin-right:auto; margin-left:auto; margin-top:25px;">
 

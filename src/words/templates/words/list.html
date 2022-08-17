@@ -9,28 +9,28 @@
         <form action="" method="GET">
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.word1.label}}</div>
-                <div class="input_f_ input_ovr">{{filter.form.word1}}</div>
+                <div class="input_main input_ovr">{{filter.form.word1}}</div>
             </div>
 
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.word2.label}}</div>
-                <div class="input_f_ input_ovr">{{filter.form.word2}}</div>
+                <div class="input_main input_ovr">{{filter.form.word2}}</div>
             </div>
 
 
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.score_gt.label}}</div>
-                <div class="input_f_ input_ovr">{{filter.form.score_gt}}</div>
+                <div class="input_main input_ovr">{{filter.form.score_gt}}</div>
             </div>
 
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.score_lt.label}}</div>
-                <div class="input_f_ input_ovr">{{filter.form.score_lt}}</div>
+                <div class="input_main input_ovr">{{filter.form.score_lt}}</div>
             </div>
 
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.order_by_asc_score.label}}</div>
-                <div class="input_f_ ">{{filter.form.order_by_asc_score}}</div>
+                <div class="input_main ">{{filter.form.order_by_asc_score}}</div>
             </div>
 
             <br>
@@ -41,9 +41,9 @@
             </div>
 
             <div class="inline_block_label_field" >
-                <input type="Submit" class='next_prev_buttons buttons_word_list' name="filter_button"
+                <input type="Submit" class='button_main' name="filter_button"
                        value="Search with filter">
-                <a class="next_prev_buttons buttons_word_list" href="{% url 'words:list' %}">Reset
+                <a class="button_main" href="{% url 'words:list' %}">Reset
                     filter</a>
             </div>
 
@@ -117,9 +117,9 @@
         </div>
 
         <div style="color:red;">
-            <a class='next_prev_buttons button_wl_table' href="{% url 'words:create' %}">Create a
+            <a class='button_main button_wl_table' href="{% url 'words:create' %}">Create a
                 pair</a>
-            <input class='next_prev_buttons button_wl_table' style="width:100%;" type="Submit" name="delete_button"
+            <input class='button_main button_wl_table' style="width:100%;" type="Submit" name="delete_button"
                    value="Delete chosen pairs" onclick="checker()">
         </div>
 

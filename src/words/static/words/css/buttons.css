@@ -6,8 +6,8 @@ body{
     margin-top:0px;
     background-color:#EEEEEE;
 }
-.next_prev_buttons{
-    background-color:#F0EDD9;
+.button_main{
+    background-color:aliceblue;
     color:#41444b;
     padding: 5px 5px 5px 5px;
     margin: 0px 0px 0px 0px;
@@ -24,7 +24,7 @@ body{
     text-align:center;
     transition: color 0.5s, opacity 1s;
     text-decoration:none;
-    width:200px;
+
     }
 .link{
 
@@ -71,12 +71,12 @@ body{
 }
 
 
-    .next_prev_buttons:hover {
+    .button_main:hover {
     color:firebrick;
         opacity:2;
     }
 
-    .next_prev_buttons:active {
+    .button_main:active {
     color:green;
     }
 
@@ -140,7 +140,7 @@ body{
 
     }
 
-    .input_f_ input, select{
+    .input_main input, select{
         background-color:aliceblue;
         color:firebrick;
         border-radius:3px;
@@ -154,7 +154,7 @@ body{
         padding: 0px;
         display:inline-block;
         height:30px;
-        width:auto;
+        width:100%;
     }
 
 .input_wc{
@@ -294,6 +294,10 @@ body{
     display:inline-block;
 
     }
+
+.filter_button{
+    width:auto;
+}
 
 .group_choice_word_list div[id='id_group']{
     margin: 0px 0px 0px 0px;
@@ -768,4 +772,15 @@ select{
     text-align-last: left;
      text-align:left;
 
+}
+
+.table_pc{
+    margin-right:auto;
+    margin-left:auto;
+
+}
+
+.table_pc td{
+
+    text-align:left;
 }
