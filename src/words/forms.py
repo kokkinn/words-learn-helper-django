@@ -57,10 +57,6 @@ class GroupForm(ModelForm):
 #     groups = forms.ModelMultipleChoiceField(queryset=GroupOfWords.objects.all(), widget=forms.CheckboxSelectMultiple())
 
 
-def qs_not_empty(query_set):
-    return False if query_set.words.count() == 0 else True
-
-
 class GroupChoiceForm(forms.Form):
     def __init__(self, user, *args, **kwargs, ):
         super(GroupChoiceForm, self).__init__(*args, **kwargs)
@@ -76,6 +72,11 @@ class GroupChoiceForm(forms.Form):
 
 class TestInputForm(forms.Form):
     input_word = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Your input...'}))
+
+
+def qs_not_empty(query_set):
+
+    return False if query_set.words.count() == 0 else True
 
 
 class TestParametersForm(forms.Form):

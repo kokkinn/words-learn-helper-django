@@ -11,6 +11,6 @@ class WordsConfig(AppConfig):
 @receiver(post_save, sender='words.Word')
 def word_creation_dispatcher(created, instance, **kwargs):
     if created:
-        print('\nAAAAAAAAALALALALALALALALAL\n')
         user = instance.user
         user.general_group.words.add(instance)
+        user.save()

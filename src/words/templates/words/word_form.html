@@ -15,9 +15,10 @@
 <dialog id="modal">
     Note:
     <br>
-        <br>
+    <br>
 
-    - 'Word' is a main unit in this system. In 'Word List' section you can observe those you've created, <br> in 'Tests', you check your knowledge.
+    - 'Word' is a main unit in this system. In 'Word List' section you can observe those you've created, <br> in
+    'Tests', you check your knowledge.
     <br>
     <br>
     - Your must be not longer than 30 letters.
@@ -56,7 +57,7 @@
         <div class="buttons_wc_container">
             <p class="label_form">Groups (optional)</p>
             {% if no_groups %}
-            <a class='next_prev_buttons buttons_wc'  href="{% url 'words:group_create' %}">No groups
+            <a class='next_prev_buttons buttons_wc' href="{% url 'words:group_create' %}">No groups
                 yet, create
                 a group</a>
             {% else %}
@@ -89,6 +90,7 @@
     const closeModal = document.querySelector('#close_guide');
     openModal.addEventListener('click', () => {modal.showModal();})
     closeModal.addEventListener('click', () => {modal.close();})
+
 
 </script>
 

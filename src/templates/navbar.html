@@ -11,7 +11,7 @@
                 </div>
             </a>
         </div>
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'index' %}">Very main page</a></div>
+        <div class="navbar_el"><a class="navbar_button" href="{% url 'index' %}">Main page</a></div>
         {% if user.is_authenticated %}
         <div class="navbar_el"><a class="navbar_button" href="{% url 'words:home' %}">Words page</a></div>
         {% endif %}
@@ -20,10 +20,10 @@
 
     <div class="navbar_middle">
         {% if user.is_authenticated %}
-        <div class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, {{user.username}}</span>
+        <div class="navbar_el" style="font-size:20px;"><span style="font-weight:bold; font-size:25px;">Welcome, {{user.username}}</span>
         </div>
         {% else %}
-        <div class="navbar_el" style="font-size:20px;"><span style="font-weight:bold;">Welcome, user</span>
+        <div class="navbar_el"><span style="font-weight:bold; font-size:25px;">Welcome, user</span>
         </div>
         {% endif %}
     </div>
