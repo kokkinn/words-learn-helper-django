@@ -365,11 +365,6 @@ body{
 
 }
 
-
-
-
-
-
 .label_gc{
     text-align: left;
     padding-right: 100px;
@@ -396,18 +391,16 @@ body{
 @media only screen and (max-width: 768px){
     .navbar{
         flex-direction:column;
-
     }
 
     .navbar_right{
-
         justify-content:flex-end;
-        color:blue;
     }
 }
 
 .navbar_el{
 
+    border:solid red;
     width:100%;
     text-align:center;
 
@@ -418,15 +411,15 @@ body{
     align-items: center;
     justify-content:flex-start;
     width:100%;
-
+    border:solid blue;
 
 }
 
 .navbar_middle{
     display: flex;
-    height:100%;
-    width:auto;
-
+    height:auto;
+    width:60%;
+    border:solid blue;
     justify-content:center;
 
 }
@@ -435,9 +428,8 @@ body{
     align-items: center;
     justify-content:flex-end;
     width:100%;
-
     cursor:pointer;
-
+    border:solid blue;
 
 }
 
