@@ -7,17 +7,17 @@
 
 
 {% if type == 'create' %}
-<p class="title_text">Word creation</p>
+<p class="title_text">Pair creation</p>
 {% else %}
 
-<p class="title_text">Word update</p>
+<p class="title_text">Pair update</p>
 {% endif %}
 <dialog id="modal">
     Note:
     <br>
     <br>
 
-    - 'Word' is a main unit in this system. In 'Word List' section you can observe those you've created, <br> in
+    - 'Pair' is a main unit in this system. In 'Pair List' section you can observe those you've created, <br> in
     'Tests', you check your knowledge.
     <br>
     <br>
@@ -25,12 +25,12 @@
     <br>
     - You can add multiple translations by inserting coma (',') between those translations.
     <br>
-    - Only one word can have multiple translations
+    - Only one Pair can have multiple translations
     <br>
     - For example: Word 1: 'Bonjour', Word 2: 'Hello, Hi'.
     <br>
     <br>
-    - By selecting any number of groups, a word will be added to those.
+    - By selecting any number of groups, a Pair will be added to those.
     <br>
     - To create, you can press 'Enter', instead of button below.
     <button class='help_button_tests' id="close_guide">Ok</button>
@@ -72,12 +72,12 @@
             <div class="buttons_wc_container">
                 {% if type == 'create' %}
                 <input class='next_prev_buttons buttons_wc' style="margin-bottom:20px;" type="submit"
-                       value="Create a word">
+                       value="Create a Pair">
                 {% else %}
                 <input class='next_prev_buttons buttons_wc' style="margin-bottom:20px;" type="submit" value="Update">
                 {% endif %}
 
-                <a class='next_prev_buttons buttons_wc' href="{% url 'words:list' %}">Words list</a>
+                <a class='next_prev_buttons buttons_wc' href="{% url 'words:list' %}">Pair list</a>
             </div>
         </div>
     </div>

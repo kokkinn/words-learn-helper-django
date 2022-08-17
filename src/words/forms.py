@@ -94,15 +94,15 @@ class TestParametersForm(forms.Form):
     test_for_choices = (("", "---------"),
                         ("for_w1", "Word1 to Word2"), ("for_w2", "Word2 to Word1"))
     do_with_incorrect_choices = (("", "---------"), ("skip", "Skip"), ("repeat", "Repeat"))
-    lower_score_first_choices = (("", "---------"), ("lower_score_first", "Words with lower are asked firstly"),
+    lower_score_first_choices = (("", "---------"), ("lower_score_first", "Pairs with lower are asked firstly"),
                                  ("random_score_first", "Random word picked"))
 
-    help_text_groups = "A 'Group', all words of which will be included in the test."
-    help_text_durations = "'Loop' for infinite test for words of a group. If 'Finite' is chosen, test will end, after all answers will be submitted, result will be created."
+    help_text_groups = "A 'Group', all Pairs of which will be included in the test."
+    help_text_durations = "'Loop' for infinite test for Pairs of a group. If 'Finite' is chosen, test will end, after all answers will be submitted, result will be created."
     help_text_type = "'Ranked' for answer will change the score, If 'Unranked', score won't be affected."
     help_text_test_for_translation_of = "'A user's choice defines translation of what word will be asked."
     help_text_do_with_incorrect = "If 'repeat' is chosen, test won't end until all answers are answered correctly."
-    help_text_lower_score_first = "Pick 'Words with lower are asked firstly' if ypu want to test words with lower score"
+    help_text_lower_score_first = "Pick 'Pairs with lower are asked firstly' if ypu want to test Pairs with lower score"
     groups = forms.ModelChoiceField(queryset=None, help_text=help_text_groups)
     durations = forms.ChoiceField(choices=duration_choices,
                                   help_text=help_text_durations)
