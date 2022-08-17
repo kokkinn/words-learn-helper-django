@@ -28,19 +28,19 @@ body{
     }
 
 .buttons_log_reg{
-
     margin:auto;
     display:block;
 }
-.buttons_wc{
-    margin: 0px 0px 0px 0px;
 
-    padding:0px;
+.buttons_wc{
+    margin: 0px;
+    padding:3px;
     padding-top:5px;
     padding-bottom:5px;
     margin-top:5px;
     margin-left:auto;
     margin-right:auto;
+    width:auto;
 }
 
 
@@ -146,15 +146,18 @@ body{
         border-width: thin;
         border-color:black;
         border-style:solid;
-
         text-color:red;
-        font-size: 20px;
+        font-size:20px;
         margin: 0px;
         padding: 0px;
         display:inline-block;
-
         height:30px;
+        width:100%;
     }
+
+.input_wc{
+
+}
 
 .input_reg_log input, select{
     height: 40px;
@@ -171,16 +174,18 @@ body{
     line-height: 30px;
     text-align: left;
     color: firebrick;
-    width: auto;
     border-color:black;
     border-style:solid;
     cursor:pointer;
     border-width: thin;
+    word-break:break-word;
+        word-break:break-all;
 }
 
 .table_wc{
     margin-left: auto;
     margin-right: auto;
+    border:solid;
 
 
 
@@ -188,9 +193,10 @@ body{
 
 .table_wc td{
     text-align:center;
-
+    border:solid;
     padding-right:10px;
     padding-left:10px;
+    width:auto;
 
 }
 
@@ -201,35 +207,29 @@ body{
     width:auto;
 }
 
-.right_of_table{
-     display:inline-block;
-     vertical-align:top;
-     text-align:left;
-     width:auto;
-
-}
 
 .table_list {
     border-collapse: collapse;
     font-size: 22px;
     text-align:center;
+    width:100%;
 }
 
 .table_list td, th {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
-    padding: 9px;
+    padding: 5px;
 
     word-break:break-word;
 
 }
 
 .table_list td:first-child {
-    width:230px;
+    width:auto;
     text-align:left;
 }
 .table_list td:nth-child(2) {
-       width:230px;
+       width:auto;
     text-align:left;
 
 }
@@ -256,7 +256,13 @@ body{
 
 }
 
+.right_of_table{
+     display:inline-block;
+     vertical-align:top;
+     text-align:left;
+     width:auto;
 
+}
 
 .tet{
     font-size: 16px
@@ -343,22 +349,17 @@ body{
 
 
 .title_text {
-
-    font-size: 40px;
+    font-size: 50px;
     font-weight: solid;
-    margin-top:55px;
-    margin-bottom:55px;
+    margin-top:20px;
+    margin-bottom:20px;
     width:100%;
     word-break: break-word;
     text-align:center;
+
     }
 
-.input_ovr2 input, select{
-    margin:0px 0px 0px 0px;
-    padding:0px;
-    margin-bottom:10px;
 
-}
 
 .cell{
     vertical-align:top;
@@ -385,7 +386,7 @@ body{
     justify-content:space-between;
     align-items:center;
     width:100%;
-
+    align-items: stretch;
 }
 
 @media only screen and (max-width: 768px){
@@ -393,43 +394,76 @@ body{
         flex-direction:column;
     }
 
+
     .navbar_right{
         justify-content:flex-end;
     }
+
+    .table_list td, th{
+        padding:0px;
+        margin:0px;
+    }
+
+    .no_view{
+        display:none;
+    }
+
+    .label_form{
+        font-size:18px;
+    }
+
+    .textbox_in{
+        margin-right:0px !important;
+        margin-left:0px !important;
+    }
+
+    .table_wl{
+    display:inline-block;
+    width:100%;
+}
+
+    .table_gcu{
+width:100% !important;
+    }
+
 }
 
 .navbar_el{
+    margin-left:5px;
+    margin-right:5px;
+    white-space: nowrap;
 
-    border:solid red;
-    width:100%;
+    width:auto;
     text-align:center;
-
 }
 
 .navbar_left{
     display: flex;
     align-items: center;
-    justify-content:flex-start;
+    justify-content:space-around;
     width:100%;
-    border:solid blue;
+
 
 }
 
 .navbar_middle{
     display: flex;
     height:auto;
-    width:60%;
-    border:solid blue;
+     width:auto;
+
     justify-content:center;
+    align-items: center;
+
 
 }
 .navbar_right{
     display: flex;
     align-items: center;
-    justify-content:flex-end;
+    justify-content:space-around;
     width:100%;
     cursor:pointer;
-    border:solid blue;
+
+
 
 }
 
@@ -529,12 +563,13 @@ select{
 
 .textbox_in{
     border:solid;
-    width:100%;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:30px;
+
+    margin-left:100px;
+    margin-right:100px;
+    margin-bottom:15px;
     font-size:20px;
 }
+
 
 .table_contacts{
     font-size:30px;
@@ -592,7 +627,7 @@ select{
 }
 
 .modal{
-
+    width:auto;
 }
 
 .modal::backdrop{
@@ -609,40 +644,35 @@ select{
 .input_profile input{
     width:100%;
     color:firebrick;
+
 }
 
 .table_profile{
     margin-top:10px;
     border:solid;
-    margin-left: auto;
-  margin-right: auto;
-
+    margin-left:auto;
+    margin-right:auto;
+    width:auto;
 
 }
 
 .table_profile td{
-
- word-wrap: break-word;
-  word-break: break-all;
-  text-align: left;
-
-
-
-
+    text-align: left;
+    text-align-last: left;
+     text-align:left;
 }
 
-.table_profile td:first-child{
-    width:150px;
 
-}
+
 .table_profile td:last-child{
-    width:500px;
     text-align:left;
+    word-break:break-word;
+    word-break: break-all;
+
 }
 
 .buttons_profile{
     margin-top:15px;
-
     margin-right:auto;
     margin-left:auto;
     padding:0px;
@@ -651,14 +681,20 @@ select{
 }
 
 .table_gcu{
-  margin-left: auto;
-  margin-right: auto;
-
+    margin-left: auto;
+    margin-right: auto;
+    width:700px;
 
 }
 
 .table_gcu td:first-child{
-    width:300px;
+    width:auto;
+
+}
+
+.table_gcu td{
+    width:auto;
+    padding:10px;
 }
 
 .help_button_tests{
@@ -668,6 +704,7 @@ select{
     margin-right:auto;
     margin-left:auto;
     margin-top:15px;
+    margin-bottom:15px;
     border-color:black;
     border-style:solid;
     border-width:thin;
@@ -709,4 +746,21 @@ select{
 }
 .table_results td:last-child{
     width:100px;
+}
+
+.table_th{
+    margin-right:auto;
+    margin-left:auto;
+    margin-bottom:15px;
+
+}
+
+.table_th td{
+    text-align-last: left;
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align-last: left;
+     text-align:left;
+
 }

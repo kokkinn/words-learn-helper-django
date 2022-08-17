@@ -83,9 +83,9 @@
                 <th>Word 1</th>
                 <th>Word 2</th>
                 <th>&#128211;</th>
-                <th>&#128064;</th>
+                <th  class="no_view">&#128064;</th>
                 <th>&#9998;</th>
-                <th>&#128465;</th>
+                <th  class="no_view">&#128465;</th>
                 <th>&#10060;</th>
             </tr>
 
@@ -94,9 +94,9 @@
                 <td>{{word.word1}}</td>
                 <td>{{word.word2}}</td>
                 <td>{{word.score}}</td>
-                <td><a href="{% url 'words:single' uuid=word.id %}">View</a></td>
+                <td class="no_view"><a href="{% url 'words:single' uuid=word.id %}">View</a></td>
                 <td><a href="{% url 'words:update' uuid=word.id %}">Update</a></td>
-                <td><a onclick="checker()" href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
+                <td class="no_view"><a onclick="checker()" href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
                 <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
             </tr>
             {% endfor %}
