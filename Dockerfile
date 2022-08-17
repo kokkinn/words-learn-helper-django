@@ -21,4 +21,5 @@ EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 CMD ["python", "manage.py", "collectstatic"]
 RUN python manage.py collectstatic
+CMD ["python", "manage.py", "migrate"]
 #only for docker test
