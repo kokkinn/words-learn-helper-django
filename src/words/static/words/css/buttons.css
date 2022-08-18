@@ -346,10 +346,9 @@ body{
 }
 
 
-
-
 .title_text {
-    font-size: 50px;
+
+    font-size: 40px;
     font-weight: solid;
     margin-top:20px;
     margin-bottom:20px;
@@ -387,6 +386,7 @@ body{
     align-items:center;
     width:100%;
     align-items: stretch;
+
 }
 
 @media only screen and (max-width: 768px){
@@ -394,6 +394,14 @@ body{
         flex-direction:column;
     }
 
+
+    .navbar_el{
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+    #navbar_welcome{
+        margin:0px;
+    }
 
     .navbar_right{
         justify-content:flex-end;
@@ -412,9 +420,10 @@ body{
         font-size:20px;
     }
 
-    .textbox_in{
-        margin-right:0px !important;
+    .textbox_index{
+              margin-right:0px !important;
         margin-left:0px !important;
+          width:100%; !important;
     }
 
     .table_wl{
@@ -441,7 +450,8 @@ width:100% !important;
     align-items: center;
     justify-content:space-around;
     width:100%;
-   height:63px;
+   height:auto;
+
 
 
 }
@@ -456,6 +466,7 @@ width:100% !important;
     align-items: center;
 
 
+
 }
 .navbar_right{
     display: flex;
@@ -463,7 +474,7 @@ width:100% !important;
     justify-content:space-around;
     width:100%;
     cursor:pointer;
-    height:63px;
+    height:auto;
 
 }
 
@@ -472,7 +483,6 @@ width:100% !important;
     border:solid;
     font-size:30px;
     width:100%
-
     border:solid;
     display: flex;
     align-items: center;
@@ -485,7 +495,9 @@ width:100% !important;
 .navbar_button{
     color: black;
     text-decoration:none;
-    font-size:20px;
+    font-size:22px;
+        border-radius:7px;
+    border:solid grey 1px;
     text-decoration-color:#7F4A88;
     background:#BADBE9;
     padding:3px;
@@ -553,8 +565,8 @@ select{
 
 .menu_item_wh{
     color:black;
-    text-decoration:none;
-    font-size:40px;
+    text-decoration:underline;
+    font-size:35px;
     margin-right:10px;
 }
 
@@ -569,13 +581,14 @@ select{
 
     }
 
-.textbox_in{
+.textbox_index{
     border:solid;
     line-height:27px;
     margin-left:100px;
     margin-right:100px;
     margin-bottom:15px;
-    font-size:20px;
+    font-size:19px;
+    width:auto;
 }
 
 

@@ -2,7 +2,7 @@
 
 <div class="navbar">
     <div class="navbar_left">
-        <div class="navbar_el">
+        <div class="navbar_el no_view">
             <a class='logo_ref' href="{% url 'index' %}">
                 <div class="navbar_logo">
                     <div>Words</div>
@@ -20,10 +20,10 @@
 
     <div class="navbar_middle">
         {% if user.is_authenticated %}
-        <div class="navbar_el" style="font-size:20px;"><span style="font-weight:bold; font-size:25px;">Welcome, {{user.username}}</span>
+        <div class="navbar_el" id='navbar_welcome' style="font-size:20px;"><span style="font-weight:bold; font-size:25px; font-family:arial;">Welcome, {{user.username}}</span>
         </div>
         {% else %}
-        <div class="navbar_el"><span style="font-weight:bold; font-size:25px;">Welcome, user</span>
+        <div class="navbar_el"  id='navbar_welcome'><span style="font-weight:bold; font-size:25px;  font-family:arial;">Welcome, user</span>
         </div>
         {% endif %}
     </div>
@@ -32,9 +32,12 @@
         {% if user.is_authenticated %}
 
 
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:profile' %}">Profile</a></div>
+
         <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:logout' %}">Logout</a></div>
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'password_change' %}">Change password</a></div>
+         <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:profile' %}">Profile</a></div>
+<!--        <div class="navbar_el"><a class="navbar_button" href="{% url 'password_change' %}">Change password</a></div>-->
+                <div class="navbar_el"><a class="navbar_button" href="{% url 'contacts' %}">Contacts</a></div>
+
 
 
         {% else %}
