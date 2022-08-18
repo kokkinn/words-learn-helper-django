@@ -4,6 +4,8 @@ from django.core.mail import send_mail
 
 import environ
 
+from src.app import settings
+
 env = environ.Env()
 environ.Env.read_env()
 
@@ -27,6 +29,8 @@ def send_activation_notification(user):
     body = render_to_string('email/activation_letter_body.txt', context)
 
     # user.email_user(subject, body)
+    # print(env("EMAIL_HOST_USER"))
+    # print(env("EMAIL_HOST_PASSWORD"))
 
     user_email = user.email
     send_mail(
@@ -34,5 +38,5 @@ def send_activation_notification(user):
         body,
         env("EMAIL_HOST_USER"),
         [user_email],
-        fail_silently=True
+        # fail_silently=True
     )
