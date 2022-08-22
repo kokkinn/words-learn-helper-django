@@ -82,7 +82,7 @@ class WordUpdateView(LoginRequiredMixin, UpdateView, SingleObjectMixin):
             for group in form.cleaned_data["groups"]:
                 group.words.add(word)
         form.save()
-        messages.success(self.request, f"Word {form.instance.word1} - {form.instance.word2} updated")
+        messages.success(self.request, f"Pair {form.instance.word1} - {form.instance.word2} updated")
         return super().form_valid(form)
 
     def get_initial(self):
@@ -114,7 +114,7 @@ class WordCreateView(LoginRequiredMixin, CreateView):
             for group in form.cleaned_data["groups"]:
                 group.words.add(form.instance)
         form.save()
-        messages.success(self.request, f"Word '{form.instance.word1} - {form.instance.word2}' created")
+        messages.success(self.request, f"Pair '{form.instance.word1} - {form.instance.word2}' created")
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -149,7 +149,7 @@ def delete_view(request, uuid):
     word_object = Word.objects.get(id=uuid)
     # if request.method == "POST":
     word_object.delete()
-    messages.success(request, f"Word '{word_object.word1} - {word_object.word2}' deleted")
+    messages.success(request, f"Pair '{word_object.word1} - {word_object.word2}' deleted")
     return redirect(reverse_lazy("words:list"))
 
     # return render(request, "words/delete.html", context)

@@ -83,6 +83,9 @@
 <span style="font-size:19px; text-align: center; display:block; margin-top:15px;"><strong>Note</strong>, you can't change anything in your profile, except email, until you account is activated.</span>
 {% endif %}
 <a class="button_main buttons_profile" href="{% url 'accounts:profile_change' %}">Change profile</a>
+<a class="button_main buttons_profile" href="{% url 'password_change' %}">Change password</a>
+
+
 {% if user.is_activated == 0 %}
 
 <a class="button_main buttons_profile" id="bb" style="width:190px;"

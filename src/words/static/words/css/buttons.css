@@ -394,6 +394,16 @@ body{
         flex-direction:column;
     }
 
+      .table_contacts{
+        font-size:20px !important;
+
+    }
+     .table_contacts td{
+        font-size:20px !important;
+        padding-top:5px;
+        padding-bottom:5px;
+
+    }
 
     .navbar_el{
         margin-top:10px;
@@ -434,6 +444,7 @@ body{
     .table_gcu{
 width:100% !important;
     }
+
 
 }
 
@@ -594,15 +605,28 @@ select{
 
 .table_contacts{
     font-size:30px;
+    margin-top:10px;
     margin-left:auto;
     margin-right:auto;
+    width:auto;
 
 }
 
 .table_contacts td{
-     padding:7px;
-
+    text-align: left;
+    text-align-last: left;
+    text-align:left;
+    padding-top:10px;
+    padding-bottom:10px;
 }
+
+
+
+.table_contacts td:last-child{
+    text-align:left;
+    word-break:break-word;
+}
+
 .contact_line{
     text-decoration-color: black;
     color:#7b27cf;
@@ -674,7 +698,6 @@ select{
     margin-left:auto;
     margin-right:auto;
     width:auto;
-
 }
 
 .table_profile td{
@@ -699,6 +722,7 @@ select{
     padding:0px;
     padding-top:5px;
     padding-bottom:5px;
+    width:190px;
 }
 
 .table_gcu{
@@ -796,4 +820,10 @@ select{
 .table_pc td{
 
     text-align:left;
+}
+
+.input_test{
+    width:350px;
+    margin-left:auto;
+    margin-right:auto;
 }

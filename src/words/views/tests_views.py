@@ -154,7 +154,8 @@ class GroupOfWordsTest(FormView, LoginRequiredMixin):
                 elif self.request.session["test_params"]["for_wX"] == 2:
                     compare_input_with = word_obj_db.word1.split(", ")
 
-                input_from_form = normalize_word(self.request.POST.getlist("input_word")[0]).split(", ")
+                input_from_form = self.request.POST.getlist("input_word")[0].split(", ")
+                # print(type(input_from_form))
 
                 for el in compare_input_with:
                     if el in input_from_form:
@@ -174,7 +175,7 @@ class GroupOfWordsTest(FormView, LoginRequiredMixin):
 
                     if len(compare_input_with) == 1:  # one word in testing word
                         messages.success(self.request,
-                                         f'Answer "{input_from_form}" is correct. Translation of "{word_obj_db.word1}" is '
+                                         f'Answer "{input_from_form[0]}" is correct. Translation of "{word_obj_db.word1}" is '
                                          f'"{word_obj_db.word2}"')
                         if self.request.session["test_params"]["test_eval"] == "ranked":
                             word_obj_db.score += 1
