@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 
 import environ
 
-from src.app import settings
+#ifrom src.app import settings
 
 env = environ.Env()
 environ.Env.read_env()
