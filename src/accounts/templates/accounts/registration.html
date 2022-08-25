@@ -4,26 +4,23 @@
 
 
 {% block header %}
-Регистрация нового пользователя.
+
 {% endblock %}
 
 {% block content %}
 <div class="title_text">Registration</div>
-<form method="post" style="text-align:center;">
-
+<form method="post">
     {% csrf_token %}
-    <div class="registration_form">
-        {% for field in form %}
-        <div class="label_field_comb">
-            <div class="label_form label_form_reg" style="display:inline-block">{{field.label_tag}}</div>
-            <div class="input_main" style="display:inline-block">{{field}}</div>
-        </div>
-        {% endfor %}
 
+        <table class="table_registration">
+            {% for field in form %}
+            <tr>
+                <td class="label_form" style="">{{field.label_tag}}</td>
+                <td class="input_main" style="">{{field}}</td>
+            </tr>
+            {% endfor %}
+        </table>
 
-        <div style="margin-top:40px;"><input class="button_main buttons_log_reg" type="submit" value="Register">
-        </div>
-
-    </div>
+    <div style="margin-top:40px;"><input class="button_main buttons_log_reg" type="submit" value="Register"></div>
 </form>
 {% endblock %}

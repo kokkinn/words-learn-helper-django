@@ -133,11 +133,14 @@ body{
     font-size: 30px;
     line-height: 30px;
     text-align: center;
-    margin-bottom: 10px;
+
     margin-top: 1px;
-    vertical-align:top;
-
-
+    vertical-align:middle;
+    width:auto;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align-last:left;
+     text-align:left;
     }
 
     .input_main input, select{
@@ -547,9 +550,7 @@ width:100% !important;
 
 }
 
-.label_form_reg{
-    vertical-align:middle;
-}
+
 
 .label_field_comb{
     margin-bottom:10px;
@@ -560,6 +561,7 @@ select{
     padding:0px;
     height:24px;
     margin:0px;
+    width:100px;
 }
 
 .table_wh{
@@ -567,17 +569,18 @@ select{
     margin-left:auto;
     text-align:center;
     font-size:40px;
-    width:100%;
+    width:auto;
 }
 
 .table_wh td{
     padding:10px;
+        white-space: nowrap;
 }
 
 .menu_item_wh{
     color:black;
     text-decoration:underline;
-    font-size:35px;
+    font-size:30px;
     margin-right:10px;
 }
 
@@ -650,10 +653,10 @@ select{
 }
 
 .label_form_profile{
-    display:inline-block;
+
     margin:0px;
     width:auto;
-     font-size:25px;
+    font-size:25px;
 
 }
 
@@ -703,7 +706,8 @@ select{
 .table_profile td{
     text-align: left;
     text-align-last: left;
-     text-align:left;
+    text-align:left;
+
 }
 
 
@@ -712,6 +716,13 @@ select{
     text-align:left;
     word-break:break-word;
     word-break: break-all;
+    width:auto;
+}
+
+.table_profile td:first-child{
+    text-align:left;
+    white-space: nowrap;
+    width:auto;
 
 }
 
@@ -802,11 +813,12 @@ select{
 }
 
 .table_th td{
+    padding:5px;
     text-align-last: left;
     text-align: center;
     word-wrap: break-word;
     word-break: break-all;
-    text-align-last: left;
+    text-align-last:left;
      text-align:left;
 
 }
@@ -826,4 +838,22 @@ select{
     width:350px;
     margin-left:auto;
     margin-right:auto;
+}
+
+.table_registration{
+
+    margin-left:auto;
+    margin-right:auto;
+    text-align:right;
+}
+
+.table_registration td:first-child{
+    text-align:left;
+    width:auto;
+    vertical-align:middle;
+
+}
+.table_registration td{
+    padding-top:10px;
+
 }
