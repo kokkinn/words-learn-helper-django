@@ -12,14 +12,10 @@ class AccountRegistrationForm(forms.ModelForm):
     password1 = forms.CharField(
         label='Password:',
         widget=forms.PasswordInput,
-        # help_text=password_validation.password_validators_help_text_html,
-        # validators=[validate_password]
     )
     password2 = forms.CharField(
         label='Confirm password:',
         widget=forms.PasswordInput,
-        # help_text='Please repeat password',
-        # validators=[validate_password]
     )
 
     def __init__(self, *args, **kwargs):
@@ -27,43 +23,19 @@ class AccountRegistrationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     def clean_email(self):
-
-        print(f"CLEAN MAIL\n{self.cleaned_data}\n")
         if CustomUser.objects.filter(email=f"{self.cleaned_data['email']}"):
             raise ValidationError(message="User with this Email is registered")
         else:
             return self.cleaned_data["email"]
 
-    #
     def clean_password1(self):
-        print(f"CLEAN PW1\n{self.cleaned_data}\n")
         pwd = self.cleaned_data['password1']
-
         password_validation.validate_password(pwd)
-
         return self.cleaned_data["password1"]
 
     def clean(self):
         super().clean()
-        # if any(self.errors):
-        #     return self.errors
-        # errors = []
-        # if CustomUser.objects.filter(email=f"{self.cleaned_data['email']}"):
-        #     errors.append(ValidationError(message="User with this Email is registered"))
-        #
-        # pwd = self.cleaned_data['password1']
-        # if len(pwd) < 3:
-        #     print("\nRaised\n")
-        #     errors.append(ValidationError(message="Niga password 2 short"))
-        #
-        # for error in errors:
-        #     raise error
-        print(f"\n{self.cleaned_data}\n")
 
-        # if CustomUser.objects.filter(email=f"{self.cleaned_data['email']}"):
-        #     raise ValidationError(message="Email already registered")
-
-        # if password_validation.validate_password(pwd)
         pwd1 = self.cleaned_data.get('password1')
         pwd2 = self.cleaned_data.get('password2')
         if pwd1 and pwd2 and pwd1 != pwd2:
@@ -117,20 +89,6 @@ class AccountUpdateForm(UserChangeForm):
             'city',
             'avatar',
         ]
-
-
-class CustomAuthenticationForm(AuthenticationForm):
-    pass
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    # print("\nOWEGOJRWGOJEROGEROJRJ:VEVH\n")
-
-    # def confirm_login_allowed(self, user):
-    #     print("\nwpirjgi0erghoetohrtouhogurtegourtou\n")
-    # if not user.is_activated:
-    #     raise ValidationError(
-    #         message="This user is not activated"
-    #     )
 
 
 class ActivationEmailConfirmationForm(forms.Form):
