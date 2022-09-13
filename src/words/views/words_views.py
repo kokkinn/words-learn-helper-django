@@ -75,6 +75,7 @@ class WordUpdateView(LoginRequiredMixin, UpdateView, SingleObjectMixin):
         return kwargs
 
     def form_valid(self, form):
+
         if form.is_valid():
             word = Word.objects.get(id=self.kwargs["uuid"])
             word.group.clear()
@@ -108,6 +109,8 @@ class WordCreateView(LoginRequiredMixin, CreateView):
         return kwargs
 
     def form_valid(self, form):
+        print(form)
+        print(self.request.POST)
         if form.is_valid():
             form.instance.user = self.request.user
             form.save()

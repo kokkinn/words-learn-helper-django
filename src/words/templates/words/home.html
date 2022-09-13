@@ -6,9 +6,7 @@
 <div class="title_text">Words section menu</div>
 
 <table class="table_wh">
-    <tr>
-        <td><a class="menu_item_wh" href="{% url 'api:get_pairs' %}">Get pairs (API/JSON)</a></td>
-    </tr>
+
     <tr>
         <td><a class="menu_item_wh" href="{% url 'words:list' %}">Pairs list</a></td>
     </tr>
@@ -26,6 +24,9 @@
     </tr>
     <tr>
         <td><a class="menu_item_wh" href="{% url 'words:test_results' %}">Results</a></td>
+    </tr>
+     <tr>
+        <td><a class="menu_item_wh" href="{% url 'api:get_pairs' %}">Get pairs (API/JSON)</a></td>
     </tr>
 </table>
 

@@ -139,8 +139,8 @@ body{
     width:auto;
     word-wrap: break-word;
     word-break: break-all;
-    text-align-last:left;
-     text-align:left;
+
+
     }
 
     .input_main input, select{
@@ -791,25 +791,25 @@ select{
 }
 
 .table_results{
-
+    margin-right:auto;
+    margin-left:auto;
+    width:auto;
 }
 
 .table_results td:first-child{
     width:auto;
 }
-.table_results td:nth-child(2){
-    width:100px;
-    text-align:center;
-}
+
 .table_results td:last-child{
-    width:100px;
+    width:70px;
+    text-align:center;
 }
 
 .table_th{
     margin-right:auto;
     margin-left:auto;
     margin-bottom:15px;
-
+    width:auto;
 }
 
 .table_th td{

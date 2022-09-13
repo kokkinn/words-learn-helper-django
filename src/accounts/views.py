@@ -14,7 +14,7 @@ from django.views.generic import TemplateView
 
 # from django_learn_helper import settings
 from .apps import user_registered
-from .forms import AccountRegistrationForm, CustomAuthenticationForm, ActivationEmailConfirmationForm
+from .forms import AccountRegistrationForm, ActivationEmailConfirmationForm
 from .forms import AccountUpdateForm
 from .forms import AccountRegistrationForm, ActivationEmailConfirmationForm
 from .utils import signer
