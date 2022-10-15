@@ -5,7 +5,7 @@
 
 <div class="accordion">
     <button type="button" class="accordion_button_wl">Expand filter</button>
-    <div class="accordion_content_wl" >
+    <div class="accordion_content_wl">
         <form action="" method="GET">
             <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.word1.label}}</div>
@@ -35,12 +35,12 @@
 
             <br>
 
-            <div class="inline_block_label_field" >
+            <div class="inline_block_label_field">
                 <div class="label_form filter_label">{{filter.form.group.label}}</div>
                 <div class="groups_choice group_choice_word_list">{{filter.form.group}}</div>
             </div>
 
-            <div class="inline_block_label_field" >
+            <div class="inline_block_label_field">
                 <input type="Submit" class='button_main' name="filter_button"
                        value="Search with filter">
                 <a class="button_main" href="{% url 'words:list' %}">Reset
@@ -54,38 +54,55 @@
 </div>
 
 <script>
-    document.querySelectorAll('.accordion_button_wl').forEach(button =>{
+    document.querySelectorAll('.accordion_button_wl').forEach(button => {
         button.addEventListener('click', () => {
             const accordionContent = button.nextElementSibling;
             button.classList.toggle('accordion_button_wl-active');
-            if (button.classList.contains('accordion_button_wl-active')){
+            if (button.classList.contains('accordion_button_wl-active')) {
                 accordionContent.style.border = '1px solid black';
                 accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
-            }
-            else {
+            } else {
                 accordionContent.style.maxHeight = 0;
                 accordionContent.style.border = 'none';
             }
         });
     });
-
-
-
 </script>
 
 
 <form action="" method="POST">
     {% csrf_token %}
 
+    <div class="top_of_table">
+
+        <div style="color:#873232; display:inline-block;">
+            <a class='button_main button_wl_table' href="{% url 'words:create' %}">Create a
+                pair</a>
+            <input class='button_main button_wl_table' type="Submit" name="delete_button"
+                   value="Delete chosen pairs" onclick="checker()">
+        </div>
+
+        <div class="stats_wl">
+            <div>AVG: {{ avg }}</div>
+            <div>MAX: {{ max }}</div>
+            <div>MIN: {{ min }}</div>
+        </div>
+
+        <div class="stats_wl" style="width:auto; margin-top:10px;">
+            <div>TOTAL WORDS: {{ total }}</div>
+        </div>
+
+
+    </div>
     <div class="table_wl">
         <table class="table_list">
             <tr>
                 <th>Word 1</th>
                 <th>Word 2</th>
                 <th>&#128211;</th>
-                <th  class="no_view">&#128064;</th>
+                <th class="no_view">&#128064;</th>
                 <th>&#9998;</th>
-                <th  class="no_view">&#128465;</th>
+                <th class="no_view">&#128465;</th>
                 <th>&#10060;</th>
             </tr>
 
@@ -104,27 +121,7 @@
         </table>
     </div>
 
-    <div class="right_of_table">
 
-        <div class="stats_wl label_">
-            <div>AVG: {{ avg }}</div>
-            <div>MAX: {{ max }}</div>
-            <div>MIN: {{ min }}</div>
-        </div>
-
-        <div class="stats_wl label_" style="display:block; width:270px; margin-top:10px;">
-            <div>TOTAL WORDS: {{ total }}</div>
-        </div>
-
-        <div style="color:red;">
-            <a class='button_main button_wl_table' href="{% url 'words:create' %}">Create a
-                pair</a>
-            <input class='button_main button_wl_table' style="width:100%;" type="Submit" name="delete_button"
-                   value="Delete chosen pairs" onclick="checker()">
-        </div>
-
-
-    </div>
 </form>
 
 

@@ -15,7 +15,7 @@
   opacity:-10;
   left:30px;
   animation:showNotification 800ms ease-in-out forwards;
-  box-shadow: 10px 0px orange;
+  box-shadow: 10px 0 orange;
 
 }
 @keyframes showNotification {

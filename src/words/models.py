@@ -35,7 +35,7 @@ class Word(models.Model):
     #     super(Word, self).__init__()
 
     def __str__(self):
-        return f"{self.word1}: {self.word2}, {self.score}, {str(self.id)[0:4]}"
+        return f"{self.word1}: {self.word2}"
 
 
     # def try_get_list_from_word(self):

@@ -27,10 +27,10 @@
 
         </tr>
         <tr>
-            <td class="cell">
-                <div class="label_form label_gc">Words (optional)</div>
+            <td class="">
+                <div class="label_form label_gc">Words</div>
             </td>
-            <td class="cell">
+            <td class="">
                 {% if no_words %}
                 <a class='button_main buttons_word_list' href="{% url 'words:create' %}">No words yet,
                     create a pair (optional)</a>
@@ -45,9 +45,11 @@
 
 
     {% if type == 'create' %}
-    <div class="button_line"><input class='button_main'  style="width:150px; margin-right:auto; margin-left:auto;" type="submit" value="Create"></div>
+    <div class="button_line"><input class='button_main' style="width:150px; margin-right:auto; margin-left:auto;"
+                                    type="submit" value="Create"></div>
     {% else %}
-    <div class="button_line"><input class='button_main'  style="width:200px; margin-right:auto; margin-left:auto;" type="submit" value="Update"></div>
+    <div class="button_line"><input class='button_main' style="width:200px; margin-right:auto; margin-left:auto;"
+                                    type="submit" value="Update"></div>
     {% endif %}
 
 

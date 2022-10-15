@@ -22,7 +22,7 @@ class WordsListView(LoginRequiredMixin, ListView):
     template_name = "words/list.html"
 
     def get_queryset(self):
-        super(WordsListView, self).get_queryset()
+        super().get_queryset()
         return self.request.user.words.all()
 
     def get_context_data(self, **kwargs):
