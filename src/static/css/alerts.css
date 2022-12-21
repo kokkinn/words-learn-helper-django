@@ -1,0 +1,41 @@
+#not-area {
+    position: fixed;
+    right: 0;
+    width: auto;
+    bottom: 200px;
+}
+
+
+.not-msg {
+    position: relative;
+    margin: 10px 0;
+    padding: 5px;
+    color: black;
+    background-color: gold;
+    border: black solid thin;
+    left: 500px;
+    transition: transform 1s ease-in-out;
+
+}
+
+.add {
+    transform: translateX(-500px);
+}
+
+.remove {
+    transform: translateX(500px);
+}
+
+/*#notification-area .notification.success {*/
+/*  background:green;*/
+/*  box-shadow: 10px 0px skyblue;*/
+/*}*/
+/*#notification-area .notification.error {*/
+/*  background:darkred;*/
+/*}*/
+/*#notification-area .notification.info {*/
+/*  background:#00acee;*/
+/*}*/
+
+
+
