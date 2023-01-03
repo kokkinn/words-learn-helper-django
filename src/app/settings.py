@@ -1,3 +1,5 @@
+type_ = 'dep'
+
 """
 Django settings for django_learn_helper project.
 
@@ -13,6 +15,7 @@ import os.path
 from pathlib import Path
 from os import getenv
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # import environ
@@ -34,9 +37,9 @@ DEBUG = str(os.environ.get("DEBUG")) == '1'
 
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
 ALLOWED_HOSTS = (
-                 "*",
+    "*",
 
-                 )
+)
 
 # Application definition
 
@@ -96,20 +99,25 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if type_ == 'dep':
+    DATABASES = {
+        "default": {
+            "ENGINE": 'django.db.backends.postgresql_psycopg2',
+            "HOST": os.getenv("POSTGRES_HOST"),
+            "PORT": os.getenv("POSTGRES_PORT"),
+            "NAME": os.getenv("POSTGRES_DB"),
+            "USER": os.getenv("POSTGRES_USER"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        }
     }
-    # "default": {
-    #     "ENGINE": 'django.db.backends.postgresql_psycopg2',
-    #     "HOST": env("POSTGRES_HOST"),
-    #     "PORT": env("POSTGRES_PORT"),
-    #     "NAME": env("POSTGRES_DB"),
-    #     "USER": env("POSTGRES_USER"),
-    #     "PASSWORD": env("POSTGRES_PASSWORD"),
-    # }
-}
+elif type == 'dev':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        },
+
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -160,34 +168,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# EMAIL_PORT = 1025
-
 EMAIL_BACKEND = getenv('EMAIL_BACKEND')
 EMAIL_HOST = getenv('EMAIL_HOST')
 EMAIL_PORT = getenv('EMAIL_PORT')
 EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
-
-
-# LOGGING = {
-#     'version': 1,
-#     'filters': {
-#         'require_debug_true': {
-#             '()': 'django.utils.log.RequireDebugTrue',
-#         }
-#     },
-#     'handlers': {
-#         'console': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.StreamHandler',
-#         }
-#     },
-#     'loggers': {
-#         'django.db.backends': {
-#             'level': 'DEBUG',
-#             'handlers': ['console'],
-#         }
-#     }
-# }

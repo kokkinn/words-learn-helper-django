@@ -4,13 +4,12 @@ services:
   web:
     build: .
     container_name: web_service
-    # command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/opt/src/static
+      - static_volume:/opt/src/staticfiles
       - media_volume:/opt/src/media
-    #    ports:
-    #      - 8010:8000
+    ports:
+       - "8000"
     env_file:
       - src/.env
     depends_on:
@@ -30,10 +29,10 @@ services:
     build: ./nginx
     container_name: nginx_service
     volumes:
-      - static_volume:/opt/src/static
+      - static_volume:/opt/src/staticfiles
       - media_volume:/opt/src/media
     ports:
-      - "80:80"
+      - "80:80" # requests from host on 80, go into 80 of container
     depends_on:
       - db
 
