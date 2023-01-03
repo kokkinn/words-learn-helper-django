@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'words/css/forms.css' %}">
+{% endblock head %}
+{% block content %}
+
+    <div style="margin: 20px 0; border: black ; display: flex; justify-content: center">
+        <div style="border: red ; width: 400px">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div style="margin: 10px 0">
+                    <div class="base-form-label">Set name:</div>
+                    <div class="base-text-input">{{ form.name }}</div>
+                </div>
+                <div style="margin: 10px 0">
+                    <div class="base-form-label">Set description:</div>
+                    <div class="base-text-input">{{ form.description }}</div>
+                </div>
+                <div class="" style="margin-bottom: 25px">
+                    <div class="base-form-label ">Words to include:</div>
+                    <div class="">
+                        {% if no_words %}
+                            <span style="font-style: italic; text-decoration: underline">{{ user.username|capfirst }} hasn't created any words</span>
+                        {% else %}
+                            <div>{{ form.words }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+                {% if type == 'create' %}
+                    <div class=""><input class='base-button'
+                                                    type="submit" value="Add"></div>
+                {% else %}
+                    <div class=""><input class='base-button'
+                                                    type="submit" value="Edit"></div>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

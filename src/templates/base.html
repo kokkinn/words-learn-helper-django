@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     {% load static %}
-<!--    <script type="text/javascript" src="https://livejs.com/live.js"></script>-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Helper</title>
-    <link rel="stylesheet" type="text/css" href="{% static '/words/css/buttons.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/words/css/alerts.css' %}">
+    <title>Words Learn Helper</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/alerts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bases.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-
-    <script src="{% static 'words/js/scripts_ws.js' %}"></script>
-
+    <script src="{% static 'js/scripts_ws.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.2.js' %}"></script>
+    {% block head %}
+    {% endblock head %}
 </head>
 <body>
-
 {% include "navbar.html" %}
-{% block tittle %}
-{% endblock %}
 {% include 'messages.html' %}
 {% block content %}
-{% endblock %}
-
+{% endblock content %}
+{#<div class="footer-basic">#}
+{#    <footer>#}
+{#        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i#}
+{#                class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a#}
+{#                href="#"><i class="icon ion-social-facebook"></i></a></div>#}
+{#        <ul class="list-inline">#}
+{#            <li class="list-inline-item"><a href="#">Home</a></li>#}
+{#            <li class="list-inline-item"><a href="#">Services</a></li>#}
+{#            <li class="list-inline-item"><a href="#">About</a></li>#}
+{#            <li class="list-inline-item"><a href="#">Terms</a></li>#}
+{#            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>#}
+{#        </ul>#}
+{#        <p class="copyright">Company Name © 2018</p>#}
+{#    </footer>#}
+{#</div>#}
 </body>
 </html>

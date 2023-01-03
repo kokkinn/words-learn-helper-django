@@ -4,22 +4,23 @@ from django.shortcuts import redirect
 
 from words.models import Word, GroupOfWords
 
-from words.forms import GroupForm
+from words.forms import GroupCUForm
 from django.http import HttpResponseRedirect, Http404
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, DeleteView
 
 
-class GroupsListView(ListView, LoginRequiredMixin):
-    template_name = "words/groups_list.html"
+class GroupsListView(LoginRequiredMixin, ListView):
+    template_name = "words/group_list.html"
     model = GroupOfWords
     context_object_name = 'groups'
 
     def get_queryset(self):
         super(GroupsListView, self).get_queryset()
-        return self.request.user.groups_of_words.all()
+        print(self.request.user.groups_of_words.all())
+        return self.request.user.groups_of_words.all().exclude(id=self.request.user.general_group.id)
 
     def post(self, request):
         checks = request.POST.getlist("checks[]")
@@ -28,19 +29,14 @@ class GroupsListView(ListView, LoginRequiredMixin):
             if group.name == "General":
                 return HttpResponseRedirect(reverse_lazy("words:home"))
             group.delete()
-            messages.success(self.request, f"Group '{group.name}' deleted")
+            # messages.success(self.request, f"Group '{group.name}' deleted")
         return redirect(reverse_lazy("words:groups_list"))
 
 
-class GroupCreateView(FormView, LoginRequiredMixin):
-    template_name = "words/group_form.html"
-    form_class = GroupForm
+class GroupCreateView(LoginRequiredMixin, FormView):
+    template_name = "words/group_CU_form.html"
+    form_class = GroupCUForm
     success_url = reverse_lazy("words:groups_list")
-
-    def get_form_kwargs(self):
-        kwargs = super(GroupCreateView, self).get_form_kwargs()
-        kwargs['request'] = self.request
-        return kwargs
 
     def form_valid(self, form):
         super().form_valid(self)
@@ -51,7 +47,7 @@ class GroupCreateView(FormView, LoginRequiredMixin):
         for word in words:
             group_obj.words.add(word)
         group_obj.save()
-        messages.success(self.request, f"Group '{form.instance.name}' created")
+        # messages.success(self.request, f"Group '{form.instance.name}' created")
         return HttpResponseRedirect(reverse_lazy("words:groups_list"))
 
     def get_context_data(self, **kwargs):
@@ -63,10 +59,15 @@ class GroupCreateView(FormView, LoginRequiredMixin):
         context['no_words'] = no_words
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(GroupCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
-class GroupUpdateView(FormView, LoginRequiredMixin):
-    template_name = "words/group_form.html"
-    form_class = GroupForm
+
+class GroupUpdateView(LoginRequiredMixin, FormView):
+    template_name = "words/group_CU_form.html"
+    form_class = GroupCUForm
     success_url = reverse_lazy("words:groups_list")
     pk_url_kwarg = "uuid"
 
@@ -106,7 +107,7 @@ class GroupUpdateView(FormView, LoginRequiredMixin):
         group_obj.description = form.cleaned_data["description"]
         group_obj.name = form.cleaned_data["name"]
         group_obj.save()
-        messages.success(self.request, f"Group '{form.instance.name}' updated")
+        # messages.success(self.request, f"Group '{form.instance.name}' updated")
 
         return HttpResponseRedirect(reverse_lazy("words:groups_list"))
 
@@ -124,6 +125,7 @@ class WordsInGroupListView(ListView, LoginRequiredMixin):
     model = Word
     context_object_name = "words"
     pk_url_kwarg = 'uuid'
+    template_name = 'words/group_single.html'
 
     def get_queryset(self):
         super(WordsInGroupListView, self).get_queryset()
@@ -136,9 +138,15 @@ class WordsInGroupListView(ListView, LoginRequiredMixin):
         context["group_obj"] = GroupOfWords.objects.get(id=uuid)
         return context
 
-    def get_template_names(self):
-        super().get_template_names()
-        if not self.request.user.words.all():
-            return ["words/no_words.html"]
-        else:
-            return ["words/words_in_group_list.html"]
+    # def get_template_names(self):
+    #     super().get_template_names()
+    #     if not self.request.user.words.all():
+    #         return ["words/no_words.html"]
+    #     else:
+    #         return ["words/group_single.html"]
+
+
+class GroupDeleteView(DeleteView):
+    model = GroupOfWords
+    pk_url_kwarg = 'uuid'
+    success_url = reverse_lazy('words:groups_list')

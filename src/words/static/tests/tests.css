@@ -1,0 +1,27 @@
+.th-stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    border: rebeccapurple solid;
+
+}
+
+.th-stats-container-div {
+    /*margin-right: 20px;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: space-around;*/
+    /*border: red solid;*/
+    width: 100%;
+}
+
+.th-stats-container-div * {
+    margin-right: 10px;
+}
+
+.on{
+    display: block;
+}

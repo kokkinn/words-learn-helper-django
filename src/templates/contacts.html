@@ -1,24 +1,27 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
-{%block content%}
+{% block content %}
 
-<div class="title_text">Contacts</div>
-<table class="table_contacts">
-    <tr class="">
-        <td class="no_view">Email:</td>
-        <td><a class="contact_line" href="mailto:yt.kostolom@gmail.com?subject=">yt.kostolom@gmail.com</a></td>
-    </tr>
-    <tr>
-        <td class="no_view">Github:</td>
-        <td><a class="contact_line" href="https://github.com/kokkinn" target="_blank"
-               rel="noopener noreferrer">https://github.com/kokkinn</a></td>
-    </tr>
-    <tr>
-        <td class="no_view">LinkedIn:</td>
-        <td><a class="contact_line" href="https://www.linkedin.com/in/kokkinn/" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/kokkinn/</a>
-        </td>
-    </tr>
+{#    <div class="base-title">Contacts</div>#}
+    <div style="display: flex; justify-content: center; border: black; margin-top: 10px ">
+        <div class="" style="display: flex; flex-direction: column; border: black ; width: 100%; margin: 0 2%">
 
-</table>
+            <div class="" style="display:flex; margin: 10px 0; ">
+                <a class="base-a" href="mailto:yt.kostolom@gmail.com?subject="
+                   style="font-size: 30px">Email</a>
+            </div>
+
+            <div class="" style="display:flex;  margin: 10px 0;">
+                <a class="base-a" href="https://github.com/kokkinn" target="_blank"
+                   rel="noopener noreferrer" style="font-size: 30px">GitHub</a>
+            </div>
+
+            <div class="" style="display:flex;  margin: 10px 0;">
+                <a class="base-a" href="https://www.linkedin.com/in/kokkinn/" target="_blank"
+                   rel="noopener noreferrer" style="font-size: 30px">LinkedIn</a>
+            </div>
+
+        </div>
+    </div>
 
 {% endblock %}

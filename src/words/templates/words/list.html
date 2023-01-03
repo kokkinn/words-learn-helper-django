@@ -1,128 +1,334 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'words/css/words-list.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-3.6.2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'words/js/ajax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.tablesorter.js' %}"></script>
+{% endblock head %}
 {% block content %}
-{% load static%}
+    {% include 'words/wl-accordion.html' %}
 
 
-<div class="accordion">
-    <button type="button" class="accordion_button_wl">Expand filter</button>
-    <div class="accordion_content_wl">
-        <form action="" method="GET">
-            <div class="inline_block_label_field">
-                <div class="label_form filter_label">{{filter.form.word1.label}}</div>
-                <div class="input_main input_ovr">{{filter.form.word1}}</div>
-            </div>
-
-            <div class="inline_block_label_field">
-                <div class="label_form filter_label">{{filter.form.word2.label}}</div>
-                <div class="input_main input_ovr">{{filter.form.word2}}</div>
-            </div>
 
 
-            <div class="inline_block_label_field">
-                <div class="label_form filter_label">{{filter.form.score_gt.label}}</div>
-                <div class="input_main input_ovr">{{filter.form.score_gt}}</div>
-            </div>
+    {#    <a href="{% url 'words:words-generate' %}?next={{ request.path|urlencode }}">#}
+    {#        <button class="base-button">Generate</button>#}
+    {#    </a>#}
 
-            <div class="inline_block_label_field">
-                <div class="label_form filter_label">{{filter.form.score_lt.label}}</div>
-                <div class="input_main input_ovr">{{filter.form.score_lt}}</div>
-            </div>
-
-            <div class="inline_block_label_field">
-                <div class="label_form filter_label">{{filter.form.order_by_asc_score.label}}</div>
-                <div class="input_main ">{{filter.form.order_by_asc_score}}</div>
-            </div>
-
-            <br>
-
-            <div class="inline_block_label_field">
-                <div class="label_form filter_label">{{filter.form.group.label}}</div>
-                <div class="groups_choice group_choice_word_list">{{filter.form.group}}</div>
-            </div>
-
-            <div class="inline_block_label_field">
-                <input type="Submit" class='button_main' name="filter_button"
-                       value="Search with filter">
-                <a class="button_main" href="{% url 'words:list' %}">Reset
-                    filter</a>
-            </div>
-
-
+    <ul id='' class="wl-menu-box off">
+        <form action='' method="post" id="form-delete">
+            {% csrf_token %}
+            <input type='submit' class="base-a wl-menu-links" value="Delete">
+            <input type="hidden" value="{{ search }}" name="search">
         </form>
+        <li class="wl-menu-item"><a id='wl-menu-box-edit-button' class="base-a wl-menu-links">Edit</a></li>
+        {#        <li class="wl-menu-item"><a class="base-a wl-menu-links">View</a></li>#}
+    </ul>
 
-    </div>
-</div>
+    <input class='off' style="font-size: 15px; width: 100%; "
+           id="btn-wlTableRow-confirmEdit" type="submit" value="Confirm">
+    <button class="off" style="font-size: 15px; width: 100%; "
+            id="btn-wlTableRow-cancelEdit">Cancel
+    </button>
 
-<script>
-    document.querySelectorAll('.accordion_button_wl').forEach(button => {
-        button.addEventListener('click', () => {
-            const accordionContent = button.nextElementSibling;
-            button.classList.toggle('accordion_button_wl-active');
-            if (button.classList.contains('accordion_button_wl-active')) {
-                accordionContent.style.border = '1px solid black';
-                accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
-            } else {
-                accordionContent.style.maxHeight = 0;
-                accordionContent.style.border = 'none';
-            }
+    <table id="wl-table" class="wl-table">
+        <thead>
+        <tr>
+            <th>Word <i class="glyphicon glyphicon-chevron-down"></i></th>
+            <th>Translation <i></i></th>
+            <th>Sets</th>
+            <th class="no_view">Score <i></i></th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for word in words %}
+            <tr id="tr-{{ word.id }}">
+                <td id="wl-table-td-data">
+                    {{ word.word1 }}
+                </td>
+                <td id="wl-table-td-data">{{ word.word2 }}</td>
+
+                <td id="wl-table-td-data">
+                    <ul style="text-align: center; list-style: none;">
+                        {% for group in word.groups.all %}
+                            {% if group.name != 'General' %}
+                                <li>{{ group }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td class="no_view" id="wl-table-td-data">{{ word.score }}</td>
+
+
+                <td class="wl-table-action" id="wl-table-action-column">
+                    <a id="btn-wl-table-action-column-edit" class="table-edit"
+                       style="text-decoration: none; color: black"
+                       href="{% url 'words:update' uuid=word.id %}">-</a>
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <script>
+        $('#wl-table').tablesorter({
+            cssAsc: 'up',
+            cssDesc: 'down',
         });
-    });
-</script>
+    </script>
+
+    <script type="text/javascript">
+        const user_id = {{ user.id|safe }};
+
+        function EvLi_td_click(ev) {
+            ev.preventDefault()
+            const clicked_row_id = ev.currentTarget.parentNode.id;
+            console.log(`TD click fired for ${clicked_row_id}`)
+            let menu = document.querySelector('.wl-menu-box');
+            menu.id = 'mb-' + clicked_row_id.slice(3);
+            menu.style.top = `${ev.clientY - 20}px`;
+            menu.style.left = `${ev.clientX - 20}px`;
+            menu.classList.remove('off');
+        }
+
+        document.querySelector('.wl-menu-box').addEventListener('mouseleave', () => {
+            document.querySelector('.wl-menu-box').classList.add('off')
+        })
+
+        document.querySelectorAll('#wl-table td[id=wl-table-td-data]').forEach((td) => {
+            td.addEventListener('click', EvLi_td_click)
+        })
+
+        document.querySelector('#form-delete').addEventListener('click', (ev) => {
+            ev.preventDefault();
+            const word2delete_id = ev.target.parentNode.parentNode.id.slice(3);
+            $.ajax({
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                type: 'POST',
+                url: '{% url 'words:delete' 0 %}'.replace('0', word2delete_id),
+                success: () => {
+                    document.querySelector('.wl-menu-box').classList.add('off');
+                    document.querySelector('body').appendChild(document.querySelector('#btn-wlTableRow-confirmEdit'))
+                    document.querySelector('body').appendChild(document.querySelector('#btn-wlTableRow-cancelEdit'))
+                    document.querySelector(`#tr-${word2delete_id}`).remove();
+                    notify('A word has been deleted');
+                    jQuery('.wl-table').trigger("update");
+                }
+            })
+        })
+
+        let row2edit_word1InitValue = null;
+        let row2edit_word2InitValue = null;
+        let row2edit_groupsInitValue = null;
+        let old_input_row = null;
+
+        document.querySelector('#wl-menu-box-edit-button').addEventListener('click', function EvLi_editClick(ev) {
+            ev.preventDefault();
+            document.querySelector('.wl-menu-box').classList.add('off');
+            const row2edit_obj = document.querySelector(`#tr-${ev.currentTarget.parentNode.parentNode.id.slice(3)}`);
+            row2edit_obj.querySelector('#btn-wl-table-action-column-edit').style.display = 'none';
+            console.log(`EDIT click fired in ${ev.currentTarget.parentNode.parentNode.id}`);
+            const possible_oldEdit_input_field = document.querySelector('#wl-table td[id=wl-table-td-data] input');
+            if (typeof (possible_oldEdit_input_field) != 'undefined' && possible_oldEdit_input_field != null) {
+                document.querySelector('#btn-wlTableRow-cancelEdit').click();
+                $('.wl-table').trigger("update");
+            }
+            row2edit_obj.querySelector('#wl-table-action-column').appendChild(document.querySelector('#btn-wlTableRow-cancelEdit'));
+            row2edit_obj.querySelector('#wl-table-action-column').appendChild(document.querySelector('#btn-wlTableRow-confirmEdit'));
+            document.querySelector('#btn-wlTableRow-cancelEdit').classList.remove('off');
+            document.querySelector('#btn-wlTableRow-confirmEdit').classList.remove('off');
+            row2edit_word1InitValue = row2edit_obj.querySelector(':nth-child(1)').innerHTML;
+            row2edit_word2InitValue = row2edit_obj.querySelector(':nth-child(2)').innerHTML;
+            row2edit_groupsInitValue = row2edit_obj.querySelector(':nth-child(3)').innerHTML;
+            row2edit_obj.childNodes.forEach((td) => {
+                td.removeEventListener('click', EvLi_td_click)
+            });
+
+            $.ajax({
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                data: {'word_id': row2edit_obj.id.slice(3), 'user_id': user_id},
+                dataType: "json",
+                type: 'GET',
+                url: '{% url 'words:get_groups' %}',
+                success: (response) => {
+                    response = JSON.parse(response['data'])["GoW_forWord_info"]
+                    let row2edit_groupsCell_initValues2EditHTML = ''
+                    for (let group = 0; group < response.length; group++) {
+                        let id_ = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
+                        if (response[group]['name'] !== 'General') {
+                            if (response[group]['is_init'] === 1) {
+                                row2edit_groupsCell_initValues2EditHTML +=
+                                    `
+                                <li>
+                                <label for = "${id_}">${response[group]['name']}</label>
+                                <input type = checkbox name="group" checked id="${id_}" value="${response[group]['id']}">
+                                </li>
+                                `
+                            } else {
+                                row2edit_groupsCell_initValues2EditHTML +=
+                                    `
+                                <li>
+                                <label for = "${id_}">${response[group]['name']}</label>
+                                <input type = checkbox name="group"  id="${id_}" value="${response[group]['id']}">
+                                </li>
+                                `
+                            }
+                        }
+                    }
+                    row2edit_groupsCell_initValues2EditHTML = `<ul style="list-style:none">${row2edit_groupsCell_initValues2EditHTML}</ul>`
+                    row2edit_obj.querySelector(':nth-child(1)').innerHTML = `<div class='base-text-input'><input style="text-align: center; background: none; border: none; margin: 0" maxlength="50" name=word1 required value=${row2edit_word1InitValue}></div>`;
+                    row2edit_obj.querySelector(':nth-child(2)').innerHTML = `<div class='base-text-input'><input style="text-align: center; background: none; border: none; margin: 0"  maxlength="50" name=word2 required value=${row2edit_word2InitValue}></div>`;
+                    row2edit_obj.querySelector(':nth-child(3)').innerHTML = row2edit_groupsCell_initValues2EditHTML;
+                    row2edit_obj.querySelector('input').focus()
+                }
+            })
+
+            $(document).keyup(function (e) {
+                if (e.key === "Escape") document.querySelector('#btn-wlTableRow-cancelEdit').click();
+                if (e.key === "Enter") document.querySelector('#btn-wlTableRow-confirmEdit').click();
+            });
+        })
+
+        document.querySelector('#btn-wlTableRow-cancelEdit').addEventListener('click', (ev) => {
+            ev.preventDefault()
+            $(document).unbind("keyup")
+            const row2cancel_obj = ev.target.parentNode.parentNode;
+            row2cancel_obj.querySelector('#btn-wl-table-action-column-edit').style.display = 'block';
+            row2cancel_obj.querySelectorAll('td[id=wl-table-td-data]').forEach((td) => {
+                td.addEventListener('click', EvLi_td_click)
+            })
+            row2cancel_obj.querySelector(':nth-child(1)').innerHTML = row2edit_word1InitValue;
+            row2cancel_obj.querySelector(':nth-child(2)').innerHTML = row2edit_word2InitValue;
+            row2cancel_obj.querySelector(':nth-child(3)').innerHTML = row2edit_groupsInitValue
+            document.querySelector('#btn-wlTableRow-cancelEdit').classList.add('off');
+            document.querySelector('#btn-wlTableRow-confirmEdit').classList.add('off');
+            document.querySelector('body').appendChild(document.querySelector('#btn-wlTableRow-confirmEdit'))
+            document.querySelector('body').appendChild(document.querySelector('#btn-wlTableRow-cancelEdit'))
+            $('.wl-table').trigger("update");
+        })
+
+        document.querySelector('#btn-wlTableRow-confirmEdit').addEventListener('click', (ev) => {
+            ev.preventDefault();
+            const row2post_obj = ev.target.parentNode.parentNode;
+            const row2post_word1Value = row2post_obj.querySelector('td input[name=word1]').value
+            const row2post_word2Value = row2post_obj.querySelector('td input[name=word2]').value
+            let row2post_groupsValues_list = [];
+            let row2post_groupsCell_editedValuesHTML = ''
+            for (let i = 0; i < row2post_obj.querySelectorAll('td ul li input').length; i++) {
+                if (row2post_obj.querySelectorAll('td ul li input')[i].checked) {
+                    row2post_groupsValues_list.push(row2post_obj.querySelectorAll('td ul li input')[i].value)
+                    row2post_groupsCell_editedValuesHTML += `<li>${row2post_obj.querySelectorAll('td ul li label')[i].innerHTML}</li>`
+                }
+            }
+            row2post_groupsCell_editedValuesHTML = `<ul style="list-style: none">${row2post_groupsCell_editedValuesHTML}</ul>`
+
+            $.ajax({
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                data: {
+                    'word1': row2post_word1Value,
+                    'word2': row2post_word2Value,
+                    'groups': row2post_groupsValues_list
+                },
+                type: 'POST',
+                url: '{% url 'words:update' 0 %}'.replace('0', row2post_obj.id.slice(3)),
+                success: function (response) {
+                    if (JSON.parse(response["status"]) === "form_invalid") {
+                        let error_msgs = JSON.parse(response["errors_list"])
+                        for (let i = 0; i < error_msgs.length; i++) notify(error_msgs[i], 'error');
+                        return 0;
+                    } else if (JSON.parse(response["status"]) === "form_valid") {
+                        console.log('done')
+                        row2post_obj.querySelectorAll('td[id=wl-table-td-data]').forEach((td) => {
+                            td.addEventListener('click', EvLi_td_click)
+                        })
+                        row2post_obj.querySelector(':nth-child(1)').innerHTML = row2post_word1Value
+                        row2post_obj.querySelector(':nth-child(2)').innerHTML = row2post_word2Value
+                        row2post_obj.querySelector(':nth-child(3)').innerHTML = row2post_groupsCell_editedValuesHTML
+                        document.querySelector('#btn-wlTableRow-cancelEdit').classList.add('off');
+                        document.querySelector('#btn-wlTableRow-confirmEdit').classList.add('off');
+                        document.querySelector('body').appendChild(document.querySelector('#btn-wlTableRow-confirmEdit'))
+                        document.querySelector('body').appendChild(document.querySelector('#btn-wlTableRow-cancelEdit'))
+                        row2post_obj.querySelector('#btn-wl-table-action-column-edit').style.display = 'block';
+                        notify('A word has been updated');
+                        $(document).unbind("keyup")
+                        $('.wl-table').trigger("update");
+                    }
+                }
+            })
+        })
 
 
-<form action="" method="POST">
-    {% csrf_token %}
+        jQuery('#wl-form-wordCreate').submit(function (ev) {
+            ev.preventDefault();
+            const ser_form_data = $(this).serialize();
+            $.ajax({
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                type: 'POST',
+                url: '{% url 'words:create' %}',
+                data: ser_form_data,
+                success: function (response) {
+                    if (JSON.parse(response["status"]) === "form_invalid") {
+                        let error_msgs = JSON.parse(response["errors_list"])
+                        for (let i = 0; i < error_msgs.length; i++) notify(error_msgs[i], 'error');
+                        return 0;
+                    } else if (JSON.parse(response["status"]) === "form_valid") {
+                        notify('A word has been created', 'success');
+                    }
 
-    <div class="top_of_table">
+                    const word_createdInstance = JSON.parse(response["instance"]);
+                    let row2add = `<tr role="row" id="tr-${word_createdInstance['pk']}">
+                            <td id="wl-table-td-data">${word_createdInstance['word1'] || ""} </td>
+                            <td id="wl-table-td-data">${word_createdInstance['word2'] || ""} </td>
+                            `
+                    let groups_li = ''
+                    for (let i = 0; i < word_createdInstance['groups'].length; i++) {
+                        groups_li += `<li>${word_createdInstance['groups'][i]}</li>`
+                    }
+                    groups_li = `<td><ul style="text-align: center; list-style: none;">${groups_li}</ul></td>`
 
-        <div style="color:#873232; display:inline-block;">
-            <a class='button_main button_wl_table' href="{% url 'words:create' %}">Create a
-                pair</a>
-            <input class='button_main button_wl_table' type="Submit" name="delete_button"
-                   value="Delete chosen pairs" onclick="checker()">
-        </div>
-
-        <div class="stats_wl">
-            <div>AVG: {{ avg }}</div>
-            <div>MAX: {{ max }}</div>
-            <div>MIN: {{ min }}</div>
-        </div>
-
-        <div class="stats_wl" style="width:auto; margin-top:10px;">
-            <div>TOTAL WORDS: {{ total }}</div>
-        </div>
-
-
-    </div>
-    <div class="table_wl">
-        <table class="table_list">
-            <tr>
-                <th>Word 1</th>
-                <th>Word 2</th>
-                <th>&#128211;</th>
-                <th class="no_view">&#128064;</th>
-                <th>&#9998;</th>
-                <th class="no_view">&#128465;</th>
-                <th>&#10060;</th>
-            </tr>
-
-            {% for word in filter.qs %}
-            <tr>
-                <td>{{word.word1}}</td>
-                <td>{{word.word2}}</td>
-                <td>{{word.score}}</td>
-                <td class="no_view"><a href="{% url 'words:single' uuid=word.id %}">View</a></td>
-                <td><a href="{% url 'words:update' uuid=word.id %}">Update</a></td>
-                <td class="no_view"><a onclick="checker()" href="{% url 'words:delete' uuid=word.id %}">Delete</a></td>
-                <td><input type="Checkbox" name="checks" value="{{word.id}}"></td>
-            </tr>
-            {% endfor %}
-
-        </table>
-    </div>
+                    row2add += groups_li
+                    row2add += `<td id="wl-table-td-data">${word_createdInstance['score'] || "0"} </td>
+                                <td class="wl-table-action" id="wl-table-action-column">
+                                    <a id="btn-wl-table-action-column-edit" class="table-edit"
+                                        style="text-decoration: none; color: black" href="/words/update/${word_createdInstance['pk']}">-</a>
+                                </td>
+                                </tr>`
 
 
-</form>
+                    $('#wl-table').prepend(row2add)
+                    document.querySelector(`#tr-${word_createdInstance['pk']}`).querySelectorAll('td[id=wl-table-td-data]').forEach((td) => {
+                        td.addEventListener('click', EvLi_td_click)
+                    })
+                    document.querySelector('#wl-form-wordCreate input[name=word1]').value = ''
+                    document.querySelector('#wl-form-wordCreate input[name=word2]').value = ''
+                    jQuery('.wl-table').trigger("update");
+                },
+
+                error: () => {
+                    notify('Something went wrong. It might be you internet connection', "error");
+                }
+            })
+        })
+    </script>
 
 
 {% endblock content %}

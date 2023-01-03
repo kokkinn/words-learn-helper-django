@@ -1,30 +1,39 @@
-<div id="notification-area">
-</div>
+<div id="not-area"></div>
 
 
 {% for message in messages %}
-<script type="text/javascript" language="JavaScript">
-    notifySuccess('{{message}}');
-
-</script>
+    {% if message.tags == 'success' %}
+        <script type="text/javascript">
+            notify("{{message|safe}}", "success");
+        </script>
+    {% elif message.tags == 'error' %}
+        <script type="text/javascript">
+            notify("{{message|safe}}", "error");
+        </script>
+    {% elif message.tags == 'info' %}
+        <script type="text/javascript">
+            notify("{{message|safe}}", "info");
+        </script>
+    {% endif %}
 {% endfor %}
 
 {% if form.errors %}
-{% for field in form %}
-{% for error in field.errors %}
-<script type="text/javascript">
-    notifyError('{{error}}');
-
-</script>
-{% endfor %}
-{% endfor %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <script type="text/javascript">
+                notify('{{error|safe}}');
+            </script>
+        {% endfor %}
+    {% endfor %}
 {% endif %}
 
 {% if form.non_field_errors %}
-<script type="text/javascript" language="JavaScript">
-    notifyError('{{form.non_field_errors}}');
+    {% for msg in form.non_field_errors %}
+        <script type="text/javascript">
+            notify('{{msg}}', 'error');
 
-</script>
+        </script>
+    {% endfor %}
 
 {% endif %}
 

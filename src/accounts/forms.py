@@ -24,7 +24,7 @@ class AccountRegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         if CustomUser.objects.filter(email=f"{self.cleaned_data['email']}"):
-            raise ValidationError(message="User with this Email is registered")
+            raise ValidationError(message="A user with such Email address already exists")
         else:
             return self.cleaned_data["email"]
 
@@ -35,13 +35,12 @@ class AccountRegistrationForm(forms.ModelForm):
 
     def clean(self):
         super().clean()
-
         pwd1 = self.cleaned_data.get('password1')
         pwd2 = self.cleaned_data.get('password2')
         if pwd1 and pwd2 and pwd1 != pwd2:
             raise ValidationError(
                 {
-                    'password2': ValidationError('Password not equals', code='password_mismatch')
+                    'password2': ValidationError('Password are not equal')
                 }
             )
         return self.cleaned_data

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tests/tests.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+    <div class="base-title">Your tests results</div>
+    <div class="th-stats-container">
+        <ul class="wl-stats" style="font-style: italic">
+            <li>Average word score: {{ avg }}</li>
+            <li>Maximum word score: {{ max }}</li>
+            <li>Minimum word score: {{ min }}</li>
+        </ul>
+    </div>
+    <ul style="list-style:none; display:flex; flex-direction: column; align-items: center;">
+        {% for result in results %}
+            <li style="padding: 5px 0">
+                <a class="base-obj-list" href="{% url 'words:single_result' uuid=result.id %}">{{ result.date }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+{% endblock content %}

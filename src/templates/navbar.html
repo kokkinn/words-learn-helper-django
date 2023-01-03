@@ -1,54 +1,127 @@
 {% load static %}
 
-<div class="navbar">
-    <div class="navbar_left">
-        <div class="navbar_el no_view">
-            <a class='logo_ref' href="{% url 'index' %}">
-                <div class="navbar_logo">
-                    <div>Words</div>
-                    <div>Learn</div>
-                    <div>Helper</div>
-                </div>
-            </a>
-        </div>
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'index' %}">Main page</a></div>
+<nav class="nav">
+
+    <div class="nav-ul">
+        <a href="{% url 'index' %}">
+            <img class='logo' src="{% static 'favicon.ico' %}" alt="WLH" width="65" height="65"></a>
+        {% if not user.is_authenticated %}
+            <div><a class="nav-a" href="{% url 'index' %}">Home</a></div>
+            <div><a class="nav-a" href="{% url 'accounts:login' %}">Login</a></div>
+            <div><a class="nav-a" href="{% url 'accounts:registration' %}">Registration</a></div>
+        {% endif %}
         {% if user.is_authenticated %}
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'words:home' %}">Words page</a></div>
+            <div class="div-a-block"><a class="nav-a" href="{% url 'index' %}">Home</a></div>
+            <div style="position: relative; display: block;" id="dropdown-full">
+                <a class="nav-a" style="" href="" id="btn-library">Your library</a>
+                <ul class='nav-dropdown-ul' style="" id="nav-dropdown-ul-lib">
+                    <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                           href="{% url 'words:list' %}">My vocabulary</a></li>
+                    <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                           href="{% url 'words:groups_list' %}">Word sets</a></li>
+                    <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                           href="{% url 'words:create' %}">Add word</a></li>
+
+                </ul>
+            </div>
+
+            <div><a class="nav-a" href="{% url 'words:tests_home' %}">Test yourself</a></div>
+            <div><a class="nav-a" href="{% url 'accounts:logout' %}">Logout</a></div>
         {% endif %}
     </div>
-
-
-    <div class="navbar_middle">
-        {% if user.is_authenticated %}
-        <div class="navbar_el" id='navbar_welcome' style="font-size:20px;"><span style="font-weight:bold; font-size:25px; font-family:arial;">Welcome, {{user.username}}</span>
+    <div style="position: relative; border: red;" id="id22" class="nol">
+        <div class="base-text-input nol" id="search_links" style="width: 100%"><input class="nol" type="search"
+                                                                                      id="s_f"></div>
+        <div id="output" class="nol"
+             style="color: red; position: absolute; background: #1A1A1AFF; width: 100%;  border-radius: 3px ">
         </div>
-        {% else %}
-        <div class="navbar_el"  id='navbar_welcome'><span style="font-weight:bold; font-size:25px;  font-family:arial;">Welcome, user</span>
-        </div>
-        {% endif %}
+    </div>
+    <div style="position: relative; display: block;" id="dropdown-full-pr">
+        <a class="nav-button" style="" href="" id="btn-profile">Profile</a>
+        <ul class='nav-dropdown-ul' id='nav-dropdown-ul-pr' style="">
+            <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                   href="{% url 'words:list' %}">View profile</a></li>
+            <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                   href="{% url 'accounts:profile_change' %}">Settings</a></li>
+            <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                   href="{% url 'accounts:logout' %}">LogOut</a></li>
+        </ul>
     </div>
 
-    <div class="navbar_right">
-        {% if user.is_authenticated %}
+</nav>
 
 
+<script>
+    const search_field = document.querySelector('#search_links');
+    const output = document.querySelector('#output');
+    let refs_objs = null;
+    let filtered_arr = [];
+    $.ajax({
+        headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        type: 'GET',
+        url: '{% url 'get_searches' %}',
+        success: (resp) => {
+            refs_objs = JSON.parse(resp['res'])['refs_objects']
+        }
+    })
 
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:logout' %}">Logout</a></div>
-         <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:profile' %}">Profile</a></div>
-<!--        <div class="navbar_el"><a class="navbar_button" href="{% url 'password_change' %}">Change password</a></div>-->
-                <div class="navbar_el"><a class="navbar_button" href="{% url 'contacts' %}">Contacts</a></div>
+    function doOnFocusOrKeyUp(ev) {
+        if (ev.target.value) {
+            console.log('FOCUS')
+            output.innerHTML = ''
+            filtered_arr = refs_objs.filter(obj => (obj['name']).toLowerCase().includes(ev.target.value.toLowerCase()))
+            if (filtered_arr.length > 0) {
+                filtered_arr.map(obj => output.innerHTML += `<a class="search-a nol" href="${obj['url']}">${obj['name']}</a>`)
+                console.log(filtered_arr)
+                {#$("div").not('nol').click(function fu() {#}
+                {#    $("div").not('nol').off('click', fu)#}
+                {#    output.innerHTML = ''#}
+                {#    document.querySelector('#s_f').blur()})#}
+                console.log('DONE')
+            }
+        } else {
+            output.innerHTML = ''
+        }
+    }
+
+    search_field.addEventListener('keyup', doOnFocusOrKeyUp)
+    search_field.addEventListener('click', doOnFocusOrKeyUp)
 
 
-
-        {% else %}
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:registration' %}">Registration</a></div>
-        <div class="navbar_el"><a class="navbar_button" href="{% url 'accounts:login' %}">Login</a></div>
-        {% endif %}
-    </div>
+    document.querySelector('#s_f').addEventListener('blur', async function boba(ev) {
+        await new Promise(r => setTimeout(r, 200));
+        output.innerHTML = ''
+    })
 
 
-    <!--    <div class="flex_el">aefnejnfenfef</div>-->
-    <!--    <div class="flex_el">bekjfejfnjenfnefkeejnfejfenfefe</div>-->
-    <!--    <div class="flex_el">c</div>-->
+</script>
+<script>
 
-</div>
+    const btnLibrary = document.querySelector('#btn-library');
+    btnLibrary.addEventListener('click', async (ev) => {
+        ev.preventDefault()
+        document.querySelector('.nav-dropdown-ul').style.display = 'block';
+        document.querySelector('.nav-dropdown-ul').style.maxHeight = '200px';
+        await new Promise(r => setTimeout(r, 1));
+    })
+
+
+    document.querySelector('#dropdown-full').addEventListener('mouseleave', async (ev) => {
+        document.querySelector('#nav-dropdown-ul-lib').style.maxHeight = '0';
+    })
+
+    const btnProfile = document.querySelector('#btn-profile');
+    btnProfile.addEventListener('click', async (ev) => {
+        ev.preventDefault()
+        document.querySelector('#nav-dropdown-ul-pr').style.display = 'block';
+        document.querySelector('#nav-dropdown-ul-pr').style.maxHeight = '200px';
+        await new Promise(r => setTimeout(r, 1));})
+
+
+    document.querySelector('#dropdown-full-pr').addEventListener('mouseleave', async (ev) => {
+        document.querySelector('#nav-dropdown-ul-pr').style.maxHeight = '0';})
+
+</script>

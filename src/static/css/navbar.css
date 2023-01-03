@@ -1,0 +1,136 @@
+.nav-button {
+    color: black;
+    background-color: goldenrod;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    width: 100px;
+    text-align: center;
+    display: block;
+    margin-right: 25px;
+}
+
+.nav-button:hover {
+    background-color: orange;
+}
+
+.nav-button:active {
+    background-color: #e7d4bd;
+}
+
+.nav-a {
+    font-size: 25px;
+    color: goldenrod;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.nav-a:hover {
+    color: darkorange;
+}
+
+.nav-a:active {
+    color: #e7d4bd;
+}
+
+
+.nav {
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A1A1AFF;
+    /*position: sticky;*/
+    top: 0;
+
+}
+
+
+.nav-ul li {
+    /*display: inline-block;*/
+    /*padding: 0 30px;*/
+    /*height: 100px;*/
+}
+
+.nav-ul div{
+    margin: 0 20px;
+    white-space: nowrap;
+}
+
+.nav-ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+
+    /*border: blue solid;*/
+    width: 60%;
+
+}
+
+.nav-ul-block {
+    display: inline-block;
+}
+
+.logo {
+    display: inline-block;
+    /*margin-left: 10px;*/
+}
+
+.nav-dropdown-ul {
+    text-align: left;
+    max-height: 0;
+    overflow: hidden;
+    /*display: none;*/
+    position: absolute;
+    border-radius: 3px;
+    background: #1A1A1AFF;
+    /*margin-top: 10px;*/
+    width: 100%;
+    /*border: white solid;*/
+    /*opacity: 0;*/
+    transition: opacity 0.4s, max-height 0.8s;
+
+
+}
+
+.nav-dropdown-ul li{
+    margin: 10px 5px;
+    list-style: none;
+
+}
+
+.nav-dropdown-ul li a{
+    transition: color 0s;
+    text-decoration: none;
+    color: goldenrod;
+}
+
+.nav-dropdown-ul li a:hover{
+    color: darkorange;
+}
+
+.div-a-block{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.search-a{
+    text-decoration: none;
+    /*padding:;*/
+    font-size: 15px;
+    margin: 10px;
+    color: goldenrod;
+    transition: color 0s;
+    display: block;
+    width: 100%;
+}
+
+.search-a:hover{
+    color: darkorange;
+}

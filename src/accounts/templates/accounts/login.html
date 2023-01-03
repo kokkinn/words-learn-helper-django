@@ -2,32 +2,40 @@
 
 
 {% block title %}
-Login
+    Login
 {% endblock %}
 
 {% block header %}
-Login
+    Login
 {% endblock %}
 
 {% block content %}
-<div class="title_text">Login</div>
-<form method="post" style="text-align:center;">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="label_field_comb">
-        <div class="label_form label_form_reg" style="display:inline-block">{{field.label_tag}}</div>
-        <div class="input_main input_reg_log" style="display:inline-block">{{field}}</div>
+    <div style="display: flex; justify-content: center; margin: 20px 0; border: black ">
+        <div style="border: black ; width: 400px; display: flex; justify-content: center; flex-direction: column; align-items: center">
+            <div class="base-title" style="margin: 10px 0; font-size: 35px;">Login into your account</div>
+            <form method="post" style="width: 100%">
+
+                {% csrf_token %}
+                <div style="margin-bottom: 30px;">
+                    {% for field in form %}
+                        <div style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column; margin-bottom: 10px">
+                            <div class="base-form-label"
+                                 style="">{{ field.label_tag }}</div>
+                            <div class="base-text-input" style="margin: 0; width: 100%">{{ field }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <a style="margin-bottom: 20px" href="{% url 'password_reset' %}">I forgot my password</a>
+                    <a href="{% url 'accounts:registration' %}">I don't have an account</a>
+                </div>
+                <div style="margin-bottom:40px; margin-top:20px;"><input class="base-button buttons_log_reg"
+                                                                         type="submit"
+                                                                         value="Login"></div>
+
+
+            </form>
+        </div>
     </div>
-    {% endfor %}
-    <p>
-        <span style="font-size:20px;">If you forgot your password, we can help you. Please click <a href="{% url 'password_reset' %}">here</a></span>.
-    </p>
-     <p>
-        <span style="font-size:20px;">If you don't have an account - <a href="{% url 'accounts:registration' %}">create it!</a> </span>
-    </p>
-
-    <div style="margin-bottom:40px; margin-top:40px;"><input class="button_main buttons_log_reg" type="submit" value="Login"></div>
-
-</form>
 
 {% endblock %}

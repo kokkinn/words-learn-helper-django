@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'words/css/menu.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+
+    {#<div class="base-title">Words section menu</div>#}
+
+    <div style="display: flex; justify-content: center; margin: 50px 0; border: black ">
+        <div class="wh-flex-column">
+            <a class="menu_item_wh" href="{% url 'words:list' %}">My vocabulary</a>
+            <a class="menu_item_wh" href="{% url 'words:groups_list' %}">My sets</a>
+            {#            <a class="menu_item_wh" href="{% url 'words:create' %}">Add a word</a>#}
+            {#            <a class="menu_item_wh" href="{% url 'words:group_create' %}">Create a group</a>#}
+            <a class="menu_item_wh" href="{% url 'words:tests_home' %}">Tests</a>
+            <a class="menu_item_wh" href="{% url 'api:get_pairs' %}">API</a>
+        </div>
+    </div>
+
+
+{% endblock content %}
+

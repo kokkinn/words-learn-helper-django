@@ -2,25 +2,30 @@
 
 {% load crispy_forms_tags %}
 
-
 {% block header %}
 
 {% endblock %}
 
 {% block content %}
-<div class="title_text">Registration</div>
-<form method="post">
-    {% csrf_token %}
+    <div style="display: flex; justify-content: center; margin-top: 20px; border: black">
+        <div style="border: black ; width: 400px; display: flex; justify-content: center; flex-direction: column; align-items: center">
+            <div class="base-title" style="margin: 10px 0; font-size: 35px">Registration</div>
+            <form method="post" style="width: 100%">
+                {% csrf_token %}
+                <div style="margin-bottom: 30px;">
+                    {% for field in form %}
+                        <div style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column; margin-bottom: 10px">
+                            <div class="base-form-label"
+                                 style="">{{ field.label_tag }}</div>
+                            <div class="base-text-input" style="margin: 0; width: 100%">{{ field }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
 
-        <table class="table_registration">
-            {% for field in form %}
-            <tr>
-                <td class="label_form" style="">{{field.label_tag}}</td>
-                <td class="input_main" style="">{{field}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-
-    <div style="margin-top:40px;"><input class="button_main buttons_log_reg" type="submit" value="Register"></div>
-</form>
+                <div style="margin-bottom:10px; margin-top:20px;"><input class="base-button buttons_log_reg"
+                                                                         type="submit"
+                                                                         value="Register"></div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

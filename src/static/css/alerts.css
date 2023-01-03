@@ -1,30 +1,42 @@
 #not-area {
     position: fixed;
     right: 0;
-    width: auto;
-    bottom: 200px;
+    /*width: 200px;*/
+    bottom: 0;
+    top: 120px;
+    /*border: black solid;*/
+    /*overflow: hidden;*/
+    height:100%;
+    pointer-events: none;
+    /*opacity: -10;*/
 }
 
 
 .not-msg {
+    overflow: hidden;
+    word-wrap:  break-word;
     position: relative;
+    width: 200px;
     margin: 10px 0;
     padding: 5px;
     color: black;
     background-color: gold;
-    border: black solid thin;
-    left: 500px;
-    transition: transform 1s ease-in-out;
+    /*border: black solid thin;*/
+    left: 210px;
+    border-radius: 4px;
+    /*width: auto;*/
+    /*display: inline;*/
+    transition: max-height 0.5s ease-in-out, transform 2s ease-in-out, padding 0.5s ease-in-out;
 
 }
 
 .add {
-    transform: translateX(-500px);
+
 }
 
-.remove {
-    transform: translateX(500px);
-}
+/*.remove {*/
+/*    transform: translateX(500px);*/
+/*}*/
 
 /*#notification-area .notification.success {*/
 /*  background:green;*/

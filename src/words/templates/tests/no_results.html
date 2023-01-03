@@ -2,10 +2,9 @@
 
 {% block content %}
 
-<div class="title_text">No results yet</div>
-
-<a href="{% url 'words:tests_home' %}" class="button_main"
-   style="width:150px; margin-right:auto; margin-left:auto;">Run
-    a test!</a>
-
-    {% endblock content %}
+    <div class="base-title">No results yet</div>
+    <div style="text-align: center">
+        <a href="{% url 'words:tests_home' %}" class="base-button" style="">Run a
+            test!</a>
+    </div>
+{% endblock content %}

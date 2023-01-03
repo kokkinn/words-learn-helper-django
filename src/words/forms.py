@@ -1,60 +1,54 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
-from django.forms import ModelForm, ModelMultipleChoiceField
-from .models import Word, GroupOfWords
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.forms import ModelForm, ModelMultipleChoiceField, ChoiceField, ModelChoiceField
+from .models import Word, GroupOfWords, Result
 from django import forms
 
 from .utils import word_is_list, normalize_word
 
 
-class WordForm(ModelForm):
-    word1 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput())
-    word2 = forms.CharField(validators=[MinLengthValidator(1)], widget=forms.TextInput())
-    groups = ModelMultipleChoiceField(queryset=None, widget=forms.CheckboxSelectMultiple,
+class WordCUForm(ModelForm):
+    word1 = forms.CharField(validators=[MinLengthValidator(1, message='Please, fill the field'),
+                                        MaxLengthValidator(50,
+                                                           message='Word should not be longer than %(limit_value)d symbols')
+                                        ],
+                            widget=forms.TextInput())
+    word2 = forms.CharField(validators=[MinLengthValidator(1, message='Please, fill the field'),
+                                        MaxLengthValidator(50,
+                                                           message='Translation should not be longer than %(limit_value)d symbols')],
+                            widget=forms.TextInput())
+    groups = ModelMultipleChoiceField(queryset=None,
+                                      widget=forms.CheckboxSelectMultiple,
                                       required=False)  # we defined a qs in init method
-
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request')
-        super(WordForm, self).__init__(*args, **kwargs)
-        self.fields['groups'].queryset = GroupOfWords.objects.filter(user=self.request.user).exclude(name="General")
-
-    def clean(self):
-        super().clean()
-        self.cleaned_data["word1"] = normalize_word(self.cleaned_data["word1"])
-        self.cleaned_data["word2"] = normalize_word(self.cleaned_data["word2"])
-        word1 = self.cleaned_data["word1"]
-        word2 = self.cleaned_data["word2"]
-
-        if word_is_list(word1) and word_is_list(word2):
-            raise ValidationError(
-                {
-                    'word1': ValidationError("Both words can\'t have multiple words")
-                }
-            )
-        return self.cleaned_data
 
     class Meta:
         model = Word
-        fields = ['word1', 'word2', "groups"]
+        fields = ['word1', 'word2', 'groups']
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')  # we pop it because it is not expected in constructor
+        super(WordCUForm, self).__init__(*args, **kwargs)
+        self.fields['groups'].queryset = GroupOfWords.objects.filter(user=self.request.user).exclude(
+            id=self.request.user.general_group.id)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        if 'word1' in cleaned_data.keys() and 'word2' in cleaned_data.keys():  # if field is not validated, it won't
+            cleaned_data["word1"] = normalize_word(cleaned_data["word1"])  # in a cleaned data dictionary
+            cleaned_data["word2"] = normalize_word(cleaned_data["word2"])
+        return self.cleaned_data
 
 
-class GroupForm(ModelForm):
+class GroupCUForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
-        super(GroupForm, self).__init__(*args, **kwargs)
+        super(GroupCUForm, self).__init__(*args, **kwargs)
         self.fields['words'].queryset = Word.objects.filter(user=self.request.user)
 
     class Meta:
         model = GroupOfWords
-        fields = ("name", "description", "words")
-
-    words = ModelMultipleChoiceField(
-        queryset=None,
-        widget=forms.CheckboxSelectMultiple, required=False)
-
-
-# class GroupFilterForm(forms.Form):
-#     groups = forms.ModelMultipleChoiceField(queryset=GroupOfWords.objects.all(), widget=forms.CheckboxSelectMultiple())
+        fields = ("name", "description", 'words')
+        widgets = {'words': forms.CheckboxSelectMultiple}
 
 
 class GroupChoiceForm(forms.Form):
@@ -75,38 +69,33 @@ class TestInputForm(forms.Form):
 
 
 def qs_not_empty(query_set):
-
     return False if query_set.words.count() == 0 else True
 
 
-class TestParametersForm(forms.Form):
-    def __init__(self, user, *args, **kwargs, ):
+class TestParametersForm(forms.ModelForm):
+    groups = forms.ModelMultipleChoiceField(queryset=None, widget=forms.CheckboxSelectMultiple, required=False)
+
+    def __init__(self, *args, **kwargs):
+        request = kwargs.pop('request')
         super(TestParametersForm, self).__init__(*args, **kwargs)
-        self.user = user
-        groups_qs = GroupOfWords.objects.filter(user=self.user)
-        for group in groups_qs:
-            if not qs_not_empty(group):
-                groups_qs = groups_qs.exclude(id=group.id)
-        self.fields['groups'].queryset = groups_qs
+        # print(request.user.groups_of_words.all() | request.user.general_group)
+        self.fields['groups'].queryset = request.user.groups_of_words.all()
 
-    duration_choices = (("", "---------"), ("loop", "Loop"), ("finite", "Finite"))
-    type_choices = (("", "---------"), ("ranked", "Ranked"), ("unranked", "Unranked"))
-    test_for_choices = (("", "---------"),
-                        ("for_w1", "Word1 to Word2"), ("for_w2", "Word2 to Word1"))
-    do_with_incorrect_choices = (("", "---------"), ("skip", "Skip"), ("repeat", "Repeat"))
-    lower_score_first_choices = (("", "---------"), ("lower_score_first", "Pairs with lower are asked firstly"),
-                                 ("random_score_first", "Random word picked"))
+    class Meta:
+        model = Result
+        fields = ['groups', 'duration', 'do_with_incorrect', 'word2examine_number', 'which_goes_first', 'scoring_type']
+    # def __init__(self, user, *args, **kwargs, ):
+    #     super(TestParametersForm, self).__init__(*args, **kwargs)
+    #     self.user = user
+    #     groups_qs = GroupOfWords.objects.filter(user=self.user)
+    #     for group in groups_qs:
+    #         if not qs_not_empty(group):
+    #             groups_qs = groups_qs.exclude(id=group.id)
+    #     self.fields['groups'].queryset = groups_qs
 
-    help_text_groups = "A 'Group', all Pairs of which will be included in the test."
-    help_text_durations = "'Loop' for infinite test for Pairs of a group. If 'Finite' is chosen, test will end, after all answers will be submitted, result will be created."
-    help_text_type = "'Ranked' for answer will change the score, If 'Unranked', score won't be affected."
-    help_text_test_for_translation_of = "'A user's choice defines translation of what word will be asked."
-    help_text_do_with_incorrect = "If 'repeat' is chosen, test won't end until all answers are answered correctly."
-    help_text_lower_score_first = "Pick 'Pairs with lower are asked firstly' if ypu want to test Pairs with lower score"
-    groups = forms.ModelChoiceField(queryset=None, help_text=help_text_groups)
-    durations = forms.ChoiceField(choices=duration_choices,
-                                  help_text=help_text_durations)
-    type = forms.ChoiceField(choices=type_choices, help_text=help_text_type)
-    test_for_translation_of = forms.ChoiceField(choices=test_for_choices, help_text=help_text_test_for_translation_of)
-    do_with_incorrect = forms.ChoiceField(choices=do_with_incorrect_choices, help_text=help_text_do_with_incorrect)
-    lower_score_first = forms.ChoiceField(choices=lower_score_first_choices, help_text=help_text_lower_score_first)
+    # help_text_groups = "A 'Group', all Pairs of which will be included in the test."
+    # help_text_durations = "'Loop' for infinite test for Pairs of a group. If 'Finite' is chosen, test will end, after all answers will be submitted, result will be created."
+    # help_text_type = "'Ranked' for answer will change the score, If 'Unranked', score won't be affected."
+    # help_text_test_for_translation_of = "'A user's choice defines translation of what word will be asked."
+    # help_text_do_with_incorrect = "If 'repeat' is chosen, test won't end until all answers are answered correctly."
+    # help_text_lower_score_first = "Pick 'Pairs with lower are asked firstly' if ypu want to test Pairs with lower score"

@@ -1,4 +1,3 @@
-from django.apps import apps
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -11,12 +10,9 @@ from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from django.views.generic import TemplateView
-
-# from django_learn_helper import settings
 from .apps import user_registered
-from .forms import AccountRegistrationForm, ActivationEmailConfirmationForm
 from .forms import AccountUpdateForm
-from .forms import AccountRegistrationForm, ActivationEmailConfirmationForm
+from .forms import AccountRegistrationForm
 from .utils import signer
 
 
@@ -26,14 +22,16 @@ class AccountRegistrationView(CreateView):
     success_url = reverse_lazy('accounts:login')
     form_class = AccountRegistrationForm
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['username'] = self.request.GET.get('username', default='')
+        initial['email'] = self.request.GET.get('email', default='')
+        return initial
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["request"] = self.request
         return kwargs
-    # def form_valid(self, form):
-    #     if form.is_valid():
-    #         messages.success(self.request, "You've successfully registered!")
-    #     return super(AccountRegistrationView, self).form_valid(form)
 
 
 class AccountRegistrationDoneView(TemplateView):
@@ -59,50 +57,20 @@ def user_activate(request, sign):
     return render(request, template)
 
 
-# def activation_email_confirmation(request):
-#     if request.method == "GET":
-#         form = ActivationEmailConfirmationForm(request)
-#         context = {"form": form}
-#         template_name = "accounts/activation_email_confirmation.html"
-#         return render(request, template_name, context)
-#     elif request.method == "POST":
-#         form = ActivationEmailConfirmationForm(request)
-#         if form.is_valid() or not form.is_valid():
-#             user = request.user
-#             user.email = request.POST["email"]
-#             user.save()
-#             user_registered.send(AccountRegistrationForm, instance=request.user)
-#             print(request.POST)
-#             return redirect(reverse_lazy("words:home"))
-
 def activation_email_confirmation(request):
     user_registered.send(AccountRegistrationForm, instance=request.user)
     messages.success(request, f"Activation email letter was sent")
-
     return redirect(reverse_lazy("accounts:profile"))
 
 
 class AccountLoginView(LoginView):
     template_name = 'accounts/login.html'
 
-    # form_class = CustomAuthenticationForm
-
     def get_redirect_url(self):
         next_url = self.request.GET.get('next')
         if next_url:
             return next_url
         return reverse('index')
-
-    # def confirm_login_allowed(self, user):
-    #     print("\nwpirjgi0erghoetohrtouhogurtegourtou\n")
-    #     if not user.is_activated:
-    #         print('\nAEFJPEWFJPIWREJIPRJIERJIORE\n')
-    #         # raise ValidationError(
-    #         #     self.error_messages["inactive"],
-    #         #     code="inactive",
-    #         # )
-    #     super().confirm_login_allowed(user)
-    #
 
 
 class AccountLogoutView(LogoutView):
@@ -114,7 +82,7 @@ def account_profile_view(request):
     return render(request, 'accounts/profile.html', context={"email": request.user.email})
 
 
-class AccountUpdateProfileView(UpdateView, LoginRequiredMixin):
+class AccountUpdateProfileView(LoginRequiredMixin, UpdateView):
     template_name = 'accounts/profile_update.html'
     model = get_user_model()
     success_url = reverse_lazy('accounts:profile')

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'words/css/forms.css' %}">
+{% endblock head %}
+
+{% block content %}
+    {#    <button class='help_button_tests' id="open_guide">Click here to read a guide</button>#}
+
+    {#    {% if type == 'create' %}#}
+    {#        <div class="base-title">Add</div>#}
+    {#    {% else %}#}
+    {#        <div class="base-title">Edit</div>#}
+    {#    {% endif %}#}
+
+    <div style="margin: 20px 0; border: black ; display: flex; justify-content: center">
+        <div style="border: red ; width: 400px">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div style="margin-bottom: 10px">
+                    {% if type == 'create' %}
+                        <div class="base-form-label">New word</div>
+                    {% elif type == 'update' %}
+                            <div class="base-form-label">Word</div>
+                    {% endif %}
+
+
+                    <div class="base-text-input">{{ form.word1 }}</div>
+                </div>
+                <div style="margin-bottom: 10px">
+                    <div class="base-form-label">Translation</div>
+                    <div class="base-text-input">{{ form.word2 }}</div>
+                </div>
+
+
+                <div class="wf-grouwps" style="margin-bottom: 20px">
+                    <p class="base-form-label">Sets to include in</p>
+                    {% if user_has_groups == 0 %}
+                        <span style="text-decoration: underline; font-style: italic">{{ user.username|capfirst }} hasn't created any categories :(</span>
+                    {% else %}
+                        <div class="base-choice">{{ form.groups }}</div>
+                    {% endif %}
+                </div>
+
+                <div style="display: flex; justify-content: center">
+                    <div class="wf-buttons-container" style="width: 100%">
+                        {% if type == 'create' %}
+                            <input class='base-button' style="margin-bottom:20px;" type="submit"
+                                   value="Add a word">
+                        {% else %}
+                            <input class='base-button' style="margin-bottom:20px;" type="submit" value="Edit a word">
+                        {% endif %}
+
+                        <a class='base-a' href="{% url 'words:list' %}">My library</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        const modal = document.querySelector('#modal');
+        const openModal = document.querySelector('#open_guide');
+        const closeModal = document.querySelector('#close_guide');
+        openModal.addEventListener('click', () => {
+            modal.showModal();
+        })
+        closeModal.addEventListener('click', () => {
+            modal.close();
+        })
+    </script>
+
+{% endblock %}

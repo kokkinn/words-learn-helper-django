@@ -6,106 +6,115 @@
 {% block content %}
 
 
-<img src="{{ user.avatar.url }}" width="80px" class="image_profile"/>
-<table class="table_profile">
-    <tr>
-        <td>
-            <div class="label_form label_form_profile">Username:</div>
-        </td>
-        <td>
-            <div class="label_form label_form_profile">{{ user.username }}</div>
-        </td>
-    </tr>
+    <div style="display: flex; justify-content: center; border: black ">
+        <div style="border: black ; display: flex; flex-direction: column; align-items: center">
+            <table class="table_profile" style="margin-top: 20px; margin-bottom: 10px; width: 400px">
+                <tr>
+                    <td>
+                        <div class="">Username:</div>
+                    </td>
+                    <td>
+                        <div class="">{{ user.username }}</div>
+                    </td>
+                </tr>
 
-    <tr>
-        <td>
-            <div class="label_form label_form_profile">Email:</div>
-        </td>
-        <td>
-            <div class="label_form label_form_profile">{{ user.email }}</div>
-        </td>
-    </tr>
+                <tr>
+                    <td>
+                        <div class="">Email:</div>
+                    </td>
+                    <td>
+                        {% if user.email %}
+                            <div class="">{{ user.email }}</div>
+                        {% else %}
+                            <div class="">None</div>
+                        {% endif %}
 
-    <tr>
-        <td>
-            <div class="label_form label_form_profile">Name:</div>
-        </td>
-        <td>
-            {% if user.first_name %}
-            <div class="label_form label_form_profile">{{ user.first_name }}</div>
-            {% else %}
-            <div class="label_form label_form_profile">None</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="">Name:</div>
+                    </td>
+                    <td>
+                        {% if user.first_name %}
+                            <div class="">{{ user.first_name }}</div>
+                        {% else %}
+                            <div class="">None</div>
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="">Surname:</div>
+                    </td>
+                    <td>
+                        {% if user.last_name %}
+                            <div class="">{{ user.last_name }}</div>
+                        {% else %}
+                            <div class="">None</div>
+                        {% endif %}
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="">Birthday:</div>
+                    </td>
+                    <td>
+                        <div class="">{{ user.birthday }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="">City:</div>
+                    </td>
+                    <td>
+                        <div class="">{{ user.city }}</div>
+                    </td>
+                </tr>
+            </table>
+
+
+            {% if user.is_activated == 0 %}
+                <div style="border: black ; width: 400px">
+                    <span
+                        style="font-size:15px; display:block; margin-top:15px; margin-bottom: 20px;"><strong>Note</strong>, you can't change anything in your profile, except email, until you account is activated.</span>
+                </div>
             {% endif %}
-        </td>
-    </tr>
+            <div style="display: flex; flex-direction: column; width: 100%">
+                <a class="base-button" style="margin: 10px 0;" href="{% url 'accounts:profile_change' %}">Change
+                    profile</a>
+                <a class="base-button" style="margin: 10px 0;" href="{% url 'password_change' %}">Change
+                    password</a>
+                {% if user.is_activated == 0 %}
+                    <a class="base-button" id="bb" style="margin: 10px 0;"
+                       href="{% url 'accounts:activation_email_confirmation' %}" onclick="">Activate
+                        account</a>
+                {% endif %}
+            </div>
 
-    <tr>
-        <td>
-            <div class="label_form label_form_profile">Surname:</div>
-        </td>
-        <td>
-            {% if user.last_name %}
-            <div class="label_form label_form_profile">{{ user.last_name }}</div>
-            {% else %}
-            <div class="label_form label_form_profile">None</div>
-            {% endif %}
-
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <div class="label_form label_form_profile">Birthday:</div>
-        </td>
-        <td>
-            <div class="label_form label_form_profile">{{ user.birthday }}</div>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <div class="label_form label_form_profile">City:</div>
-        </td>
-        <td>
-            <div class="label_form label_form_profile">{{ user.city }}</div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="label_form label_form_profile">Avatar:</div>
-        </td>
-        <td>
-            <div class="label_form label_form_profile">{{ user.avatar }}</div>
-        </td>
-    </tr>
-</table>
-{% if user.is_activated == 0 %}
-<span style="font-size:19px; text-align: center; display:block; margin-top:15px;"><strong>Note</strong>, you can't change anything in your profile, except email, until you account is activated.</span>
-{% endif %}
-<a class="button_main buttons_profile" href="{% url 'accounts:profile_change' %}">Change profile</a>
-<a class="button_main buttons_profile" href="{% url 'password_change' %}">Change password</a>
+        </div>
+    </div>
 
 
-{% if user.is_activated == 0 %}
 
-<a class="button_main buttons_profile" id="bb" style="width:190px;"
-   href="{% url 'accounts:activation_email_confirmation' %}" onclick="">Activate
-    account</a>
-{% endif %}
-
-<script>
-    const el = document.getElementById('bb');
-    const email = '{{ email }}';
-    el.addEventListener('click', () => {
-            message =  `Send activation letter to ${email} ?`
-            var result = confirm(message);
-            if(result == false){
-                event.preventDefault()
+    <script>
+        const el = document.getElementById('bb');
+        const email = '{{ email }}';
+        el.addEventListener('click', () => {
+                message = `Send activation letter to ${email} ?`
+                var result = confirm(message);
+                if (result == false) {
+                    event.preventDefault()
+                }
             }
-    }
-    )
+        )
 
-</script>
+    </script>
 {% endblock %}
 
 

@@ -1,10 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% block content %}
+    <div style="display: flex; justify-content: center; border: blue ; background: #1a1a1a; border-bottom: gold ">
+        <div class="accordion">
+            <button type="button" id='wab' class="wl-accordion-button">Add / Search a word</button>
+            <div class="wl-accordion-content" style="display: flex; justify-content: space-evenly">
+                <div id='wl-accordion-add' class="wl-accordion-content-block">
+                    <form method="post" id="wl-form-wordCreate">
+                        {% csrf_token %}
+                        <div id="wl-accordion-add-input-fields-container"
+                             class="wl-accordion-textfields-block">
+                            <div class="base-text-input" style="margin-right: 10px; width: 100%"><input name="word1"
+                                                                                                        value="{{ word1_form }}"
+                                                                                                        required
+                                                                                                        type="text"
+                                                                                                        placeholder="New word">
+                            </div>
+                            <div class="base-text-input" style="margin-left: 10px; width: 100%"><input name="word2"
+                                                                                                       value="{{ word2_form }}"
+                                                                                                       required
+                                                                                                       type="text"
+                                                                                                       placeholder="Translation">
+                            </div>
+                        </div>
+                        <div id="wl-accordion-search-groups" class="wl-accordion-groups-choice">
+                            {% for group in groups_for_create %}
+                                <div style="margin: 0 10px; width: auto; height: auto">
+                                    <label style="color: gray">
+                                        <input type="checkbox" name='groups' value="{{ group.id }}"> {{ group }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div style="text-align: center">
+                            <input class="base-button" type="submit" id='add-btn' value="Add a word"
+                                   style="width: 100%">
+                        </div>
+                        <input type="hidden" name="wl" value="wl">
+                        <input type="hidden" value="{{ search }}" name="search">
+
+                    </form>
+                </div>
+                <div id="wl-accordion-search" class="wl-accordion-content-block">
+                    <form style="" method="get" action="{% url 'words:list' %}">
+                        <div id="wl-accordion-search-input-container" class="" style="width: 100%">
+
+                            <div class="base-text-input"
+                                 style="display: flex; justify-content: center; width: auto; height: auto;">
+                                <input
+                                        name="search"
+                                        type="search"
+                                        placeholder="Look up in both columns"
+                                        value="{{ search }}">
+                            </div>
+                        </div>
+                        <div id="wl-accordion-add-groups" class="wl-accordion-groups-choice">
+
+                            {% for group in groups_for_create %}
+                                <div style="margin: 0 10px; width: auto; height: auto">
+                                    <label style="color: gray;">
+                                        {% if group.id|safe in chosen_groups %}
+                                            <input checked type="checkbox" name='groups' value="{{ group.id }}">
+                                            {{ group }}
+                                        {% else %}
+                                            <input type="checkbox" name='groups' value="{{ group.id }}"> {{ group }}
+                                        {% endif %}
+
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div><input style="width: 100%;" type="submit" value="Search" class="base-button"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.wl-accordion-button').forEach(button => {
+            button.addEventListener('click', async function () {
+                const accordionContent = button.nextElementSibling;
+                button.classList.toggle('wl-accordion-button-active');
+                if (button.classList.contains('wl-accordion-button-active')) {
+                    document.cookie = 'accordion-open=1'
+                    {#accordionContent.style.border = '1px solid black';#}
+                    {#accordionContent.style.borderTop = 'none';#}
+                    accordionContent.style.maxHeight = accordionContent.scrollHeight + 3 + 'px';
+                } else {
+                    document.cookie = 'accordion-open=0'
+                    addEventListener('transitionend', function listener1() {
+                        removeEventListener('transitionend', listener1);
+                        accordionContent.style.border = 'none';
+                    });
+                    accordionContent.style.maxHeight = 0;
+                }
+            });
+        });
+
+        async function f1() {
+            let ac = document.querySelector('.wl-accordion-content');
+            ac.style.transition = 'max-height 0.0001s, border 0.0001s';
+            ac.addEventListener('transitionend', (ev) => {
+                ev.target.style.transition = 'max-height 0.5s, border 0s';
+            })
+            document.querySelector('#wab').click();
+
+            {#await new Promise(r => setTimeout(r, 1000));#}
+            {#ac.style.transition = 'max-height 0.5s, border 0s';#}
+        }
+
+        if (getCookie('accordion-open') === '1') {
+            f1()
+
+
+        }
+    </script>
+
+{% endblock content %}
+

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="base-title" style=""> Set '{{ group_obj.name }}'</div>
+
+    <div style="border: red ; text-align: center; margin-bottom: 20px">
+        <div style="display: inline-block; border: blue  ">
+            <a class="base-a" style="display: block; margin-bottom: 10px"
+               href="{% url 'words:group_update' uuid=group_obj.id %}">Edit
+                Set</a>
+            <form method="post" action="{% url 'words:group-delete' uuid=group_obj.id %}">
+                {% csrf_token %}
+                <button id='btn-dlt' class="base-button" style="display: block; margin-bottom: 10px">Delete Set
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <div style="display: flex; justify-content: center">
+        <div style="display:flex; flex-direction: column; border-right: black solid; border-left: black solid">
+            {% for word in words %}
+                <a class="base-obj-list"
+                   href="{% url 'words:update' uuid=word.id %}">
+                    <div style="margin: 5px; text-align: center">
+                        {{ word.word1 }} : {{ word.word2 }}
+                    </div>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#btn-dlt').addEventListener('click', (ev) => {
+            if (confirm('Are you sure to delete a Set ?') === false) ev.preventDefault() })
+    </script>
+{% endblock %}

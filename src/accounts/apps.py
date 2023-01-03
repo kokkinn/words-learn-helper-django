@@ -27,6 +27,7 @@ def user_creation_dispatcher(instance, created, **kwargs):
     from words.models import GroupOfWords
     django.setup()
     if created:
+        print('IF CREEEAAATED')
         gen_gro = GroupOfWords.objects.create(name="General", user=instance)
         gen_gro.save()
         instance.general_group = gen_gro

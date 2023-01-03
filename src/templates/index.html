@@ -1,39 +1,56 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
-{%block content%}
+{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/main_menu.css' %}">
+{% endblock head %}
+{% block content %}
+
+    {% if not user.is_authenticated %}
+        <div class="textbox_index" style="border: black solid; ">
+            <div class="base-title" style="">
+                Create your virtual vocabulary for <span
+                    style="font-size:inherit; font-weight: bold; color: goldenrod; ; -webkit-text-stroke: 1px fuchsia;">better learning performance</span>
+                today!
+            </div>
+            <div style="line-height: normal; width: 70%; border: black solid;  color: gray">
+                Discover a <span style="font-weight: bold; font-style: italic">modern</span> way to <a style=""
+                                                                                                       href="{% url 'words:list' %}">write
+                down new words</a> you want
+                to learn, combine them into <a style="" href="{% url 'words:groups_list' %}">Sets</a> and <a
+                    style="" href="{% url 'words:tests_home' %}">test</a>
+                yourself
+            </div>
+            <div style="width: 70%;">
+                <form method="get" action="{% url 'accounts:registration' %}">
+                    <div style="display: flex; margin-top: 20px; border: black ; justify-content: space-between">
+                        <div class="base-text-input"><input style="margin: 10px 0" class="" type="text" name="username"
+                                                            placeholder="Username" required></div>
+                        <div class="base-text-input"><input style="margin: 10px 0" type="text" name="email"
+                                                            placeholder="Email address" required></div>
+                    </div>
+                    <input type="submit" class="base-a" value="Try it FREE for 120 days"
+                           style="width: 100%; margin-top: 0">
+                </form>
+            </div>
+        </div>
+    {% endif %}
+    <div class="index-menu">
+        <ul class="index-menu-items">
+            <li><a class="" href="{% url 'words:home' %}">Words section</a></li>
+            <li><a class="" href="{% url 'accounts:profile' %}">Profile</a></li>
+            <li><a class="" href="https://github.com/kokkinn/django_LH_web" target="_blank"
+                   rel="noopener noreferrer">GitHub<img
+                    src="{% static '25231.png' %}" width="33px"></a></li>
+            <li><a class="" href="{% url 'contacts' %}">Contacts</a></li>
+        </ul>
+    </div>
 
 
-<div class="title_text">Words Learn Helper</div>
-<div class="textbox_index">
-    Hi, welcome to the application which provides an opportunity to study foreign language faster. It has three
-    logical sections:
-    <br><br>1. <span style="font-weight:bold; font-size:25px;">Pairs list, Pair creation</span> - you can make a pair of
-    two words which is a main unit to be studied, <span style="font-weight:bold; color:#faa911; background:black; opacity:0.8;">intended to treat</span> it as a <span
-        style="font-weight:bold; color:#1017e0; background--color:#e6a8a8">word</span> and it's <span
-        style="font-weight:bold; color:#1bb343; background--color:#e6a8a8">translation</span>.
-    <br><br>2. <span style="font-weight:bold; font-size:25px;">Groups list, Group creation</span> - a way to join
-    multiple pairs by some category.
-    <br><br>3. <span style="font-weight:bold; font-size:25px;">Tests, Results</span> - check a knowledge of pairs you've
-    created. Test can be started if at least one pair is present.
-</div>
+{#    <script>#}
+{#        $(document).ready(function () {#}
+{#            console.log('MEOW')#}
+{#            document.querySelector('.textbox_index').style.transform = 'scale(1)'#}
+{#        })#}
+{#    </script>#}
 
-<table class="table_wh">
-    <tr>
-        <td><a class="menu_item_wh" href="{% url 'words:home' %}">Words section</a>
-        </td>
-    </tr>
-    <tr>
-        <td><a class="menu_item_wh" href="{% url 'accounts:profile' %}">Profile</a></td>
-    </tr>
-    <tr>
-        <td><a class="menu_item_wh" href="https://github.com/kokkinn/django_LH_web" target="_blank"
-               rel="noopener noreferrer"><span style="margin-right:10px;">GitHub</span><img
-                src="{% static '25231.png' %}" width="33px"></a></td>
-    </tr>
-    <tr>
-        <td><a class="menu_item_wh" href="{% url 'contacts' %}">Contacts</a></td>
-    </tr>
-</table>
-
-
-{%endblock%}
+{% endblock %}

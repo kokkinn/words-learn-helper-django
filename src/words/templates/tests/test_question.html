@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {#<div class="base-title">Test for group {{group_obj.name}}</div>#}
+
+    <div class="base-form-label" style="text-align:center; margin-top:50px;">Translation of '{{ word2examine }}' is
+        ...
+    </div>
+
+    <form action="" method="POST">
+        <input type="hidden" id="" name="word_obj" value="{{ word_obj.id }}">
+        {% csrf_token %}
+        <div style="text-align:center; display: flex; flex-direction: column; border: black ; margin: 0 35%">
+            <div class="base-text-input input_test" style="margin-top:20px; width: 100%">{{ form.input_word }}</div>
+            <input class='base-button button_test' type="Submit" value="Go">
+        </div>
+    </form>
+    <div style="display: flex; justify-content: center">
+        <a class="back_test" href="{% url 'words:tests_home' %}">Back to tests home</a>
+    </div>
+
+{% endblock content %}

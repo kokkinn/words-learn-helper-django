@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'words/css/forms.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'tests/tests.css' %}">
+{% endblock head %}
+<a href="{% url 'words:groups_of_words_test' uuid='' %}">Test</a>
+{% block content %}
+
+    <div style="border: blue ; display: flex; justify-content: center;">
+        <div style="display: flex; flex-direction: column;  border: red ; width: 50%">
+
+            <div class="base-title" style="">Test your knowledge</div>
+
+            <form method="post" style="border: gold ">
+                <div style="display: flex;  align-items: center; border: red ; flex-direction: column">
+                    {% csrf_token %}
+
+                    <table class='th-table' style="border: black ">
+                        <tr>
+                            <td>
+                                <div class="base-form-label">Sets:</div>
+                            </td>
+                            <td>{{ form.groups }}</td>
+                        </tr>
+                    </table>
+
+                    <div class="other-options-full" style="text-align: center">
+                        <button style="width: 200px; margin-bottom: 10px" class="th-opt-btn">Options</button>
+                        <div class="other-options-fields th-off">
+                            {% for field in form %}
+                                {% if field.name != 'groups' %}
+                                    <div style="display: flex; justify-content: space-between; align-items: center">
+                                        <div class="base-form-label"
+                                             style="width: 45%; text-align: left; margin-right: 0">{{ field.label_tag }}</div>
+                                        <div class="base-select"
+                                             style="width: 55%">{{ field }}</div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                    <div class="th-buttons-container" style="border: red ;">
+                        <div style="display: flex; justify-content: center; border: blue ; flex-direction: column; width: 200px">
+                            <input id='btn-th-submit' class='base-button'
+                                   style='margin-bottom:10px; display: block'
+                                   type="submit" value="Start a test">
+                            <a class='base-a' style='display: block'
+                               href="{% url 'words:test_results' %}">Results section</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#stats-button').addEventListener('click', function () {
+            let stats = document.querySelector('.wl-stats');
+            stats.classList.toggle('on');
+            if (stats.classList.contains('on')) {
+                stats.style.maxHeight = stats.scrollHeight + 'px';
+                document.querySelector('#stats-button').innerHTML = 'Hide stats'
+            } else {
+                document.querySelector('#stats-button').innerHTML = 'Show stats'
+                stats.style.maxHeight = 0;
+            }
+        })
+    </script>
+    <script>
+        document.querySelector('#btn-th-submit').addEventListener('click', (ev) => {
+            ev.preventDefault()
+            let res = document.querySelectorAll('label input')
+            for (let i = 0; i < res.length; i++) {
+                if (res[i].checked === true) {
+                    console.log('CLICKED')
+                    document.querySelector('form').submit()
+                    return 0;
+                }
+            }
+
+            notify('Please, select at least one Set', 'info')
+            return 0;
+
+        })
+    </script>
+    <script>
+        let showOptBtn = document.querySelector('.th-opt-btn');
+        showOptBtn.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            let fields = document.querySelector('.other-options-fields');
+            fields.classList.toggle('th-off')
+            fields.style.maxHeight = '0';
+            if (fields.classList.contains('th-off') === false) {
+                document.querySelector('.other-options-fields').style.maxHeight =
+                    document.querySelector('.other-options-fields').scrollHeight + 'px';
+            }
+
+        })
+    </script>
+
+    <script>
+        const modal = document.querySelector('#modal');
+        const openModal = document.querySelector('#open_guide');
+        const closeModal = document.querySelector('#close_guide');
+
+        openModal.addEventListener('click', () => {
+            modal.showModal();
+        })
+        closeModal.addEventListener('click', () => {
+            modal.close();
+        })
+    </script>
+
+
+{% endblock %}

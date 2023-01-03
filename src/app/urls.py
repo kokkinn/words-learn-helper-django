@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+from utils import get_searches
 from words import views
 from django.views.generic import TemplateView
 from django.conf import settings
@@ -29,10 +31,11 @@ urlpatterns = [
     path("accounts/", include('django.contrib.auth.urls')),
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path("contacts", TemplateView.as_view(template_name='contacts.html'), name="contacts"),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('search-links', get_searches, name='get_searches')
     # path('__debug__/', include('debug_toolbar.urls'))
 ]
 
-if settings.typee == 'dev':
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

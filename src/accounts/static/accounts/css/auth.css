@@ -1,0 +1,14 @@
+.pr-block {
+    width: 400px;
+    margin: 10% auto;
+    padding: 20px;
+    border-right: black solid;
+    border-left: black solid
+}
+
+/*@media only screen and (max-width: 768px) {*/
+/*    .pr-block{*/
+/*        width: 90%;*/
+/*    }*/
+
+/*}*/

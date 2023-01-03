@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="base-title">My sets</div>
+    <div style="display: flex; justify-content: center; border: black ; align-items: center;  margin: 20px 0">
+        <a class="base-a" href="{% url 'words:group_create' %}" style="text-align: center; width: 20%">Add new
+            Set</a>
+    </div>
+    <div style="display: flex; justify-content: center; border: black ">
+        <div style="display:flex; flex-direction: column; border-right: black solid; border-left: black solid">
+            {% for group in groups %}
+                <a class="base-obj-list" href="{% url 'words:group' uuid=group.id %}">
+                    <div style="margin: 5px 0; text-align: center; display: block">
+                        {{ group.name }}
+                    </div>
+                </a>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    {#        <a class='base-button' style="" href="{% url 'words:group_create' %}">Create a group</a>#}
+
+
+
+{% endblock %}
