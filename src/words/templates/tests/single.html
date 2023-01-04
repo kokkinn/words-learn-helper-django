@@ -19,9 +19,11 @@
 
         {% for res in fnl_res_4test_words %}
             <tr>
-                {% for val in res.values %}
-                    <td>{{ val }}</td>
-                {% endfor %}
+                {#                {% for val in res.values %}#}
+                <td>{{ res.pair }}</td>
+                <td>{{ res.user_input }}</td>
+                <td>{{ res.is_correct }}</td>
+                {#                {% endfor %}#}
             </tr>
         {% endfor %}
     </table>
