@@ -4,7 +4,8 @@
     line-height: 50px;
     margin: 30px 25%;
     border-radius: 10px;
-    height: 500px;
+    height: auto;
+    padding-bottom: 30px;
     font-size: 19px;
     /*width: auto;*/
     font-family: Arial, Helvetica, sans-serif;

@@ -96,6 +96,7 @@
     /*border: white solid;*/
     /*opacity: 0;*/
     transition: opacity 0.4s, max-height 0.8s;
+    z-index: 10;
 
 
 
