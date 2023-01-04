@@ -45,7 +45,7 @@ async function notify(msg, type) {
     await new Promise(r => setTimeout(r, 0));
     n_a_child.style.transform = 'translateX(-220px)'
     n_a_child.addEventListener('transitionend', async (event) => {
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 200));
         n_a_child.style.transform = 'translateX(220px)'
         n_a_child.addEventListener('transitionend', () => {
             n_a_child.style.border = 'none'

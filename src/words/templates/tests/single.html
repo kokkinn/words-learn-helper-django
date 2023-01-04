@@ -19,7 +19,7 @@
 
         {% for res in fnl_res_4test_words %}
             <tr>
-                {% for key, val in res.items %}
+                {% for val in res.values %}
                     <td>{{ val }}</td>
                 {% endfor %}
             </tr>
