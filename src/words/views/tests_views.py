@@ -38,6 +38,10 @@ class TestsHomeView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.save()
         words4test = None
+        if not Word.objects.none().union(*[group.words.all()
+                                                      for group in form.instance.groups.all()]):
+            messages.success(message='Please, add some words to your sets', request=self.request)
+            return redirect(reverse_lazy('words:tests_home'))
         if form.instance.which_goes_first == 'random':  # set up an order of a words "que"
             words4test = [str(word.id) for word in
                           Word.objects.none().union(*[group.words.all()
@@ -172,9 +176,10 @@ class ResultsListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         user_words_qs = self.request.user.words.all()
         # context["total"] = user_words_qs.count()
-        context["min"] = user_words_qs.order_by("score").first().score
-        context["max"] = user_words_qs.order_by("score").last().score
-        context["avg"] = round(Word.average_score(self.request.user, qs=user_words_qs), 2)
+        if user_words_qs:
+            context["min"] = user_words_qs.order_by("score").first().score
+            context["max"] = user_words_qs.order_by("score").last().score
+            context["avg"] = round(Word.average_score(self.request.user, qs=user_words_qs), 2)
         return context
 
 

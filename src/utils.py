@@ -16,5 +16,8 @@ def get_searches(request):
         {'name': 'Change password', 'url': reverse('password_change')},
         {'name': 'Profile', 'url': reverse('accounts:profile')},
         {'name': 'Password reset', 'url': reverse('password_reset')},
+        {'name': 'Source code', 'url': 'https://github.com/kokkinn/Words-Learn-Helper-Django-Docker'},
+        {'name': 'Home', 'url': reverse('index')},
+
     ]}
     return JsonResponse({'res': json.dumps(res)}, status=200)

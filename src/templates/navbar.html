@@ -32,7 +32,8 @@
     </div>
     <div style="position: relative; border: red;" id="id22" class="nol">
         <div class="base-text-input" id="search_links" style="width: 100%"><input class="nol" type="search"
-                                                                                      id="s_f" placeholder="&#x1F50D; Search"></div>
+                                                                                  id="s_f"
+                                                                                  placeholder="Search"></div>
         <div id="output" class="nol"
              style="color: red; position: absolute; background: #1A1A1AFF; width: 100%;  border-radius: 3px; z-index: 2;">
         </div>
@@ -41,7 +42,7 @@
         <a class="nav-button" style="" href="" id="btn-profile">Profile</a>
         <ul class='nav-dropdown-ul' id='nav-dropdown-ul-pr' style="">
             <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
-                   href="{% url 'words:list' %}">View profile</a></li>
+                   href="{% url 'accounts:profile' %}">View profile</a></li>
             <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
                    href="{% url 'accounts:profile_change' %}">Settings</a></li>
             <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
@@ -100,19 +101,21 @@
 
 </script>
 <script>
+    {% if user.is_authenticated %}
 
-    const btnLibrary = document.querySelector('#btn-library');
-    btnLibrary.addEventListener('click', async (ev) => {
-        ev.preventDefault()
-        document.querySelector('.nav-dropdown-ul').style.display = 'block';
-        document.querySelector('.nav-dropdown-ul').style.maxHeight = '200px';
-        await new Promise(r => setTimeout(r, 1));
-    })
+        const btnLibrary = document.querySelector('#btn-library');
+        btnLibrary.addEventListener('click', async (ev) => {
+            ev.preventDefault()
+            document.querySelector('.nav-dropdown-ul').style.display = 'block';
+            document.querySelector('.nav-dropdown-ul').style.maxHeight = '200px';
+            await new Promise(r => setTimeout(r, 1));
+        })
 
 
-    document.querySelector('#dropdown-full').addEventListener('mouseleave', async (ev) => {
-        document.querySelector('#nav-dropdown-ul-lib').style.maxHeight = '0';
-    })
+        document.querySelector('#dropdown-full').addEventListener('mouseleave', async (ev) => {
+            document.querySelector('#nav-dropdown-ul-lib').style.maxHeight = '0';
+        })
+    {% endif %}
 
     const btnProfile = document.querySelector('#btn-profile');
     btnProfile.addEventListener('click', async (ev) => {
