@@ -1,16 +1,51 @@
 .textbox_index {
-
     transition: transform 1s;
     transform: scale(0);
-    border: none;
     line-height: 50px;
-    margin: 20px 25%;
+    margin: 30px 25%;
+    border-radius: 10px;
+    height: 500px;
     font-size: 19px;
-    width: auto;
+    /*width: auto;*/
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     /*justify-content: center;*/
     align-items: center;
+    z-index: 1;
+    position: relative;
 
+    background-color: rgb(26, 26, 26, 1);
+
+}
+
+
+.index-menu {
+    margin-top: 12%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border: black solid;
+
+
+}
+
+.index-menu-items {
+    border: black solid;
+    display: flex;
+    justify-content: normal;
+    list-style: none;
+    flex-direction: column;
+}
+
+.index-menu-items li a {
+    font-size: 30px;
+}
+
+.index-menu-items li {
+    margin-top: 10px;
+}
+
+.a-index{
+    color: gold;
 }

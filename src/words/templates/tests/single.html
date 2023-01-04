@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'words/css/words-list.css' %}">
+{% endblock head %}
 
 {% block content %}
 
-    <div class="base-form-label" style="margin-top:15px;">Result for {{ result.date }}</div>
+
+    <div class="base-form-label" style="margin-top:15px; text-align: center">Result for {{ result.date }}</div>
 
     <p>
     <table class="wl-table" style="margin-right:auto; margin-left:auto; margin-top:25px;">
@@ -14,9 +19,9 @@
 
         {% for res in fnl_res_4test_words %}
             <tr>
-            {% for key, val in res.items %}
+                {% for key, val in res.items %}
                     <td>{{ val }}</td>
-            {% endfor %}
+                {% endfor %}
             </tr>
         {% endfor %}
     </table>

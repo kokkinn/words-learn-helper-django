@@ -1,27 +1,5 @@
 
 
-.index-menu {
-    margin-top: 20px;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-}
-
-.index-menu-items {
-    display: flex;
-    justify-content: normal;
-    list-style: none;
-    flex-direction: column;
-}
-
-.index-menu-items li a {
-    font-size: 30px;
-}
-
-.index-menu-items li {
-    margin-top: 10px;
-}
-
 
 .link {
 

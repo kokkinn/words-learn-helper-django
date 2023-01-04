@@ -110,7 +110,7 @@ if type_ == 'dep':
             "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         }
     }
-elif type == 'dev':
+elif type_ == 'dev':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

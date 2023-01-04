@@ -11,7 +11,10 @@
 }
 
 body {
-    background-color: #EEEEEE;
+    /*background-color: #EEEEEE;*/
+    background-image: url('../IMG_8139 (3).PNG');
+    background-size: 500px;
+    opacity: 1;
 }
 
 @media only screen and (max-width: 768px) {
@@ -63,7 +66,7 @@ body {
 }
 
 a {
-    color: cornflowerblue;
+    color: black;
 }
 
 .base-a {

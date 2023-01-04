@@ -2,30 +2,31 @@
 {% load static %}
 {% block head %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/main_menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'words/css/menu.css' %}">
 {% endblock head %}
 {% block content %}
 
     {% if not user.is_authenticated %}
-        <div class="textbox_index" style="border: black solid; ">
-            <div class="base-title" style="">
+        <div class="textbox_index" style="">
+            <div class="base-title" style="color: goldenrod; margin-top: 65px; margin-bottom: 60px">
                 Create your virtual vocabulary for <span
-                    style="font-size:inherit; font-weight: bold; color: goldenrod; ; -webkit-text-stroke: 1px fuchsia;">better learning performance</span>
+                    style="font-size:inherit; font-weight: bold; color: darkorange; "><br>better learning performance</span>
                 today!
             </div>
-            <div style="line-height: normal; width: 70%; border: black solid;  color: gray">
-                Discover a <span style="font-weight: bold; font-style: italic">modern</span> way to <a style=""
+            <div style="line-height: normal; width: 80%; font-size: 25px; color: gray; text-align: center">
+                Discover a <span style="font-weight: bold; font-style: italic; font-size: inherit">modern</span> way to <a class="a-index" style="font-size: inherit"
                                                                                                        href="{% url 'words:list' %}">write
                 down new words</a> you want
-                to learn, combine them into <a style="" href="{% url 'words:groups_list' %}">Sets</a> and <a
-                    style="" href="{% url 'words:tests_home' %}">test</a>
+                to learn, combine them into <a style="font-size: inherit" href="{% url 'words:groups_list' %}">sets</a> and <a class="a-index"
+                    style="font-size: inherit" href="{% url 'words:tests_home' %}">test</a>
                 yourself
             </div>
-            <div style="width: 70%;">
+            <div style="width: 80%;">
                 <form method="get" action="{% url 'accounts:registration' %}">
-                    <div style="display: flex; margin-top: 20px; border: black ; justify-content: space-between">
-                        <div class="base-text-input"><input style="margin: 10px 0" class="" type="text" name="username"
+                    <div style="display: flex; margin-top: 20px; justify-content: space-between">
+                        <div class="base-text-input" style=" width: 48%"><input style="margin: 10px 0;"  type="text" name="username"
                                                             placeholder="Username" required></div>
-                        <div class="base-text-input"><input style="margin: 10px 0" type="text" name="email"
+                        <div class="base-text-input" style=" width: 48%"><input style="margin: 10px 0" type="text" name="email"
                                                             placeholder="Email address" required></div>
                     </div>
                     <input type="submit" class="base-a" value="Try it FREE for 120 days"
@@ -34,23 +35,32 @@
             </div>
         </div>
     {% endif %}
-    <div class="index-menu">
-        <ul class="index-menu-items">
-            <li><a class="" href="{% url 'words:home' %}">Words section</a></li>
-            <li><a class="" href="{% url 'accounts:profile' %}">Profile</a></li>
-            <li><a class="" href="https://github.com/kokkinn/django_LH_web" target="_blank"
-                   rel="noopener noreferrer">GitHub<img
-                    src="{% static '25231.png' %}" width="33px"></a></li>
-            <li><a class="" href="{% url 'contacts' %}">Contacts</a></li>
-        </ul>
+    {% if not user.is_authenticated %}
+    <div style="display: flex; justify-content: center; border: black; margin: 30px 0" >
+    {% else %}
+    <div style="display: flex; justify-content: center; border: black; margin: 10% 0" >
+    {% endif %}
+        <div class="wh-flex-column">
+            {% if user.is_authenticated %}
+                <a class="menu_item_wh" href="{% url 'words:home' %}">Words section</a>
+                <a class="menu_item_wh" href="{% url 'accounts:profile' %}">Profile</a>
+            {% endif %}
+            <a class="menu_item_wh" href="https://github.com/kokkinn/django_LH_web" target="_blank"
+               rel="noopener noreferrer">Source code<img
+                    src="{% static '25231.png' %}" width="33px"></a>
+            <a class="menu_item_wh" href="{% url 'contacts' %}">Contacts</a>
+        </div>
     </div>
 
 
-{#    <script>#}
-{#        $(document).ready(function () {#}
-{#            console.log('MEOW')#}
-{#            document.querySelector('.textbox_index').style.transform = 'scale(1)'#}
-{#        })#}
-{#    </script>#}
+
+
+    <script>
+        $(document).ready(function () {
+            console.log('MEOW')
+            document.querySelector('.textbox_index').style.transform = 'scale(1)'
+            {#document.querySelector('.textbox_index').style.zIndex = '1'#}
+        })
+    </script>
 
 {% endblock %}

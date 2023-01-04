@@ -1,18 +1,20 @@
 {% load static %}
 
 <nav class="nav">
-
-    <div class="nav-ul">
+    <div class="div-a-block" style="">
         <a href="{% url 'index' %}">
-            <img class='logo' src="{% static 'favicon.ico' %}" alt="WLH" width="65" height="65"></a>
+            <img class='logo' src="{% static 'favicon.ico' %}" alt="WLH" width="65" height="65">
+        </a>
+    </div>
+    <div class="nav-ul">
         {% if not user.is_authenticated %}
-            <div><a class="nav-a" href="{% url 'index' %}">Home</a></div>
-            <div><a class="nav-a" href="{% url 'accounts:login' %}">Login</a></div>
-            <div><a class="nav-a" href="{% url 'accounts:registration' %}">Registration</a></div>
+            <div class=""><a class="nav-a" href="{% url 'index' %}">Home</a></div>
+            <div class=""><a class="nav-a" href="{% url 'accounts:login' %}">Login</a></div>
+            <div class=""><a class="nav-a" href="{% url 'accounts:registration' %}">Registration</a></div>
         {% endif %}
         {% if user.is_authenticated %}
-            <div class="div-a-block"><a class="nav-a" href="{% url 'index' %}">Home</a></div>
-            <div style="position: relative; display: block;" id="dropdown-full">
+            <div class=""><a class="nav-a" href="{% url 'index' %}">Home</a></div>
+            <div style="position: relative;" id="dropdown-full" class="">
                 <a class="nav-a" style="" href="" id="btn-library">Your library</a>
                 <ul class='nav-dropdown-ul' style="" id="nav-dropdown-ul-lib">
                     <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
@@ -25,18 +27,17 @@
                 </ul>
             </div>
 
-            <div><a class="nav-a" href="{% url 'words:tests_home' %}">Test yourself</a></div>
-            <div><a class="nav-a" href="{% url 'accounts:logout' %}">Logout</a></div>
+            <div class=""><a class="nav-a" href="{% url 'words:tests_home' %}">Test yourself</a></div>
         {% endif %}
     </div>
     <div style="position: relative; border: red;" id="id22" class="nol">
-        <div class="base-text-input nol" id="search_links" style="width: 100%"><input class="nol" type="search"
-                                                                                      id="s_f"></div>
+        <div class="base-text-input" id="search_links" style="width: 100%"><input class="nol" type="search"
+                                                                                      id="s_f" placeholder="&#x1F50D; Search"></div>
         <div id="output" class="nol"
-             style="color: red; position: absolute; background: #1A1A1AFF; width: 100%;  border-radius: 3px ">
+             style="color: red; position: absolute; background: #1A1A1AFF; width: 100%;  border-radius: 3px; z-index: 2;">
         </div>
     </div>
-    <div style="position: relative; display: block;" id="dropdown-full-pr">
+    <div style="position: relative; margin-right: 30px; display: block;" id="dropdown-full-pr">
         <a class="nav-button" style="" href="" id="btn-profile">Profile</a>
         <ul class='nav-dropdown-ul' id='nav-dropdown-ul-pr' style="">
             <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
@@ -118,10 +119,12 @@
         ev.preventDefault()
         document.querySelector('#nav-dropdown-ul-pr').style.display = 'block';
         document.querySelector('#nav-dropdown-ul-pr').style.maxHeight = '200px';
-        await new Promise(r => setTimeout(r, 1));})
+        await new Promise(r => setTimeout(r, 1));
+    })
 
 
     document.querySelector('#dropdown-full-pr').addEventListener('mouseleave', async (ev) => {
-        document.querySelector('#nav-dropdown-ul-pr').style.maxHeight = '0';})
+        document.querySelector('#nav-dropdown-ul-pr').style.maxHeight = '0';
+    })
 
 </script>

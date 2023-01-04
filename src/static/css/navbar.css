@@ -7,7 +7,7 @@
     font-weight: bold;
     border-radius: 4px;
     text-decoration: none;
-    width: 100px;
+    width: 100%;
     text-align: center;
     display: block;
     margin-right: 25px;
@@ -26,7 +26,7 @@
     color: goldenrod;
     text-decoration: none;
     cursor: pointer;
-    padding: 0 10px;
+    /*margin: 0 10px;*/
 }
 
 .nav-a:hover {
@@ -44,29 +44,31 @@
     justify-content: space-between;
     align-items: center;
     background-color: #1A1A1AFF;
+    flex-wrap: wrap;
     /*position: sticky;*/
     top: 0;
 
 }
 
 
-.nav-ul li {
+.nav-ul div {
     /*display: inline-block;*/
-    /*padding: 0 30px;*/
+    /*padding-right: 40px;*/
     /*height: 100px;*/
 }
 
-.nav-ul div{
-    margin: 0 20px;
-    white-space: nowrap;
-}
+/*.nav-ul div{*/
+/*    margin: 0 20px;*/
+/*    white-space: nowrap;*/
+/*}*/
 
 .nav-ul {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    gap: 35px;
     align-items: center;
     text-align: center;
-
+    flex-wrap: wrap;
     /*border: blue solid;*/
     width: 60%;
 
@@ -96,6 +98,7 @@
     transition: opacity 0.4s, max-height 0.8s;
 
 
+
 }
 
 .nav-dropdown-ul li{
@@ -115,9 +118,14 @@
 }
 
 .div-a-block{
-    display: flex;
+    /*display: flex;*/
     text-align: center;
-    justify-content: center;
+    /*justify-content: center;*/
+    /*margin: 0 30px;*/
+    margin-right: 0px;
+    margin-left: 25px;
+
+
 }
 
 .search-a{

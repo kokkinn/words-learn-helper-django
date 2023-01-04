@@ -33,7 +33,7 @@
 }
 
 .accordion {
-    border: blue ;
+    border: blue;
     margin: 10px 10px;
     /*margin: 0px;*/
     width: 100%
@@ -105,6 +105,7 @@
     text-align: center;
     width: 98%;
     margin: 10px 10px;
+
 }
 
 
@@ -114,10 +115,14 @@
     /*word-break: keep-all;*/
 }
 
-.wl-table tr { border: none; }
+.wl-table tr {
+    border: none;
+}
+
 .wl-table td {
-  border-right: goldenrod solid;
-  border-left: goldenrod solid;
+
+    border-right: goldenrod solid;
+    border-left: goldenrod solid;
 }
 
 .wl-table td:not(#wl-table-action-column), .wl-table th {
@@ -164,6 +169,7 @@
 
 .wl-table tbody tr:hover {
     background-color: #eae7d4;
+    opacity: 1;
 }
 
 /*.wl-table tbody tr:nth-child(odd) {*/

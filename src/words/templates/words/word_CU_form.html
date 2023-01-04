@@ -37,7 +37,7 @@
                 <div class="wf-grouwps" style="margin-bottom: 20px">
                     <p class="base-form-label">Sets to include in</p>
                     {% if user_has_groups == 0 %}
-                        <span style="text-decoration: underline; font-style: italic">{{ user.username|capfirst }} hasn't created any categories :(</span>
+                       <a href="{% url 'words:group_create' %}"> <span style="text-decoration: underline; font-style: italic">You haven't created any set :(</span></a>
                     {% else %}
                         <div class="base-choice">{{ form.groups }}</div>
                     {% endif %}
