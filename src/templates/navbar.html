@@ -1,12 +1,10 @@
 {% load static %}
 
 <nav class="nav">
-    <div class="div-a-block" style="">
+    <div class="nav-main-links-container">
         <a href="{% url 'index' %}">
             <img class='logo' src="{% static 'favicon.ico' %}" alt="WLH" width="65" height="65">
         </a>
-    </div>
-    <div class="nav-ul">
         {% if not user.is_authenticated %}
             <div class=""><a class="nav-a" href="{% url 'index' %}">Home</a></div>
             <div class=""><a class="nav-a" href="{% url 'accounts:login' %}">Login</a></div>
@@ -30,25 +28,28 @@
             <div class=""><a class="nav-a" href="{% url 'words:tests_home' %}">Test yourself</a></div>
         {% endif %}
     </div>
-    <div style="position: relative; border: red;" id="id22" class="nol">
-        <div class="base-text-input" id="search_links" style="width: 100%"><input class="nol" type="search"
-                                                                                  id="s_f"
-                                                                                  placeholder="Search"></div>
-        <div id="output" class="nol"
-             style="color: red; position: absolute; background: #1A1A1AFF; width: 100%;  border-radius: 3px; z-index: 2;">
+    <div style="flex-flow: row wrap; display: flex; gap: 20px">
+        <div style="position: relative; border: red;" id="id22" class="nol">
+            <div class="base-text-input" id="search_links" style="width: 100%"><input class="nol" type="search"
+                                                                                      id="s_f"
+                                                                                      placeholder="Search"></div>
+            <div id="output" class="nol"
+                 style="color: red; position: absolute; background: #1A1A1AFF; width: 100%;  border-radius: 3px; z-index: 2;">
+            </div>
+        </div>
+        <div style="position: relative; display: block;" id="dropdown-full-pr">
+            <a class="nav-button" style="" href="" id="btn-profile">Profile</a>
+            <ul class='nav-dropdown-ul' id='nav-dropdown-ul-pr' style="">
+                <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                       href="{% url 'accounts:profile' %}">View profile</a></li>
+                <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                       href="{% url 'accounts:profile_change' %}">Settings</a></li>
+                <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
+                       href="{% url 'accounts:logout' %}">LogOut</a></li>
+            </ul>
         </div>
     </div>
-    <div style="position: relative; margin-right: 30px; display: block;" id="dropdown-full-pr">
-        <a class="nav-button" style="" href="" id="btn-profile">Profile</a>
-        <ul class='nav-dropdown-ul' id='nav-dropdown-ul-pr' style="">
-            <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
-                   href="{% url 'accounts:profile' %}">View profile</a></li>
-            <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
-                   href="{% url 'accounts:profile_change' %}">Settings</a></li>
-            <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
-                   href="{% url 'accounts:logout' %}">LogOut</a></li>
-        </ul>
-    </div>
+
 
 </nav>
 

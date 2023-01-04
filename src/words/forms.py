@@ -65,7 +65,7 @@ class GroupChoiceForm(forms.Form):
 
 
 class TestInputForm(forms.Form):
-    input_word = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Your input...'}))
+    input_word = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Answer'}))
 
 
 def qs_not_empty(query_set):

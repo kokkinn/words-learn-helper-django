@@ -46,35 +46,27 @@
     background-color: #1A1A1AFF;
     flex-wrap: wrap;
     /*position: sticky;*/
+    row-gap: 20px;
     top: 0;
 
 }
 
 
-.nav-ul div {
-    /*display: inline-block;*/
-    /*padding-right: 40px;*/
-    /*height: 100px;*/
+.nav-main-links-container div {
+
 }
 
-/*.nav-ul div{*/
-/*    margin: 0 20px;*/
-/*    white-space: nowrap;*/
-/*}*/
-
-.nav-ul {
+.nav-main-links-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 35px;
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
-    /*border: blue solid;*/
-    width: 60%;
-
+    row-gap: 0;
 }
 
-.nav-ul-block {
+.nav-main-links-container-block {
     display: inline-block;
 }
 

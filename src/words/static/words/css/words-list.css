@@ -168,8 +168,8 @@
 }
 
 .wl-table tbody tr:hover {
-    background-color: #eae7d4;
-    opacity: 1;
+    background-color: rgba(234, 231, 212, 0.5);
+
 }
 
 /*.wl-table tbody tr:nth-child(odd) {*/
@@ -228,4 +228,12 @@ thead th.up {
 thead th.down {
     background-image: url('../../../../static/icons/sort-down.svg');
     background-size: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    thead th,  thead th.down,  thead th.up {
+        background-image: none;
+    }
+
+
 }

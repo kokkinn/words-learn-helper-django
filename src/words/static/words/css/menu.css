@@ -1,13 +1,3 @@
-
-.table_wh {
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-    font-size: 40px;
-    width: auto;
-    margin-top: 20px;
-}
-
 .table_wh td {
     padding: 10px;
     white-space: nowrap;
@@ -35,20 +25,21 @@
 
 }
 
-.wh-flex-column {
+.nav-menu-flex-block {
     display: flex;
     flex-direction: column;
     border-right: black solid;
+    row-gap: 20px;
     border-left: black solid;
     width: auto;
     padding: 0 60px;
 }
 
-/*@media only screen and (max-width: 768px) {*/
-/*    .wh-flex-column{*/
-/*        width: 90%;*/
-/*    }*/
 
 
-/*    }*/
-/*}*/
+@media only screen and (max-width: 768px) {
+    .nav-menu-flex-block {
+        padding: 0;
+        width: 100%;
+    }
+}

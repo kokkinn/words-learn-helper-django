@@ -7,13 +7,13 @@
 <a href="{% url 'words:groups_of_words_test' uuid='' %}">Test</a>
 {% block content %}
 
-    <div style="border: blue ; display: flex; justify-content: center;">
-        <div style="display: flex; flex-direction: column;  border: red ; width: 50%">
+    <div class="outer-block-flex-center" style="margin: 30px 0">
+        <div class="th-inner-container">
 
             <div class="base-title" style="">Test your knowledge</div>
 
             <form method="post" style="border: gold ">
-                <div style="display: flex;  align-items: center; border: red ; flex-direction: column">
+                <div style="display: flex;  align-items: center; flex-direction: column">
                     {% csrf_token %}
 
                     <table class='th-table' style="border: black ">
@@ -25,8 +25,8 @@
                         </tr>
                     </table>
 
-                    <div class="other-options-full" style="text-align: center">
-                        <button style="width: 200px; margin-bottom: 10px" class="th-opt-btn">Options</button>
+                    <div class="other-options-full">
+                        <button style="margin-bottom: 10px; width: 100%" class="th-opt-btn">Options</button>
                         <div class="other-options-fields th-off">
                             {% for field in form %}
                                 {% if field.name != 'groups' %}
@@ -42,8 +42,8 @@
                     </div>
 
 
-                    <div class="th-buttons-container" style="border: red ;">
-                        <div style="display: flex; justify-content: center; border: blue ; flex-direction: column; width: 200px">
+                    <div class="th-buttons-container" style="">
+                        <div style="display: flex; justify-content: center; border: blue ; flex-direction: column; width:100%">
                             <input id='btn-th-submit' class='base-button'
                                    style='margin-bottom:10px; display: block'
                                    type="submit" value="Start a test">

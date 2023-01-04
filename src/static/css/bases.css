@@ -1,6 +1,4 @@
 * {
-    /*font-family: FreeMono, monospace;*/
-    /*font-family: Courier New, sans-serif;*/
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     margin: 0;
@@ -11,7 +9,6 @@
 }
 
 body {
-    /*background-color: #EEEEEE;*/
     background-image: url('../IMG_8139 (3).PNG');
     background-size: 500px;
     opacity: 1;
@@ -19,8 +16,9 @@ body {
 
 @media only screen and (max-width: 768px) {
 
-    .width-90{
-        width: 90%; !important;
+    .width-90 {
+        width: 90%;
+    !important;
     }
 }
 
@@ -28,6 +26,11 @@ body {
 /*input:-webkit-autofill:focus {*/
 /*    transition: background-color 600000s 0s, color 600000s 0s;*/
 /*}*/
+
+.outer-block-flex-center {
+    display: flex;
+    justify-content: center;
+}
 
 .base-title {
     font-size: 40px;
