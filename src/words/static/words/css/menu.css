@@ -13,7 +13,6 @@
     text-align: center;
     width: 100%;
     font-weight: bold;
-    /*white-space: nowrap;*/
 }
 
 .menu_item_wh:hover {
@@ -36,10 +35,11 @@
 }
 
 
-
 @media only screen and (max-width: 768px) {
     .nav-menu-flex-block {
         padding: 0;
         width: 100%;
+        border-right: none;
+        border-left: none;
     }
 }

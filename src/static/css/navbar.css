@@ -50,7 +50,11 @@
     top: 0;
 
 }
-
+@media only screen and (max-width: 768px) {
+    .nav {
+        padding: 0 10px 20px;
+    }
+}
 
 .nav-main-links-container div {
 

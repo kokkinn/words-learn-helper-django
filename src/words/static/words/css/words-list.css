@@ -14,10 +14,11 @@
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.5s, border 0s;
-    /*background: #F1EED8;*/
     background-color: #1a1a1a;
-    /*margin-bottom: 20px;*/
+    display: flex;
+    justify-content: space-evenly
 }
+
 
 .wl-accordion-button::after {
     content: '\25b2';
@@ -43,7 +44,6 @@
 }
 
 .wl-accordion-content-block {
-    /*border: solid;*/
     margin: 30px 10px;
     height: 100%;
     width: 30%;
@@ -231,9 +231,14 @@ thead th.down {
 }
 
 @media only screen and (max-width: 768px) {
-    thead th,  thead th.down,  thead th.up {
+    thead th, thead th.down, thead th.up {
         background-image: none;
     }
+
+    .wl-accordion-content-block {
+    width: 100%;
+}
+
 
 
 }

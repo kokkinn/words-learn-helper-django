@@ -23,6 +23,7 @@
             <input type="hidden" value="{{ search }}" name="search">
         </form>
         <li class="wl-menu-item"><a id='wl-menu-box-edit-button' class="base-a wl-menu-links">Edit</a></li>
+        <button class="base-a wl-menu-links" id="menu-box-cancel">Cancel</button>
         {#        <li class="wl-menu-item"><a class="base-a wl-menu-links">View</a></li>#}
     </ul>
 
@@ -89,6 +90,7 @@
 
         function EvLi_td_click(ev) {
             ev.preventDefault()
+
             const clicked_row_id = ev.currentTarget.parentNode.id;
             console.log(`TD click fired for ${clicked_row_id}`)
             let menu = document.querySelector('.wl-menu-box');
@@ -96,11 +98,18 @@
             menu.style.top = `${ev.clientY - 20}px`;
             menu.style.left = `${ev.clientX - 20}px`;
             menu.classList.remove('off');
+
         }
+
+        document.querySelector('#menu-box-cancel').addEventListener('click', () => {
+            document.querySelector('.wl-menu-box').classList.add('off')
+            }
+        )
 
         document.querySelector('.wl-menu-box').addEventListener('mouseleave', () => {
             document.querySelector('.wl-menu-box').classList.add('off')
         })
+
 
         document.querySelectorAll('#wl-table td[id=wl-table-td-data]').forEach((td) => {
             td.addEventListener('click', EvLi_td_click)
@@ -145,6 +154,7 @@
             }
             row2edit_obj.querySelector('#wl-table-action-column').appendChild(document.querySelector('#btn-wlTableRow-cancelEdit'));
             row2edit_obj.querySelector('#wl-table-action-column').appendChild(document.querySelector('#btn-wlTableRow-confirmEdit'));
+
             document.querySelector('#btn-wlTableRow-cancelEdit').classList.remove('off');
             document.querySelector('#btn-wlTableRow-confirmEdit').classList.remove('off');
             row2edit_word1InitValue = row2edit_obj.querySelector(':nth-child(1)').innerHTML;
