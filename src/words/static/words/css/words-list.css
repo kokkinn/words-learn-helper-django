@@ -114,7 +114,6 @@
 }
 
 
-
 .wl-table td {
     border-right: goldenrod solid;
     border-left: goldenrod solid;
@@ -225,9 +224,20 @@ thead th.down {
     }
 
     .wl-accordion-content-block {
-    width: 100%;
-}
+        width: 100%;
+    }
+
+    .wl-table td:nth-child(1) {
+        width: 45%;
+    }
+
+    .wl-table td:nth-child(2) {
+        width: 45%;
+    }
 
 
+    .wl-table td:nth-child(3) {
+        width: 10%;
+    }
 
 }
