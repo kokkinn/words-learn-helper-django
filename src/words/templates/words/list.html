@@ -32,51 +32,52 @@
     <button class="off" style="font-size: 15px; width: 100%; "
             id="btn-wlTableRow-cancelEdit">Cancel
     </button>
-
-    <table id="wl-table" class="wl-table">
-        <thead>
-        <tr>
-            <th>Word <i class="glyphicon glyphicon-chevron-down"></i></th>
-            <th>Translation <i></i></th>
-            <th>Sets</th>
-            <th class="no_view">Score <i></i></th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        {% for word in words %}
-            <tr id="tr-{{ word.id }}">
-                <td id="wl-table-td-data">
-                    {{ word.word1 }}
-                </td>
-                <td id="wl-table-td-data">{{ word.word2 }}</td>
-
-                <td id="wl-table-td-data">
-                    <ul style="text-align: center; list-style: none;">
-                        {% for group in word.groups.all %}
-                            {% if group.name != 'General' %}
-                                <li>{{ group }}</li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td class="no_view" id="wl-table-td-data">{{ word.score }}</td>
-
-
-                <td class="wl-table-action" id="wl-table-action-column">
-                    <a id="btn-wl-table-action-column-edit" class="table-edit"
-                       style="text-decoration: none; color: black"
-                       href="{% url 'words:update' uuid=word.id %}">-</a>
-                </td>
-
+    <div style="width: 100%">
+        <table id="wl-table" class="wl-table">
+            <thead>
+            <tr>
+                <th>Word <i class="glyphicon glyphicon-chevron-down"></i></th>
+                <th>Translation <i></i></th>
+                <th class="no_view">Sets</th>
+                <th class="no_view">Score <i></i></th>
+                <th>Action</th>
             </tr>
+            </thead>
+            <tbody>
 
-        {% endfor %}
 
-        </tbody>
-    </table>
+            {% for word in words %}
+                <tr id="tr-{{ word.id }}">
+                    <td id="wl-table-td-data">
+                        {{ word.word1 }}
+                    </td>
+                    <td id="wl-table-td-data">{{ word.word2 }}</td>
+
+                    <td id="wl-table-td-data" class="no_view">
+                        <ul style="text-align: center; list-style: none;">
+                            {% for group in word.groups.all %}
+                                {% if group.name != 'General' %}
+                                    <li>{{ group }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class="no_view" id="wl-table-td-data">{{ word.score }}</td>
+
+
+                    <td class="wl-table-action" id="wl-table-action-column">
+                        <a id="btn-wl-table-action-column-edit" class="table-edit"
+                           style="text-decoration: none; color: black"
+                           href="{% url 'words:update' uuid=word.id %}">-</a>
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
 
     <script>
         $('#wl-table').tablesorter({
@@ -102,7 +103,7 @@
         }
 
         document.querySelector('#menu-box-cancel').addEventListener('click', () => {
-            document.querySelector('.wl-menu-box').classList.add('off')
+                document.querySelector('.wl-menu-box').classList.add('off')
             }
         )
 
@@ -313,10 +314,10 @@
                     for (let i = 0; i < word_createdInstance['groups'].length; i++) {
                         groups_li += `<li>${word_createdInstance['groups'][i]}</li>`
                     }
-                    groups_li = `<td><ul style="text-align: center; list-style: none;">${groups_li}</ul></td>`
+                    groups_li = `<td class="no_view"><ul style="text-align: center; list-style: none;">${groups_li}</ul></td>`
 
                     row2add += groups_li
-                    row2add += `<td id="wl-table-td-data">${word_createdInstance['score'] || "0"} </td>
+                    row2add += `<td id="wl-table-td-data" class="no_view">${word_createdInstance['score'] || "0"} </td>
                                 <td class="wl-table-action" id="wl-table-action-column">
                                     <a id="btn-wl-table-action-column-edit" class="table-edit"
                                         style="text-decoration: none; color: black" href="/words/update/${word_createdInstance['pk']}">-</a>
