@@ -45,7 +45,6 @@
     align-items: center;
     background-color: #1A1A1AFF;
     flex-wrap: wrap;
-    /*position: sticky;*/
     row-gap: 20px;
     top: 0;
 
@@ -53,6 +52,9 @@
 @media only screen and (max-width: 768px) {
     .nav {
         padding: 0 10px 20px;
+    }
+    .nav-main-links-container{
+        margin-left: 0;
     }
 }
 
@@ -62,12 +64,13 @@
 
 .nav-main-links-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 35px;
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
     row-gap: 0;
+    margin-left: 30px;
 }
 
 .nav-main-links-container-block {

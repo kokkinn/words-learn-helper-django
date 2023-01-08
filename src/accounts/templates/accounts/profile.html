@@ -6,27 +6,27 @@
 {% block content %}
 
 
-    <div style="display: flex; justify-content: center; border: black ">
+    <div style="display: flex; justify-content: center; ">
         <div style="border: black ; display: flex; flex-direction: column; align-items: center">
             <table class="table_profile" style="margin-top: 20px; margin-bottom: 10px; width: 400px">
                 <tr>
                     <td>
-                        <div class="">Username:</div>
+                        <div class="base-form-label">Username:</div>
                     </td>
                     <td>
-                        <div class="">{{ user.username }}</div>
+                        <div class="base-form-label">{{ user.username }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <div class="">Email:</div>
+                        <div class="base-form-label">Email:</div>
                     </td>
                     <td>
                         {% if user.email %}
-                            <div class="">{{ user.email }}</div>
+                            <div class="base-form-label">{{ user.email }}</div>
                         {% else %}
-                            <div class="">None</div>
+                            <div class="base-form-label">None</div>
                         {% endif %}
 
                     </td>
@@ -34,26 +34,26 @@
 
                 <tr>
                     <td>
-                        <div class="">Name:</div>
+                        <div class="base-form-label">Name:</div>
                     </td>
                     <td>
                         {% if user.first_name %}
-                            <div class="">{{ user.first_name }}</div>
+                            <div class="base-form-label">{{ user.first_name }}</div>
                         {% else %}
-                            <div class="">None</div>
+                            <div class="base-form-label">None</div>
                         {% endif %}
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <div class="">Surname:</div>
+                        <div class="base-form-label">Surname:</div>
                     </td>
                     <td>
                         {% if user.last_name %}
-                            <div class="">{{ user.last_name }}</div>
+                            <div class="base-form-label">{{ user.last_name }}</div>
                         {% else %}
-                            <div class="">None</div>
+                            <div class="base-form-label">None</div>
                         {% endif %}
 
                     </td>
@@ -61,19 +61,19 @@
 
                 <tr>
                     <td>
-                        <div class="">Birthday:</div>
+                        <div class="base-form-label">Birthday:</div>
                     </td>
                     <td>
-                        <div class="">{{ user.birthday }}</div>
+                        <div class="base-form-label">{{ user.birthday }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <div class="">City:</div>
+                        <div class="base-form-label">City:</div>
                     </td>
                     <td>
-                        <div class="">{{ user.city }}</div>
+                        <div class="base-form-label">{{ user.city }}</div>
                     </td>
                 </tr>
             </table>

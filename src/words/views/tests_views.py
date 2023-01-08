@@ -39,7 +39,7 @@ class TestsHomeView(LoginRequiredMixin, CreateView):
         form.save()
         words4test = None
         if not Word.objects.none().union(*[group.words.all()
-                                                      for group in form.instance.groups.all()]):
+                                           for group in form.instance.groups.all()]):
             messages.success(message='Please, add some words to your sets', request=self.request)
             return redirect(reverse_lazy('words:tests_home'))
         if form.instance.which_goes_first == 'random':  # set up an order of a words "que"
@@ -135,7 +135,7 @@ class TestQuestionView(LoginRequiredMixin, FormView):
                 'is_correct': is_cor
             })
 
-        user_input = form.cleaned_data['input_word']
+        user_input = form.cleaned_data['input_word'].lower()
 
         if user_input == self.result_object.current_words['current_word']['ans']:
             messages.success(message='The answer is correct', request=self.request)
@@ -160,6 +160,13 @@ class ResultsListView(LoginRequiredMixin, ListView):
     model = Result
     context_object_name = 'results'
     template_name = "tests/list.html"
+
+    def get(self, request, *args, **kwargs):
+        for res in Result.objects.filter(user=self.request.user):
+            print('A')
+            if not res.details['fnl_res_4test_words']:
+                res.delete()
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         super(ResultsListView, self).get_queryset()

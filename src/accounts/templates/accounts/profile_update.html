@@ -15,82 +15,71 @@
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {#        <img src="{{ user.avatar.url }}" width="80px" class="image_profile"/>#}
+        <div style="display: flex; justify-content: center; ">
+            <div style="display: flex; flex-direction: column; align-items: center;  width: 400px">
+                <table class="table_profile" style="margin-top: 20px; margin-bottom: 10px;">
+                    <tr>
+                        <td>
+                            <div class="base-form-label">Username:</div>
+                        </td>
+                        <td>
+                            <div class="base-form-label">{{ form.username }}</div>
+                        </td>
+                    </tr>
 
-        <div style="display: flex; justify-content: center">
-            <table class="table_profile" style="margin-top: 20px; margin-bottom: 10px;">
-                <tr>
-                    <td>
-                        <div class="base-form-label">Username:</div>
-                    </td>
-                    <td>
-                        <div class="base-form-label">{{ form.username }}</div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div class="base-form-label">Email:</div>
+                        </td>
+                        <td>
+                            <div class="base-form-label ">{{ form.email }}</div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <div class="base-form-label">Email:</div>
-                    </td>
-                    <td>
-                        <div class="base-form-label ">{{ form.email }}</div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div class="base-form-label">Name:</div>
+                        </td>
+                        <td>
+                            <div class="base-form-label">{{ form.first_name }}</div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <div class="base-form-label">Name:</div>
-                    </td>
-                    <td>
-                        <div class="base-form-label">{{ form.first_name }}</div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div class="base-form-label">Surname:</div>
+                        </td>
+                        <td>
+                            <div class="base-form-label ">{{ form.last_name }}</div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <div class="base-form-label">Surname:</div>
-                    </td>
-                    <td>
-                        <div class="base-form-label ">{{ form.last_name }}</div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div class="base-form-label base-form-label_profile">Birthday:</div>
+                        </td>
+                        <td>
+                            <div class="base-form-label base-form-label_profile">{{ form.birthday }}</div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <div class="base-form-label base-form-label_profile">Birthday:</div>
-                    </td>
-                    <td>
-                        <div class="base-form-label base-form-label_profile">{{ form.birthday }}</div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div class="base-form-label base-form-label_profile">City:</div>
+                        </td>
+                        <td>
+                            <div class="base-form-label base-form-label_profile">{{ form.city }}</div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <div class="base-form-label base-form-label_profile">City:</div>
-                    </td>
-                    <td>
-                        <div class="base-form-label base-form-label_profile">{{ form.city }}</div>
-                    </td>
-                </tr>
-                {#            <tr>#}
-                {#                <td>#}
-                {#                    <div class="base-form-label base-form-label_profile">Avatar:</div>#}
-                {#                </td>#}
-                {#                <td>#}
-                {#                    <div class="base-form-label base-form-label_profile">{{ form.avatar }}</div>#}
-                {#                </td>#}
-                {#            </tr>#}
-            </table>
-        </div>
+                </table>
+                <div style="display: flex; flex-direction: column; width: 100%">
+                    <input class="base-button buttons_profile" type="submit" value="Save">
+                    <a class="base-button buttons_profile" href="{% url 'accounts:profile' %}">Cancel</a>
+                </div>
 
-
-        <div style="display: flex; justify-content: center">
-            <div style="display: flex; flex-direction: column; width: 30%">
-                <input class="base-button buttons_profile" type="submit" value="Save">
-                <a class="base-button buttons_profile" href="{% url 'accounts:profile' %}">Cancel</a>
             </div>
+
         </div>
-
-
     </form>
 {% endblock %}

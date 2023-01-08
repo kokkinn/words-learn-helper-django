@@ -22,7 +22,7 @@ services:
     volumes:
       - db_volume:/var/lib/postgresql/data/
     ports:
-      - "5438:5432"
+      - "5432"
     env_file:
       - src/.env
 
