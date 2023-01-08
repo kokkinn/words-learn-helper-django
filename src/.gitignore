@@ -1,1 +1,5 @@
 ../.env
+.gitignore
+.idea
+.DS_Store
+.src/DS_Store
