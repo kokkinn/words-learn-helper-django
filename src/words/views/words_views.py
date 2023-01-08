@@ -224,7 +224,6 @@ def delete_view(request, uuid):
         except Word.DoesNotExist:
             raise Http404
         word_object.delete()
-        messages.success(request, f"Word '{word_object.word1}': '{word_object.word2}' was removed")
         # response = redirect(reverse_lazy("words:list"))
         # response['Location'] += f'?search={request.POST.get("search", default="")}'
         # return response
