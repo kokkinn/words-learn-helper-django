@@ -19,7 +19,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # import environ
-
 # env = environ.Env()
 # environ.Env.read_env()
 
@@ -174,3 +173,5 @@ EMAIL_PORT = getenv('EMAIL_PORT')
 EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
+
+CSRF_TRUSTED_ORIGINS=['https://*.words-learn-helper.com']
