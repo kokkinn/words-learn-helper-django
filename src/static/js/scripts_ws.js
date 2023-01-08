@@ -21,8 +21,6 @@ function getCookie(name) {
             return cookieValue;
         }
 async function notify(msg, type) {
-    console.log(type)
-    console.log('Alert Fired')
     let not_area = document.getElementById('not-area')
     const id = Math.random().toString(36).slice(2);
     let n_a_child = document.createElement('div')

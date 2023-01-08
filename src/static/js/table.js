@@ -2,7 +2,6 @@ var row_cur = null;
 var row_prev = null;
 
 function listener_WlTableTd_Click(ev1) {
-    console.log('\n')
     ev1.preventDefault()
     let row_id = ev1.currentTarget.parentNode.id;
     console.log(`TD click fired for ${row_id}`)
@@ -24,7 +23,6 @@ function listener_WlTableTd_Click(ev1) {
         ev2.preventDefault();
         $(`[id=${row_id}] td input`)[0].classList.remove('off')
         $(`[id=${row_id}] td button`)[0].classList.remove('off')
-        console.log(`EDIT click fired for ${ev2.currentTarget.parentNode.parentNode.id}`)
         let input_field = document.querySelector('#sort-table tbody tr td:not(.wl-table-action) input')
         if (typeof (input_field) != 'undefined' && input_field != null) {
             let active_edit_id = input_field.parentNode.parentNode.id;
@@ -38,7 +36,6 @@ function listener_WlTableTd_Click(ev1) {
         }
         row_prev = document.querySelector(`[id=${CSS.escape(row_id)}]:not(.wl-menu-box)`).cloneNode(true)
         $(`[id=${row_id}] td:not(.wl-table-action)`).unbind('click');
-        console.log('Row is going to become input')
         let w1 = document.querySelector(`[id=${CSS.escape(row_id)}]:not(.wl-menu-box)`).cloneNode(true).firstElementChild.innerHTML;
         let w2 = document.querySelector(`[id=${CSS.escape(row_id)}]:not(.wl-menu-box)`).cloneNode(true).childNodes[3].innerHTML;
         $(`[id=${row_id}] td:not(.wl-table-action)`)[0].innerHTML =
@@ -61,10 +58,8 @@ document.querySelector('.wl-menu-box').addEventListener('mouseleave', function (
 $('[id={{ word.id }}] td [id=table-confirm]').click(function (ev) {
     ev.preventDefault();
     let uuid = '{{ word.id }}';
-    console.log(`Button near ${uuid} was clicked`)
     let w_1 = $('[id={{ word.id }}]:not(.wl-menu-box)').children('td')[0].children[0].value;
     let w_2 = $('[id={{ word.id }}]:not(.wl-menu-box)').children('td')[1].children[0].value;
-    console.log(w_1)
     $.ajax({
         headers: {
             "X-Requested-With": "XMLHttpRequest",

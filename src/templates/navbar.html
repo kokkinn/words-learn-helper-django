@@ -73,17 +73,14 @@
 
     function doOnFocusOrKeyUp(ev) {
         if (ev.target.value) {
-            console.log('FOCUS')
             output.innerHTML = ''
             filtered_arr = refs_objs.filter(obj => (obj['name']).toLowerCase().includes(ev.target.value.toLowerCase()))
             if (filtered_arr.length > 0) {
                 filtered_arr.map(obj => output.innerHTML += `<a class="search-a nol" href="${obj['url']}">${obj['name']}</a>`)
-                console.log(filtered_arr)
                 {#$("div").not('nol').click(function fu() {#}
                 {#    $("div").not('nol').off('click', fu)#}
                 {#    output.innerHTML = ''#}
                 {#    document.querySelector('#s_f').blur()})#}
-                console.log('DONE')
             }
         } else {
             output.innerHTML = ''

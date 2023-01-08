@@ -132,7 +132,7 @@
 /*}*/
 
 .wl-table td:not(#wl-table-action-column), .wl-table th {
-    padding: 7px 0;
+    padding: 7px 7px;
 }
 
 
@@ -151,15 +151,15 @@
 
 
 .wl-table td:nth-child(3) {
-    width: 20%;
+    width: 26%;
 }
 
 .wl-table td:nth-child(4) {
-    width: 10%;
+    width: 7%;
 }
 
 .wl-table td:nth-child(5) {
-    width: 7%;
+    width: 7.5%;
 }
 
 .wl-table tr {
@@ -251,5 +251,10 @@ thead th.down {
     .wl-table td:nth-child(3) {
         width: 10%;
     }
+
+    .wl-list-table-outer {
+    width: 100%;
+    padding: 0;
+}
 
 }

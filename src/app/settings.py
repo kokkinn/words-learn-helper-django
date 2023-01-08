@@ -1,4 +1,4 @@
-type_ = 'dep'
+type_ = 'dev'
 
 """
 Django settings for django_learn_helper project.

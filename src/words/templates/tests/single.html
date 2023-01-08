@@ -8,23 +8,23 @@
 
 
     <div class="base-form-label" style="margin-top:15px; text-align: center">Result for {{ result.date }}</div>
-
-    <p>
-    <table class="wl-table" style="margin-right:auto; margin-left:auto; margin-top:25px;">
-        <tr>
-            <th>Pair</th>
-            <th>Input</th>
-            <th>Is correct</th>
-        </tr>
-
-        {% for res in fnl_res_4test_words %}
+    <div style="width: 100%; padding: 10px">
+        <table class="wl-table" style="margin-top:25px;">
             <tr>
-                {#                {% for val in res.values %}#}
-                <td>{{ res.pair }}</td>
-                <td>{{ res.user_input }}</td>
-                <td>{{ res.is_correct }}</td>
-                {#                {% endfor %}#}
+                <th>Pair</th>
+                <th>Input</th>
+                <th>Is correct</th>
             </tr>
-        {% endfor %}
-    </table>
+
+            {% for res in fnl_res_4test_words %}
+                <tr>
+                    {#                {% for val in res.values %}#}
+                    <td>{{ res.pair }}</td>
+                    <td>{{ res.user_input }}</td>
+                    <td>{{ res.is_correct }}</td>
+                    {#                {% endfor %}#}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

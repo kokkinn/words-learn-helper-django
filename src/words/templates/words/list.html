@@ -93,7 +93,6 @@
             ev.preventDefault()
 
             const clicked_row_id = ev.currentTarget.parentNode.id;
-            console.log(`TD click fired for ${clicked_row_id}`)
             let menu = document.querySelector('.wl-menu-box');
             menu.id = 'mb-' + clicked_row_id.slice(3);
             menu.style.top = `${ev.clientY - 20}px`;
@@ -147,7 +146,6 @@
             document.querySelector('.wl-menu-box').classList.add('off');
             const row2edit_obj = document.querySelector(`#tr-${ev.currentTarget.parentNode.parentNode.id.slice(3)}`);
             row2edit_obj.querySelector('#btn-wl-table-action-column-edit').style.display = 'none';
-            console.log(`EDIT click fired in ${ev.currentTarget.parentNode.parentNode.id}`);
             const possible_oldEdit_input_field = document.querySelector('#wl-table td[id=wl-table-td-data] input');
             if (typeof (possible_oldEdit_input_field) != 'undefined' && possible_oldEdit_input_field != null) {
                 document.querySelector('#btn-wlTableRow-cancelEdit').click();
@@ -158,8 +156,8 @@
 
             document.querySelector('#btn-wlTableRow-cancelEdit').classList.remove('off');
             document.querySelector('#btn-wlTableRow-confirmEdit').classList.remove('off');
-            row2edit_word1InitValue = row2edit_obj.querySelector(':nth-child(1)').innerHTML;
-            row2edit_word2InitValue = row2edit_obj.querySelector(':nth-child(2)').innerHTML;
+            row2edit_word1InitValue = row2edit_obj.querySelector(':nth-child(1)').innerText;
+            row2edit_word2InitValue = row2edit_obj.querySelector(':nth-child(2)').innerText;
             row2edit_groupsInitValue = row2edit_obj.querySelector(':nth-child(3)').innerHTML;
             row2edit_obj.childNodes.forEach((td) => {
                 td.removeEventListener('click', EvLi_td_click)
@@ -200,8 +198,8 @@
                         }
                     }
                     row2edit_groupsCell_initValues2EditHTML = `<ul style="list-style:none">${row2edit_groupsCell_initValues2EditHTML}</ul>`
-                    row2edit_obj.querySelector(':nth-child(1)').innerHTML = `<div class='base-text-input'><input style="text-align: center; background: none; border: none; margin: 0" maxlength="50" name=word1 required value=${row2edit_word1InitValue}></div>`;
-                    row2edit_obj.querySelector(':nth-child(2)').innerHTML = `<div class='base-text-input'><input style="text-align: center; background: none; border: none; margin: 0"  maxlength="50" name=word2 required value=${row2edit_word2InitValue}></div>`;
+                    row2edit_obj.querySelector(':nth-child(1)').innerHTML = `<div class='base-text-input'><input style="text-align: center; background: none; border: none; margin: 0" maxlength="50" name=word1 required value="${row2edit_word1InitValue}"></div>`;
+                    row2edit_obj.querySelector(':nth-child(2)').innerHTML = `<div class='base-text-input'><input style="text-align: center; background: none; border: none; margin: 0"  maxlength="50" name=word2 required value="${row2edit_word2InitValue}"></div>`;
                     row2edit_obj.querySelector(':nth-child(3)').innerHTML = row2edit_groupsCell_initValues2EditHTML;
                     row2edit_obj.querySelector('input').focus()
                 }
@@ -264,7 +262,6 @@
                         for (let i = 0; i < error_msgs.length; i++) notify(error_msgs[i], 'error');
                         return 0;
                     } else if (JSON.parse(response["status"]) === "form_valid") {
-                        console.log('done')
                         row2post_obj.querySelectorAll('td[id=wl-table-td-data]').forEach((td) => {
                             td.addEventListener('click', EvLi_td_click)
                         })
