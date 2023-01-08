@@ -137,14 +137,14 @@ class TestQuestionView(LoginRequiredMixin, FormView):
 
         user_input = form.cleaned_data['input_word'].lower()
 
-        if user_input == self.result_object.current_words['current_word']['ans']:
+        if user_input == self.result_object.current_words['current_word']['ans'].lower():
             messages.success(message='The answer is correct', request=self.request)
             append_info(True)
             self.result_object.current_words['current_word'] = dict()
             if self.result_object.duration == 'finite':
                 self.result_object.current_words['words4test'].remove(str(self.word_object.id))
 
-        elif user_input != self.result_object.current_words['current_word']['ans']:
+        elif user_input != self.result_object.current_words['current_word']['ans'].lower():
             messages.error(message='The answer is incorrect', request=self.request)
             append_info(False)
             if self.result_object.do_with_incorrect == 'skip':
@@ -163,7 +163,6 @@ class ResultsListView(LoginRequiredMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         for res in Result.objects.filter(user=self.request.user):
-            print('A')
             if not res.details['fnl_res_4test_words']:
                 res.delete()
         return super().get(request, *args, **kwargs)
