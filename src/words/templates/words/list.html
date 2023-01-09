@@ -89,6 +89,18 @@
     <script type="text/javascript">
         const user_id = {{ user.id|safe }};
 
+
+        String.prototype.escape = function () {
+            let tagsToReplace = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;'
+            };
+            return this.replace(/[&<>]/g, function (tag) {
+                return tagsToReplace[tag] || tag;
+            });
+        };
+
         function EvLi_td_click(ev) {
             ev.preventDefault()
 
@@ -182,7 +194,7 @@
                                 row2edit_groupsCell_initValues2EditHTML +=
                                     `
                                 <li>
-                                <label for = "${id_}">${response[group]['name']}</label>
+                                <label for = "${id_}">${response[group]['name'].escape()}</label>
                                 <input type = checkbox name="group" checked id="${id_}" value="${response[group]['id']}">
                                 </li>
                                 `
@@ -190,7 +202,7 @@
                                 row2edit_groupsCell_initValues2EditHTML +=
                                     `
                                 <li>
-                                <label for = "${id_}">${response[group]['name']}</label>
+                                <label for = "${id_}">${response[group]['name'].escape()}</label>
                                 <input type = checkbox name="group"  id="${id_}" value="${response[group]['id']}">
                                 </li>
                                 `
@@ -219,9 +231,9 @@
             row2cancel_obj.querySelectorAll('td[id=wl-table-td-data]').forEach((td) => {
                 td.addEventListener('click', EvLi_td_click)
             })
-            row2cancel_obj.querySelector(':nth-child(1)').innerHTML = row2edit_word1InitValue;
-            row2cancel_obj.querySelector(':nth-child(2)').innerHTML = row2edit_word2InitValue;
-            row2cancel_obj.querySelector(':nth-child(3)').innerHTML = row2edit_groupsInitValue
+            row2cancel_obj.querySelector(':nth-child(1)').innerHTML = row2edit_word1InitValue.escape();
+            row2cancel_obj.querySelector(':nth-child(2)').innerHTML = row2edit_word2InitValue.escape();
+            row2cancel_obj.querySelector(':nth-child(3)').innerHTML = row2edit_groupsInitValue;
             document.querySelector('#btn-wlTableRow-cancelEdit').classList.add('off');
             document.querySelector('#btn-wlTableRow-confirmEdit').classList.add('off');
             document.querySelector('body').appendChild(document.querySelector('#btn-wlTableRow-confirmEdit'))
@@ -265,8 +277,8 @@
                         row2post_obj.querySelectorAll('td[id=wl-table-td-data]').forEach((td) => {
                             td.addEventListener('click', EvLi_td_click)
                         })
-                        row2post_obj.querySelector(':nth-child(1)').innerHTML = row2post_word1Value
-                        row2post_obj.querySelector(':nth-child(2)').innerHTML = row2post_word2Value
+                        row2post_obj.querySelector(':nth-child(1)').innerHTML = row2post_word1Value.escape()
+                        row2post_obj.querySelector(':nth-child(2)').innerHTML = row2post_word2Value.escape()
                         row2post_obj.querySelector(':nth-child(3)').innerHTML = row2post_groupsCell_editedValuesHTML
                         document.querySelector('#btn-wlTableRow-cancelEdit').classList.add('off');
                         document.querySelector('#btn-wlTableRow-confirmEdit').classList.add('off');
@@ -304,8 +316,8 @@
 
                     const word_createdInstance = JSON.parse(response["instance"]);
                     let row2add = `<tr role="row" id="tr-${word_createdInstance['pk']}">
-                            <td id="wl-table-td-data">${word_createdInstance['word1'] || ""} </td>
-                            <td id="wl-table-td-data">${word_createdInstance['word2'] || ""} </td>
+                            <td id="wl-table-td-data">${word_createdInstance['word1'].escape()}</td>
+                            <td id="wl-table-td-data">${word_createdInstance['word2'].escape()}</td>
                             `
                     let groups_li = ''
                     for (let i = 0; i < word_createdInstance['groups'].length; i++) {

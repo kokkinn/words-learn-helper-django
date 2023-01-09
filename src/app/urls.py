@@ -33,7 +33,6 @@ urlpatterns = [
     path("contacts", TemplateView.as_view(template_name='contacts.html'), name="contacts"),
     path('api/', include('api.urls')),
     path('search-links', get_searches, name='get_searches')
-    # path('__debug__/', include('debug_toolbar.urls'))
 ]
 
 if settings.DEBUG:
