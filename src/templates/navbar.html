@@ -13,7 +13,7 @@
         {% if user.is_authenticated %}
             <div class=""><a class="nav-a" href="{% url 'index' %}">Home</a></div>
             <div style="position: relative;" id="dropdown-full" class="">
-                <a class="nav-a" style="" href="" id="btn-library">Your library</a>
+                <a class="nav-a" style="" href="" id="btn-library">My library</a>
                 <ul class='nav-dropdown-ul' style="" id="nav-dropdown-ul-lib">
                     <li><a class="" style="font-size: 15px; width: 100%; padding: 0"
                            href="{% url 'words:list' %}">My vocabulary</a></li>
