@@ -1,5 +1,3 @@
-type_ = 'dep'
-
 """
 Django settings for django_learn_helper project.
 
@@ -98,24 +96,21 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if type_ == 'dep':
-    DATABASES = {
-        "default": {
-            "ENGINE": 'django.db.backends.postgresql_psycopg2',
-            "HOST": os.getenv("POSTGRES_HOST"),
-            "PORT": os.getenv("POSTGRES_PORT"),
-            "NAME": os.getenv("POSTGRES_DB"),
-            "USER": os.getenv("POSTGRES_USER"),
-            "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": 'django.db.backends.postgresql_psycopg2',
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
     }
-elif type_ == 'dev':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        },
+}
 
+if os.environ.get("TYPE") == 'local':
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 
 # Password validation
@@ -174,4 +169,4 @@ EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
 
-CSRF_TRUSTED_ORIGINS=['https://*.words-learn-helper.com']
+CSRF_TRUSTED_ORIGINS = ['https://*.words-learn-helper.com']
