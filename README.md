@@ -15,7 +15,7 @@ test based on user's words.
 
 ## About The Project
 
-I see this project as my portfolio. An idea came after I was required to learn English urgently. Users are a
+I see this project as my portfolio. An idea came after I was required to learn English urgently. Users are
 able to create new words in their vocabulary, combine them into sets and do knowledge tests based on personal entries.
 
 ### Built With
@@ -45,7 +45,7 @@ Skip steps 2 and 3 for Docker usage.
    ```
 3. Install requirements
    ```sh
-   pip install requirements.txt
+   pip install -r requirements.txt
    ```
 4. Create a file with environmental variables in src directory
     ```sh
@@ -85,9 +85,9 @@ docker-compose down
 Note that in both cases you will need to apply migrations for a 
 database. 
 
-For local sqlite3 just a command:
+For local sqlite3 just use a command:
  ```sh
-python manage.py applymigations
+python manage.py applymigrations
 ```
 or go into Docker container while stack is running from a root directory and after,
 apply the same command as above: 
