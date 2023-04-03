@@ -31,7 +31,8 @@ services:
     volumes:
       - static_volume:/opt/src/staticfiles
       - media_volume:/opt/src/media
-
+      - /etc/letsencrypt/live/words-learn-helper.com:/etc/letsencrypt/live/words-learn-helper.com
+      - /etc/letsencrypt/live/words-learn-helper.com/privkey.pem:/etc/letsencrypt/live/words-learn-helper.com/privkey.pem
     ports:
       - "80:80" # requests from host on 80, go into 80 of container
       - "443:443"
