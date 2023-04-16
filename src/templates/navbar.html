@@ -3,7 +3,7 @@
 <nav class="nav">
     <div class="nav-main-links-container">
         <a href="{% url 'index' %}">
-            <img class='logo' src="{% static 'favicon.ico' %}" alt="WLH" width="65" height="65">
+            <img class='logo' src="{% static 'images/favicon.ico' %}" alt="WLH" width="65" height="65">
         </a>
         {% if not user.is_authenticated %}
             <div class=""><a class="nav-a" href="{% url 'index' %}">Home</a></div>

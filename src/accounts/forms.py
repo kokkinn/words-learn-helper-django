@@ -95,5 +95,5 @@ class ActivationEmailConfirmationForm(forms.Form):
 
     def __init__(self, request):
         super().__init__()
-        print(str(request.user.email))
+        
         self.fields["email"].initial = request.user.email

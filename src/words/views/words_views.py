@@ -76,12 +76,6 @@ class WordCreateView(LoginRequiredMixin, CreateView):
     template_name = "words/word_CU_form.html"
     success_url = reverse_lazy('words:list')
 
-    # def get_success_url(self):
-    #     if self.request.POST.get('wl'):
-    #         return reverse_lazy('words:list')
-    #     else:
-    #         return reverse_lazy('words:create')
-
     def get_form_kwargs(self):
         kwargs = super(WordCreateView, self).get_form_kwargs()
         kwargs['request'] = self.request
@@ -89,7 +83,7 @@ class WordCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            print('FORM VALID')
+            
             form.instance.user = self.request.user
             form.save()
             for group in form.cleaned_data["groups"]:
@@ -104,7 +98,6 @@ class WordCreateView(LoginRequiredMixin, CreateView):
                                            id=self.request.user.general_group.id).all()]
                                        })
                 return JsonResponse({"instance": ser_word, "status": json.dumps("form_valid")}, status=200)
-            # return JsonResponse({"word_id": word_instance.id, "action": "created"})
             return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -121,10 +114,6 @@ class WordCreateView(LoginRequiredMixin, CreateView):
         else:
             context['user_has_groups'] = 1
 
-        # no_groups = False
-        # if len(self.request.user.groups_of_words.all()) == 1:
-        #     no_groups = True
-        # context['no_groups'] = no_groups
         return context
 
 
@@ -165,7 +154,7 @@ class WordUpdateView(LoginRequiredMixin, UpdateView, SingleObjectMixin):
     def get_initial(self):
         initial = super(WordUpdateView, self).get_initial()
         initial["groups"] = Word.objects.get(id=self.kwargs["uuid"]).groups.all()  # initial data for a form field
-        print(initial)
+        
         return initial
 
     def get_context_data(self, **kwargs):
@@ -183,8 +172,6 @@ class WordUpdateView(LoginRequiredMixin, UpdateView, SingleObjectMixin):
 @login_required
 def get_initial_groups_of_word(request):
     init_groups = Word.objects.get(id=request.GET.get('word_id')).groups.all()
-    # form = WordCUForm(initial={'groups': init_groups}, request=request)
-    # form = form['groups']
     all_user_groups = CustomUser.objects.get(id=request.GET.get('user_id')).groups_of_words.all()
     res = json.dumps(
         {"GoW_forWord_info":
@@ -196,10 +183,7 @@ def get_initial_groups_of_word(request):
         }
     )
 
-    # groups_id_list = [str(group.id) for group in Word.objects.get(id=request.GET.get('word_id')).groups.all()]
-    # data = json.dumps({"list": groups_id_list})
     return JsonResponse({"data": res}, status=200)
-    # return JsonResponse({"form": json.dumps(str(form))}, status=202, safe=False)
 
 
 @login_required
@@ -208,39 +192,14 @@ def home_view(request):
 
 
 @login_required
-def one_word_view(request, uuid):
-    word = Word.objects.get(id=uuid)
-    context = {"word": word}
-    return render(request, "words/word_single.html", context)
-
-
-@login_required
 def delete_view(request, uuid):
-    print(request.POST)
+    
     if is_ajax(request=request) and request.method == 'POST':
-        print('YEP')
+        
         try:
             word_object = Word.objects.get(user=request.user, id=uuid)
         except Word.DoesNotExist:
             raise Http404
         word_object.delete()
-        # response = redirect(reverse_lazy("words:list"))
-        # response['Location'] += f'?search={request.POST.get("search", default="")}'
-        # return response
         return JsonResponse(data={'state': 'deleted'}, status=200)
     raise Http404
-
-
-def words_generate(request):
-    from string import ascii_lowercase
-    from random import choice
-    for _ in range(10):
-        score_ = random.randint(0, 20)
-        word1 = f'Word with score {score_}'
-        word2 = ''
-        for _ in range(6):
-            word2 += choice(ascii_lowercase)
-        Word(user=request.user, word1=word1, word2=word2, score=score_).save()
-    # for word in request.user.words.all():
-    #     word.delete()
-    return redirect(request.GET.get('next', '/'))

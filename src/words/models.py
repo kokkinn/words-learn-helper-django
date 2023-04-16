@@ -1,14 +1,6 @@
 from django.db import models
 import uuid
-from googletrans import Translator
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
 from accounts.models import CustomUser
-
-import random
-
-from faker import Faker
 
 
 class Word(models.Model):
@@ -35,27 +27,6 @@ class Word(models.Model):
                 score_counter += word.score
         return score_counter / total_words
 
-    # @classmethod
-    # def generate(cls, num):
-    #     faker = Faker()
-    #     for _ in range(1, num):
-    #         translator = Translator()
-    #         word1 = faker.word()
-    #         tr = translator.translate(str(word1), src="en", dest="ru")
-    #         word2 = tr.text
-    #         wordobj = Word(word1=f"{word1}", word2=f"{word2}")
-    #         wordobj.user = CustomUser.objects.get(username="admin")
-    #         wordobj.score = random.randint(-10, 50)
-    #         wordobj.save()
-    #         # wordobj.group.add(random.choice(list(wordobj.user.groups_of_words.all())))
-    #         wordobj.group.add(wordobj.user.groups_of_words.get(name="General"))
-    #         wordobj.save()
-
-
-# class GroupOfWordsManager(models.Manager):
-#     def get_queryset(self):
-#         return super().get_queryset().exclude(name='General')
-
 
 class GroupOfWords(models.Model):
     id = models.UUIDField(default=uuid.uuid4, db_index=True, unique=True, editable=False, primary_key=True)
@@ -65,23 +36,11 @@ class GroupOfWords(models.Model):
     user = models.ForeignKey(to=CustomUser, related_name="groups_of_words", on_delete=models.CASCADE, null=False,
                              editable=False)
 
-    # objects = GroupOfWordsManager()
-
     def __repr__(self):
         return f"{self.name}"
 
     def __str__(self):
         return f"{self.name}"
-
-
-@receiver(post_save, sender=Word)
-def custom_word(instance, created, **kwargs):
-    if created:
-        print(f"Word instance created: '{instance}'")
-
-
-# class TestOptions(models.Model):
-#     group = models.(to=GroupOfWords, on_delete=models.CASCADE)
 
 
 class Result(models.Model):

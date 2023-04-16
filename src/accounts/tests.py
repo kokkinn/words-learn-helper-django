@@ -7,7 +7,7 @@
 #         self.score = score_
 #
 #     def pechat(self):
-#         print("Pishet class A")
+#         
 #
 #     def return_list(self, *args):
 #         listic = list()
@@ -23,7 +23,7 @@
 #
 #     def pechat(self):
 #         super(ClassB, self).pechat()
-#         print("Pishet class B")
+#         
 #
 #
 #     def return_list(self, *args):
@@ -33,14 +33,14 @@
 #
 #
 # a = ClassA(50)
-# print(a.colour)
-# print(a.score)
+# 
+# 
 # a.pechat()
 #
 # b = ClassB(250, mood_="HIU")
-# print(b.score)
+# 
 # b.pechat()
-# print(b.mood)
-# # print(b.return_list("er","ef"))
-# print(b.return_list("Ef", "GER"))
+# 
+# # 
+# 
 

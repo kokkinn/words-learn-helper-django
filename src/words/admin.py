@@ -11,7 +11,6 @@ class WordsInline(admin.TabularInline):
 
 class UserInline(admin.TabularInline):
     model = CustomUser
-    # readonly_fields = ('id',)
 
 
 class GroupAdmin(admin.ModelAdmin):

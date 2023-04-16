@@ -109,12 +109,6 @@ class TestQuestionView(LoginRequiredMixin, FormView):
         self.result_object.save()
         return super().dispatch(request, *args, **kwargs)
 
-    # def get(self, request, *args, **kwargs):
-    #
-    #
-    #
-    #     return super(TestQuestionView, self).get(self, request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(TestQuestionView, self).get_context_data(**kwargs)
         context['word2examine'] = self.result_object.current_words['current_word']['ask']

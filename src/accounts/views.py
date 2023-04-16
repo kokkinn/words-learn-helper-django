@@ -51,7 +51,7 @@ def user_activate(request, sign):
         template = 'accounts/activation_done.html'
         user.is_active = True
         user.is_activated = True
-        print("User created")
+        
     user.save()
 
     return render(request, template)

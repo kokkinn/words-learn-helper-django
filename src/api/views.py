@@ -10,6 +10,6 @@ from words.models import Word
 def getData(request):
     user = request.user
     words = user.words.all()
-    print(words)
+    
     serializer = WordSerializer(words, many=True)
     return Response(serializer.data)

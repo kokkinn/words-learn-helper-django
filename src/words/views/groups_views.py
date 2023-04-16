@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 
@@ -19,18 +18,7 @@ class GroupsListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         super(GroupsListView, self).get_queryset()
-        print(self.request.user.groups_of_words.all())
         return self.request.user.groups_of_words.all().exclude(id=self.request.user.general_group.id)
-
-    def post(self, request):
-        checks = request.POST.getlist("checks[]")
-        for idi in checks:
-            group = GroupOfWords.objects.get(id=idi)
-            if group.name == "General":
-                return HttpResponseRedirect(reverse_lazy("words:home"))
-            group.delete()
-            # messages.success(self.request, f"Group '{group.name}' deleted")
-        return redirect(reverse_lazy("words:groups_list"))
 
 
 class GroupCreateView(LoginRequiredMixin, FormView):
@@ -47,7 +35,6 @@ class GroupCreateView(LoginRequiredMixin, FormView):
         for word in words:
             group_obj.words.add(word)
         group_obj.save()
-        # messages.success(self.request, f"Group '{form.instance.name}' created")
         return HttpResponseRedirect(reverse_lazy("words:groups_list"))
 
     def get_context_data(self, **kwargs):
@@ -107,8 +94,6 @@ class GroupUpdateView(LoginRequiredMixin, FormView):
         group_obj.description = form.cleaned_data["description"]
         group_obj.name = form.cleaned_data["name"]
         group_obj.save()
-        # messages.success(self.request, f"Group '{form.instance.name}' updated")
-
         return HttpResponseRedirect(reverse_lazy("words:groups_list"))
 
     def get_context_data(self, **kwargs):
@@ -137,13 +122,6 @@ class WordsInGroupListView(ListView, LoginRequiredMixin):
         uuid = self.kwargs.get("uuid")
         context["group_obj"] = GroupOfWords.objects.get(id=uuid)
         return context
-
-    # def get_template_names(self):
-    #     super().get_template_names()
-    #     if not self.request.user.words.all():
-    #         return ["words/no_words.html"]
-    #     else:
-    #         return ["words/group_single.html"]
 
 
 class GroupDeleteView(DeleteView):

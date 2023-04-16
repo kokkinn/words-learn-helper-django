@@ -78,24 +78,9 @@ class TestParametersForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         request = kwargs.pop('request')
         super(TestParametersForm, self).__init__(*args, **kwargs)
-        # print(request.user.groups_of_words.all() | request.user.general_group)
+        # 
         self.fields['groups'].queryset = request.user.groups_of_words.all()
 
     class Meta:
         model = Result
         fields = ['groups', 'duration', 'do_with_incorrect', 'word2examine_number', 'which_goes_first', 'scoring_type']
-    # def __init__(self, user, *args, **kwargs, ):
-    #     super(TestParametersForm, self).__init__(*args, **kwargs)
-    #     self.user = user
-    #     groups_qs = GroupOfWords.objects.filter(user=self.user)
-    #     for group in groups_qs:
-    #         if not qs_not_empty(group):
-    #             groups_qs = groups_qs.exclude(id=group.id)
-    #     self.fields['groups'].queryset = groups_qs
-
-    # help_text_groups = "A 'Group', all Pairs of which will be included in the test."
-    # help_text_durations = "'Loop' for infinite test for Pairs of a group. If 'Finite' is chosen, test will end, after all answers will be submitted, result will be created."
-    # help_text_type = "'Ranked' for answer will change the score, If 'Unranked', score won't be affected."
-    # help_text_test_for_translation_of = "'A user's choice defines translation of what word will be asked."
-    # help_text_do_with_incorrect = "If 'repeat' is chosen, test won't end until all answers are answered correctly."
-    # help_text_lower_score_first = "Pick 'Pairs with lower are asked firstly' if ypu want to test Pairs with lower score"
