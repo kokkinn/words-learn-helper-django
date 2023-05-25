@@ -4,19 +4,13 @@
     <img src="https://words-learn-helper.com/static/favicon.ico" alt="Logo" width="80" height="80">
   </a>
 <h3>Words Learn Helper</h3>
-  <p>
-    A web application which implements a digital vocabulary with options of entries manipulation and doing a knowledge 
-test based on user's words.
-    <br>
-    <br>
-    <a href="https://words-learn-helper.com">Deployed version</a>
-  </p>
+<a href="https://words-learn-helper.com">words-learn-helper.com</a>
 </div>
 
 ## About The Project
 
-I see this project as my portfolio. An idea came after I was required to learn English urgently. Users are
-able to create new words in their vocabulary, combine them into sets and do knowledge tests based on personal entries.
+A web application which implements a vocabulary with options of entries manipulation, filtering and doing exams
+based on current words.
 
 ### Built With
 
@@ -67,7 +61,8 @@ If you have set your virtual environment correctly, no problems will occur.
 
 #### With Docker
 
-Running with Docker allows you to use PostgresSQL, unlike local runserver, however you can create local postgres db on host and use it.
+Running with Docker allows you to use PostgresSQL, unlike local runserver, however you can create local postgres db on
+host and use it.
 <br>
 <br>
 Go to root directory and type following command to start docker containers:
@@ -82,15 +77,18 @@ For stopping (from a root directory):
 docker-compose down
 ```
 
-Note that in both cases you will need to apply migrations for a 
-database. 
+Note that in both cases you will need to apply migrations for a
+database.
 
 For local sqlite3 just use a command:
+
  ```sh
 python manage.py applymigrations
 ```
+
 or go into Docker container while stack is running from a root directory and after,
-apply the same command as above: 
+apply the same command as above:
+
  ```sh
 docker-compose exec web /bin/bash
 ```
